@@ -162,27 +162,27 @@ loadingBG.parentDidResize()
 
 
 loadModules = {
-	loading_screen = "games/fortcubes/loading_screen.lua",
-	menu = "games/fortcubes/menu.lua",
-	settings = "games/fortcubes/settings.lua",
+	loading_screen = "fortcubes/loading_screen.lua",
+	menu = "fortcubes/menu.lua",
+	settings = "fortcubes/settings.lua",
 	-- game
-	gameWorld = "games/fortcubes/game/world.lua",
-	gameEvent = "games/fortcubes/game/event.lua",
-	gameUI = "games/fortcubes/game/ui.lua",
-	game = "games/fortcubes/game/game.lua",
+	gameWorld = "fortcubes/game/world.lua",
+	gameEvent = "fortcubes/game/event.lua",
+	gameUI = "fortcubes/game/ui.lua",
+	game = "fortcubes/game/game.lua",
 	-- classes
-	bullet = "games/fortcubes/classes/bullet.lua",
-	playerConstructor = "games/fortcubes/classes/player.lua",
+	bullet = "fortcubes/classes/bullet.lua",
+	playerConstructor = "fortcubes/classes/player.lua",
 }
 
 animations = {}
 loadAnimations = {
-	nanskip = "games/fortcubes/assets/animations/menu/nanskip.json",
-	sysfab = "games/fortcubes/assets/animations/menu/sysfab.json",
-	katana_idle = "games/fortcubes/assets/animations/menu/katana_idle.json",
-	pistol_idle = "games/fortcubes/assets/animations/menu/pistol_idle.json",
-	player_walk = "games/fortcubes/assets/animations/game/walk.json",
-	player_die = "games/fortcubes/assets/animations/game/die.json",
+	nanskip = "fortcubes/assets/animations/menu/nanskip.json",
+	sysfab = "fortcubes/assets/animations/menu/sysfab.json",
+	katana_idle = "fortcubes/assets/animations/menu/katana_idle.json",
+	pistol_idle = "fortcubes/assets/animations/menu/pistol_idle.json",
+	player_walk = "fortcubes/assets/animations/game/walk.json",
+	player_die = "fortcubes/assets/animations/game/die.json",
 }
 
 shapes = {}
@@ -199,15 +199,15 @@ loadShapes = {
 
 audio = {}
 loadAudios = {
-	game_theme = "games/fortcubes/assets/gameTheme.mp3",
-	menu_theme = "games/fortcubes/assets/menuTheme.mp3",
-	bush = "games/fortcubes/assets/bush.mp3"
+	game_theme = "fortcubes/assets/gameTheme.mp3",
+	menu_theme = "fortcubes/assets/menuTheme.mp3",
+	bush = "fortcubes/assets/bush.mp3"
 }
 
 images = {}
 loadImages = {
-	logo = "games/fortcubes/assets/logo.png",
-	gradient = "games/fortcubes/assets/gradient.png",
+	logo = "fortcubes/assets/logo.png",
+	gradient = "fortcubes/assets/gradient.png",
 }
 
 
