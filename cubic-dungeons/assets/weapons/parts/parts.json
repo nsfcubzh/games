@@ -1,0 +1,234 @@
+{
+    "sword_wood_handle": {
+        "type": "sword",
+        "texture": "sword_wood_handle",
+        "name": "Wooden handle",
+        "description": "Weak, but universal",
+        "rarity": "common",
+        "stat_effects": [
+            "damage = 1",
+            "attack_speed = 1",
+            "attack_duration = 0.2"
+        ]
+    },
+    "sword_stone_handle": {
+        "type": "sword",
+        "texture": "sword_stone_handle",
+        "name": "Stone handle",
+        "description": "Heavy and cold",
+        "rarity": "common",
+        "stat_effects": [
+            "damage = 0.5",
+            "attack_speed = 0.8",
+            "attack_duration = 0.2"
+        ]
+    },
+    "sword_copper_handle": {
+        "type": "sword",
+        "texture": "sword_copper_handle",
+        "name": "Copper handle",
+        "description": "Not strong, but comfortable for hand",
+        "rarity": "common",
+        "stat_effects": [
+            "damage = 0.5",
+            "attack_speed = 2",
+            "attack_duration = 0.2"
+        ]
+    },
+    "sword_iron_handle": {
+        "type": "sword",
+        "texture": "sword_iron_handle",
+        "name": "Iron handle",
+        "description": "Very nice handle made out of iron",
+        "rarity": "common",
+        "stat_effects": [
+            "damage = 2",
+            "attack_speed = 1",
+            "attack_duration = 0.2"
+        ]
+    },
+    "sword_gold_handle": {
+        "type": "sword",
+        "texture": "sword_gold_handle",
+        "name": "Golden handle",
+        "description": "Costs alot but so heavy",
+        "rarity": "rare",
+        "stat_effects": [
+            "damage = 3",
+            "attack_speed = 0.5",
+            "attack_duration = 2"
+        ]
+    },
+
+    "sword_wood_blade": {
+        "type": "sword",
+        "texture": "sword_wood_blade",
+        "name": "Wooden blade",
+        "description": "Weak blade made out of wood",
+        "rarity": "common",
+        "stat_effects": [
+            "damage += 1"
+        ]
+    },
+    "sword_stone_blade": {
+        "type": "sword",
+        "texture": "sword_stone_blade",
+        "name": "Stone blade",
+        "description": "Strong and heavy",
+        "rarity": "common",
+        "stat_effects": [
+            "damage += 4",
+            "attack_speed *= 0.5",
+            "attack_duration *= 2"
+        ]
+    },
+    "sword_copper_blade": {
+        "type": "sword",
+        "texture": "sword_copper_blade",
+        "name": "Copper blade",
+        "description": "Not strong but lightweight",
+        "rarity": "common",
+        "stat_effects": [
+            "damage += 2",
+            "attack_speed *= 2",
+            "attack_duration *= 0.8"
+        ]
+    },
+    "sword_iron_blade": {
+        "type": "sword",
+        "texture": "sword_iron_blade",
+        "name": "Iron blade",
+        "description": "Heavy iron blade",
+        "rarity": "common",
+        "stat_effects": [
+            "damage += 4",
+            "attack_speed *= 0.4",
+            "attack_duration *= 1.2"
+        ]
+    },
+    "sword_gold_blade": {
+        "type": "sword",
+        "texture": "sword_gold_blade",
+        "name": "Golden blade",
+        "description": "Very heavy golden blade",
+        "rarity": "rare",
+        "stat_effects": [
+            "damage += 6",
+            "attack_speed *= 0.3",
+            "attack_duration *= 2"
+        ]
+    },
+
+    "sword_wood_guard": {
+        "type": "sword",
+        "texture": "sword_wood_guard",
+        "name": "Wooden guard",
+        "description": "Classic guard",
+        "rarity": "common",
+        "stat_effects": [
+            "attack_speed *= 1.2"
+        ]
+    },
+    "sword_stone_guard": {
+        "type": "sword",
+        "texture": "sword_stone_guard",
+        "name": "Stone guard",
+        "description": "Heavy and increases damage",
+        "rarity": "common",
+        "stat_effects": [
+            "attack_speed *= 0.8",
+            "attack_duration *= 1.2",
+            "damage *= 1.2"
+        ]
+    },
+    "sword_copper_guard": {
+        "type": "sword",
+        "texture": "sword_copper_guard",
+        "name": "Copper guard",
+        "description": "Lightweight guard",
+        "rarity": "common",
+        "stat_effects": [
+            "attack_speed *= 2",
+            "attack_duration *= 1.2",
+            "damage *= 0.9"
+        ]
+    },
+    "sword_iron_guard": {
+        "type": "sword",
+        "texture": "sword_iron_guard",
+        "name": "Iron guard",
+        "description": "Very comfortable guard for strong and fast attacks",
+        "rarity": "common",
+        "stat_effects": [
+            "attack_speed *= 0.8",
+            "attack_duration *= 0.5",
+            "damage *= 1.5"
+        ]
+    },
+    "sword_gold_guard": {
+        "type": "sword",
+        "texture": "sword_gold_guard",
+        "name": "Iron guard",
+        "description": "Heavier than other guards but good for damaging",
+        "rarity": "common",
+        "stat_effects": [
+            "attack_speed *= 0.8",
+            "attack_duration *= 1.2",
+            "damage *= 2"
+        ]
+    },
+
+    "sword_wood_pommel": {
+        "type": "sword",
+        "texture": "sword_wood_pommel",
+        "name": "Wooden pommel",
+        "description": "Weak wooden pommel",
+        "rarity": "common",
+        "stat_effects": [
+            "attack_speed *= 1.1"
+        ]
+    },
+    "sword_stone_pommel": {
+        "type": "sword",
+        "texture": "sword_stone_pommel",
+        "name": "Stone pommel",
+        "description": "Heavy pommel",
+        "rarity": "common",
+        "stat_effects": [
+            "attack_speed *= 0.9",
+            "attack_duration *= 0.9"
+        ]
+    },
+    "sword_copper_pommel": {
+        "type": "sword",
+        "texture": "sword_copper_pommel",
+        "name": "Copper pommel",
+        "description": "Lightweight pommel",
+        "rarity": "common",
+        "stat_effects": [
+            "attack_speed *= 1.1"
+        ]
+    },
+    "sword_iron_pommel": {
+        "type": "sword",
+        "texture": "sword_iron_pommel",
+        "name": "Iron pommel",
+        "description": "Good pommel for faster attacks",
+        "rarity": "common",
+        "stat_effects": [
+            "attack_speed *= 1.2",
+            "attack_duration *= 0.9"
+        ]
+    },
+    "sword_gold_pommel": {
+        "type": "sword",
+        "texture": "sword_gold_pommel",
+        "name": "Golden pommel",
+        "description": "Very nice pommel for increasing attack speed",
+        "rarity": "common",
+        "stat_effects": [
+            "attack_speed *= 1.3",
+            "attack_duration *= 0.7"
+        ]
+    }
+}
