@@ -168,7 +168,7 @@
     "sword_gold_guard": {
         "type": "sword",
         "texture": "sword_gold_guard",
-        "name": "Iron guard",
+        "name": "Gold guard",
         "description": "Heavier than other guards but good for damaging",
         "rarity": "common",
         "stat_effects": [

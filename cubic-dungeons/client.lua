@@ -214,6 +214,12 @@ loadImages = {
 	wp_sword_iron_guard = "cubic-dungeons/assets/weapons/parts/textures/sword/iron/wp_guard.png",
 	wp_sword_iron_blade = "cubic-dungeons/assets/weapons/parts/textures/sword/iron/wp_blade.png",
 	wp_sword_iron_pommel = "cubic-dungeons/assets/weapons/parts/textures/sword/iron/wp_pommel.png",
+
+	-- Gold Sword
+	wp_sword_gold_handle = "cubic-dungeons/assets/weapons/parts/textures/sword/gold/wp_handle.png",
+	wp_sword_gold_guard = "cubic-dungeons/assets/weapons/parts/textures/sword/gold/wp_guard.png",
+	wp_sword_gold_blade = "cubic-dungeons/assets/weapons/parts/textures/sword/gold/wp_blade.png",
+	wp_sword_gold_pommel = "cubic-dungeons/assets/weapons/parts/textures/sword/gold/wp_pommel.png",
 	--wp_name = "cubic-dungeons/assets/weapons/parts/textures/name",
 }
 
