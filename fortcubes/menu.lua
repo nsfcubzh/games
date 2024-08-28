@@ -213,10 +213,10 @@ function menu.create(self)
 
     menu.descriptionBG = ui:createFrame(Color(0, 0, 0, 80))
     menu.descriptionBG.pos = Number2(-1000, -1000)
-    menu.descriptionName = ui:createText("NSFWorks Team")
+    menu.descriptionName = ui:createText("NSFCubzh Team")
     menu.descriptionName.pos = Number2(-1000, -1000)
     menu.descriptionName.Color = Color(255, 255, 255, 255)
-    menu.description = ui:createText("We create games that are" .. string.char(10) .. " not suitable for work -" .. string.char(10) .. "but suitable for playing")
+    menu.description = ui:createText("Thanks for playing!")
     menu.description.pos = Number2(-1000, -1000)
     menu.description.Color = Color(200, 200, 200, 255)
 
