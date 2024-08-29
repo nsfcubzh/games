@@ -18,7 +18,7 @@ playerConstructor.create = function(player)
 			end
 			rawset(player.Animations, "Walk", {})
 			multi:unlink("ph_" .. player.ID)
-			player.particles = particles.createEmitter()
+			player.particles = Particles.createEmitter()
 			player.particlesTick = 0
 
 			player.health = 100
@@ -112,9 +112,9 @@ playerConstructor.create = function(player)
 				end
 			end
 
-			player.bushparticles = particles:createEmitter()
-			player.damageParticles = particles:createEmitter()
-			player.shootParticles = particles.createEmitter({
+			player.bushparticles = Particles:createEmitter()
+			player.damageParticles = Particles:createEmitter()
+			player.shootParticles = Particles.createEmitter({
 				position = player.Position + player.Forward*2.5 + player.Down*0.5,
 				scale = Number3(1, 1, 1),
 				color = Color(255, 239, 94),
@@ -263,7 +263,7 @@ end
 
 playerConstructor.remove = function(player)
     player.IsHidden = true
-    player.leaveParticles = particles:createEmitter()
+    player.leaveParticles = Particles:createEmitter()
     for i=1, 30 do
         player.leaveParticles:updateConfig({
             position = player.Position + Number3(math.random(-10, 10)/2, math.random(0, 40)/2, math.random(-10, 10)/2),

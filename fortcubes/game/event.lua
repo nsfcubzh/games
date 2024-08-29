@@ -93,7 +93,7 @@ connection.onEvent = errorHandler(function(connection, e)
 				bush.Rotation.Y = bushes[k].rot
 				bush.id = bushes[k].id
 				bush.type = "bush"
-				bush.particles = particles.createEmitter()
+				bush.particles = Particles.createEmitter()
 
 				bush.move = function(self)
 					if not self.ismoving then
