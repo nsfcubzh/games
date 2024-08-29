@@ -74,7 +74,7 @@ playerConstructor.create = function(player)
 					if self.collides and not self:GetParent().Body.isMoving then
 						self.t = self.t + 63*dt
 
-						if self.t > 60 then
+						if self.t > 5 then
 							if not self.inbush then
 								self.inbush = true
 								self:GetParent().inbush = true
@@ -163,7 +163,10 @@ playerConstructor.create = function(player)
 			end
 
 			player.die = function(self)
-				
+				if self == Player then
+					game.controls.directionalPad(0, 0, false)
+				end
+
 				self.Body:nanStop()
 				self.Body:setPlaySpeed(2)
 				self.Body:setLoop(true)
