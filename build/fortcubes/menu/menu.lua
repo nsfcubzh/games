@@ -194,7 +194,7 @@ function menu.create(self)
     self.avatar = require("avatar")
     self.ha = require("hierarchyactions")
 
-    Loader:LoadFunction("fortcubes/assets/ambience.lua", function(f) f() end)
+    Loader:LoadFunction("build/fortcubes/assets/ambience.lua", function(f) f() end)
 
     self.menus = {
         "menu", "about us", "settings", "armory"
