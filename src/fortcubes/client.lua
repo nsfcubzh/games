@@ -162,31 +162,31 @@ loadingBG.parentDidResize()
 
 
 loadModules = {
-	loading_screen = "fortcubes/loading_screen.lua",
+	loading_screen = "build/fortcubes/loading_screen.lua",
 	-- menu
-	menu = "fortcubes/menu/menu.lua",
-	globalTrees = "fortcubes/menu/data/trees.lua",
-	globalBushes = "fortcubes/menu/data/bushes.lua",
-	armory = "fortcubes/menu/armory.lua",
-	settings = "fortcubes/settings.lua",
+	menu = "build/fortcubes/menu/menu.lua",
+	globalTrees = "build/fortcubes/menu/data/trees.lua",
+	globalBushes = "build/fortcubes/menu/data/bushes.lua",
+	armory = "build/fortcubes/menu/armory.lua",
+	settings = "build/fortcubes/settings.lua",
 	-- game
-	gameWorld = "fortcubes/game/world.lua",
-	gameEvent = "fortcubes/game/event.lua",
-	gameUI = "fortcubes/game/ui.lua",
-	game = "fortcubes/game/game.lua",
+	gameWorld = "build/fortcubes/game/world.lua",
+	gameEvent = "build/fortcubes/game/event.lua",
+	gameUI = "build/fortcubes/game/ui.lua",
+	game = "build/fortcubes/game/game.lua",
 	-- classes
-	bullet = "fortcubes/classes/bullet.lua",
-	playerConstructor = "fortcubes/classes/player.lua",
+	bullet = "build/fortcubes/classes/bullet.lua",
+	playerConstructor = "build/fortcubes/classes/player.lua",
 }
 
 animations = {}
 loadAnimations = {
-	nanskip = "fortcubes/assets/animations/menu/nanskip.json",
-	sysfab = "fortcubes/assets/animations/menu/sysfab.json",
-	katana_idle = "fortcubes/assets/animations/menu/katana_idle.json",
-	pistol_idle = "fortcubes/assets/animations/menu/pistol_idle.json",
-	player_walk = "fortcubes/assets/animations/game/walk.json",
-	player_die = "fortcubes/assets/animations/game/die.json",
+	nanskip = "build/fortcubes/assets/animations/menu/nanskip.json",
+	sysfab = "build/fortcubes/assets/animations/menu/sysfab.json",
+	katana_idle = "build/fortcubes/assets/animations/menu/katana_idle.json",
+	pistol_idle = "build/fortcubes/assets/animations/menu/pistol_idle.json",
+	player_walk = "build/fortcubes/assets/animations/game/walk.json",
+	player_die = "build/fortcubes/assets/animations/game/die.json",
 }
 
 shapes = {}
@@ -203,15 +203,15 @@ loadShapes = {
 
 audio = {}
 loadAudios = {
-	game_theme = "fortcubes/assets/gameTheme.mp3",
-	menu_theme = "fortcubes/assets/menuTheme.mp3",
-	bush = "fortcubes/assets/bush.mp3"
+	game_theme = "build/fortcubes/assets/gameTheme.mp3",
+	menu_theme = "build/fortcubes/assets/menuTheme.mp3",
+	bush = "build/fortcubes/assets/bush.mp3"
 }
 
 images = {}
 loadImages = {
-	logo = "fortcubes/assets/logo.png",
-	gradient = "fortcubes/assets/gradient.png",
+	logo = "build/fortcubes/assets/logo.png",
+	gradient = "build/fortcubes/assets/gradient.png",
 }
 
 

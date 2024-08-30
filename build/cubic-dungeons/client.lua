@@ -172,17 +172,17 @@ loadingBG.parentDidResize()
 
 
 loadModules = {
-	loading_screen = "cubic-dungeons/loading_screen.lua",
-	menu = "cubic-dungeons/menu.lua",
-	settings = "cubic-dungeons/settings.lua",
+	loading_screen = "build/cubic-dungeons/loading_screen.lua",
+	menu = "build/cubic-dungeons/menu.lua",
+	settings = "build/cubic-dungeons/settings.lua",
 
 	-- classes
-	weapons = "cubic-dungeons/classes/weapons.lua",
-	weapon_parts = "cubic-dungeons/classes/weapon_parts.lua",
-	rarity_tiers = "cubic-dungeons/classes/rarity_tiers.lua",
+	weapons = "build/cubic-dungeons/classes/weapons.lua",
+	weapon_parts = "build/cubic-dungeons/classes/weapon_parts.lua",
+	rarity_tiers = "build/cubic-dungeons/classes/rarity_tiers.lua",
 
 	-- modules
-	weapon_visualizer = "cubic-dungeons/modules/weapon_visualizer.lua",
+	weapon_visualizer = "build/cubic-dungeons/modules/weapon_visualizer.lua",
 }
 
 animations = {}
@@ -203,42 +203,42 @@ loadAudios = {
 images = {}
 loadImages = {
 	-- Wood Sword
-	wp_sword_wood_handle = "cubic-dungeons/assets/weapons/parts/textures/sword/wood/wp_handle.png",
-	wp_sword_wood_guard = "cubic-dungeons/assets/weapons/parts/textures/sword/wood/wp_guard.png",
-	wp_sword_wood_blade = "cubic-dungeons/assets/weapons/parts/textures/sword/wood/wp_blade.png",
-	wp_sword_wood_pommel = "cubic-dungeons/assets/weapons/parts/textures/sword/wood/wp_pommel.png",
+	wp_sword_wood_handle = "build/cubic-dungeons/assets/weapons/parts/textures/sword/wood/wp_handle.png",
+	wp_sword_wood_guard = "build/cubic-dungeons/assets/weapons/parts/textures/sword/wood/wp_guard.png",
+	wp_sword_wood_blade = "build/cubic-dungeons/assets/weapons/parts/textures/sword/wood/wp_blade.png",
+	wp_sword_wood_pommel = "build/cubic-dungeons/assets/weapons/parts/textures/sword/wood/wp_pommel.png",
 
 	-- Stone Sword
-	wp_sword_stone_handle = "cubic-dungeons/assets/weapons/parts/textures/sword/stone/wp_handle.png",
-	wp_sword_stone_guard = "cubic-dungeons/assets/weapons/parts/textures/sword/stone/wp_guard.png",
-	wp_sword_stone_blade = "cubic-dungeons/assets/weapons/parts/textures/sword/stone/wp_blade.png",
-	wp_sword_stone_pommel = "cubic-dungeons/assets/weapons/parts/textures/sword/stone/wp_pommel.png",
+	wp_sword_stone_handle = "build/cubic-dungeons/assets/weapons/parts/textures/sword/stone/wp_handle.png",
+	wp_sword_stone_guard = "build/cubic-dungeons/assets/weapons/parts/textures/sword/stone/wp_guard.png",
+	wp_sword_stone_blade = "build/cubic-dungeons/assets/weapons/parts/textures/sword/stone/wp_blade.png",
+	wp_sword_stone_pommel = "build/cubic-dungeons/assets/weapons/parts/textures/sword/stone/wp_pommel.png",
 
 	-- Copper Sword
-	wp_sword_copper_handle = "cubic-dungeons/assets/weapons/parts/textures/sword/copper/wp_handle.png",
-	wp_sword_copper_guard = "cubic-dungeons/assets/weapons/parts/textures/sword/copper/wp_guard.png",
-	wp_sword_copper_blade = "cubic-dungeons/assets/weapons/parts/textures/sword/copper/wp_blade.png",
-	wp_sword_copper_pommel = "cubic-dungeons/assets/weapons/parts/textures/sword/copper/wp_pommel.png",
+	wp_sword_copper_handle = "build/cubic-dungeons/assets/weapons/parts/textures/sword/copper/wp_handle.png",
+	wp_sword_copper_guard = "build/cubic-dungeons/assets/weapons/parts/textures/sword/copper/wp_guard.png",
+	wp_sword_copper_blade = "build/cubic-dungeons/assets/weapons/parts/textures/sword/copper/wp_blade.png",
+	wp_sword_copper_pommel = "build/cubic-dungeons/assets/weapons/parts/textures/sword/copper/wp_pommel.png",
 
 	-- Iron Sword
-	wp_sword_iron_handle = "cubic-dungeons/assets/weapons/parts/textures/sword/iron/wp_handle.png",
-	wp_sword_iron_guard = "cubic-dungeons/assets/weapons/parts/textures/sword/iron/wp_guard.png",
-	wp_sword_iron_blade = "cubic-dungeons/assets/weapons/parts/textures/sword/iron/wp_blade.png",
-	wp_sword_iron_pommel = "cubic-dungeons/assets/weapons/parts/textures/sword/iron/wp_pommel.png",
+	wp_sword_iron_handle = "build/cubic-dungeons/assets/weapons/parts/textures/sword/iron/wp_handle.png",
+	wp_sword_iron_guard = "build/cubic-dungeons/assets/weapons/parts/textures/sword/iron/wp_guard.png",
+	wp_sword_iron_blade = "build/cubic-dungeons/assets/weapons/parts/textures/sword/iron/wp_blade.png",
+	wp_sword_iron_pommel = "build/cubic-dungeons/assets/weapons/parts/textures/sword/iron/wp_pommel.png",
 
 	-- Gold Sword
-	wp_sword_gold_handle = "cubic-dungeons/assets/weapons/parts/textures/sword/gold/wp_handle.png",
-	wp_sword_gold_guard = "cubic-dungeons/assets/weapons/parts/textures/sword/gold/wp_guard.png",
-	wp_sword_gold_blade = "cubic-dungeons/assets/weapons/parts/textures/sword/gold/wp_blade.png",
-	wp_sword_gold_pommel = "cubic-dungeons/assets/weapons/parts/textures/sword/gold/wp_pommel.png",
-	--wp_name = "cubic-dungeons/assets/weapons/parts/textures/name",
+	wp_sword_gold_handle = "build/cubic-dungeons/assets/weapons/parts/textures/sword/gold/wp_handle.png",
+	wp_sword_gold_guard = "build/cubic-dungeons/assets/weapons/parts/textures/sword/gold/wp_guard.png",
+	wp_sword_gold_blade = "build/cubic-dungeons/assets/weapons/parts/textures/sword/gold/wp_blade.png",
+	wp_sword_gold_pommel = "build/cubic-dungeons/assets/weapons/parts/textures/sword/gold/wp_pommel.png",
+	--wp_name = "build/cubic-dungeons/assets/weapons/parts/textures/name",
 }
 
 json = {}
 loadJsons = {
-	weapons = "cubic-dungeons/assets/weapons/weapons.json",
-	weapon_parts = "cubic-dungeons/assets/weapons/parts/parts.json",
-	rarity_tiers = "cubic-dungeons/assets/rarity_tiers.json",
+	weapons = "build/cubic-dungeons/assets/weapons/weapons.json",
+	weapon_parts = "build/cubic-dungeons/assets/weapons/parts/parts.json",
+	rarity_tiers = "build/cubic-dungeons/assets/rarity_tiers.json",
 }
 
 
