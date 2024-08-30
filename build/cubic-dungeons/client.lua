@@ -9,9 +9,11 @@ NSFLua['cubic-dungeons\\client.lua'].LAST_SECTION_LINE = 0
 
 -- End of NSFLua code
 
+NSFLua['cubic-dungeons\\client.lua'].LAST_SECTION = "START" NSFLua['cubic-dungeons\\client.lua'].LAST_SECTION_LINE = 1 Debug.log("cubic-dungeons\\client.lua > New section: \"START\" [Line: 1]")
+
 Debug.enabled = false
-Debug.log("client() - Loaded from: '"..repo.."' repo. Commit: '"..githash.."'. Modules commit: '"..nsfwhash.."'")
-Debug.log("client() - Starting '"..game.."'...")
+Debug.log("server() - Loaded from: '"..repo.."' repo. Commit: '"..githash.."'. Modules commit: '"..nsfwhash.."'")
+Debug.log("server() - Starting '"..game.."' server...")
 
 randomEasterLogs = {
 	"Once upon a time...",
@@ -150,7 +152,7 @@ end)
 set("VERSION", "v0.0")
 set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
 
-Debug.log("client() - version: "..VERSION)
+Debug.log("client() - version: "..VERSION.."")
 
 Client.DirectionalPad = nil
 Client.AnalogPad = nil
@@ -255,6 +257,7 @@ need_to_load_jsons = 0
 isLoaded = false
 
 function doneLoading()
+	NSFLua['cubic-dungeons\\client.lua'].LAST_SECTION = "STARTED" NSFLua['cubic-dungeons\\client.lua'].LAST_SECTION_LINE = 249 Debug.log("cubic-dungeons\\client.lua > New section: \"STARTED\" [Line: 249]")
 	isLoaded = true
 
 	Camera:SetParent(World)
@@ -534,3 +537,4 @@ Debug.log("client() - Loading " .. need_to_load_jsons .. " jsons..")
 
 
 Debug.log("client() - Total: " .. need_to_load .. " assets")
+NSFLua['cubic-dungeons\\client.lua'].LAST_SECTION = "LOADING" NSFLua['cubic-dungeons\\client.lua'].LAST_SECTION_LINE = 529 Debug.log("cubic-dungeons\\client.lua > New section: \"LOADING\" [Line: 529]")

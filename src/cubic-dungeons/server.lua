@@ -1,6 +1,8 @@
+-SECTION("START")
+
 Debug.enabled = false
-Debug.log("server() - Loaded from: '"..repo.."' repo. Commit: '"..githash.."'")
-Debug.log("server() - Starting '"..game.."' server...")
+Debug.log(f"server() - Loaded from: '{repo}' repo. Commit: '{githash}'")
+Debug.log(f"server() - Starting '{game}' server...")
 
 function set(key, value)
 	rawset(_ENV, key, value)
@@ -9,6 +11,7 @@ end
 set("CRASH", function(message)
 	message = tostring(message)
 	pcall(function()
+		-SECTION("CRASHED")
 		Server.DidReceiveEvent = nil
 		Server.OnPlayerJoin = nil
 		Server.OnPlayerLeave = nil
@@ -30,21 +33,21 @@ end)
 set("VERSION", "v0.0")
 set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
 
-Debug.log("server() - version: "..VERSION)
+Debug.log(f"server() - version: {VERSION}")
 
 Server.OnPlayerJoin = function(player)
-	Debug.log("server() - player joined [" .. player.Username .. "]")
+	Debug.log(f"server() - player joined [{player.Username}]")
 end
 
 Server.OnPlayerLeave = function(player)
-	Debug.log("server() - player leaved [" .. player.Username .. "]")
+	Debug.log(f"server() - player leaved [{player.Username}]")
 end
 
 Server.DidReceiveEvent = errorHandler(function(e) 
 	Network:ParseEvent(e, {
 
 	get_logs = function(event)
-		Debug.log("server() - sending server logs to "..event.Sender.Username)
+		Debug.log(f"server() - sending server logs to {event.Sender.Username}")
 
 		local r = Network.Event("server_logs", Debug:export())
 		r:SendTo(event.Sender)
@@ -60,16 +63,18 @@ Server.DidReceiveEvent = errorHandler(function(e)
 	end,
 
 	["_"] = function(event)
-		Debug.log("server() - got unknown event: "..tostring(event.action))
+		Debug.log(f"server() - got unknown event: {tostring(event.action)}")
 	end
 
 	})
-end, function(err) CRASH("Server.DidReceiveEvent - "..err) end)
+end, function(err) CRASH(f"Server.DidReceiveEvent - {err}") end)
 
 
 tick = Object()
 tick.Tick = errorHandler(function(self, dt)
 
-end, function(err) CRASH("Server.tick.Tick - "..err) end)
+end, function(err) CRASH(f"Server.tick.Tick - {err}") end)
 
 Debug.log("server() - created tick object with Tick function.")
+
+-SECTION("STARTED")

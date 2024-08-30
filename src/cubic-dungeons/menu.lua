@@ -59,7 +59,7 @@ function menu.create(self)
     menu.object.Tick = errorHandler(function(self, dt)
         local delta = dt * 63
         
-    end, function(err) CRASH("menu.object.Tick - "..err) end)
+    end, function(err) CRASH(f"menu.object.Tick - {err}") end)
 
     Camera:SetModeFree()
     Camera.Rotation = Rotation(0, -0.2, 0)

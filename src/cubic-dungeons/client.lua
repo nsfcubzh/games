@@ -1,6 +1,8 @@
+-SECTION("START")
+
 Debug.enabled = false
-Debug.log("client() - Loaded from: '"..repo.."' repo. Commit: '"..githash.."'. Modules commit: '"..nsfwhash.."'")
-Debug.log("client() - Starting '"..game.."'...")
+Debug.log(f"server() - Loaded from: '{repo}' repo. Commit: '{githash}'. Modules commit: '{nsfwhash}'")
+Debug.log(f"server() - Starting '{game}' server...")
 
 randomEasterLogs = {
 	"Once upon a time...",
@@ -139,7 +141,7 @@ end)
 set("VERSION", "v0.0")
 set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
 
-Debug.log("client() - version: "..VERSION)
+Debug.log(f"client() - version: {VERSION}")
 
 Client.DirectionalPad = nil
 Client.AnalogPad = nil
@@ -244,6 +246,7 @@ need_to_load_jsons = 0
 isLoaded = false
 
 function doneLoading()
+	-SECTION("STARTED")
 	isLoaded = true
 
 	Camera:SetParent(World)
@@ -523,3 +526,4 @@ Debug.log("client() - Loading " .. need_to_load_jsons .. " jsons..")
 
 
 Debug.log("client() - Total: " .. need_to_load .. " assets")
+-SECTION("LOADING")
