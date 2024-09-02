@@ -9,7 +9,7 @@ NSFLua['cubic-dungeons\\server.lua'].LAST_SECTION_LINE = 0
 
 -- End of NSFLua code
 
-NSFLua['cubic-dungeons\\server.lua'].LAST_SECTION = "START" NSFLua['cubic-dungeons\\server.lua'].LAST_SECTION_LINE = 1 Debug.log("cubic-dungeons\\server.lua > New section: \"START\" [Line: 1]")
+NSFLua['cubic-dungeons\\server.lua'].LAST_SECTION = "START" NSFLua['cubic-dungeons\\server.lua'].LAST_SECTION_LINE = 1 Debug.log("cubic-dungeons\\server.lua > New section: '".."START".."' [Line: 1]")
 
 Debug.enabled = false
 Debug.log("server() - Loaded from: '"..repo.."' repo. Commit: '"..githash.."'")
@@ -22,7 +22,7 @@ end
 set("CRASH", function(message)
 	message = tostring(message)
 	pcall(function()
-		NSFLua['cubic-dungeons\\server.lua'].LAST_SECTION = "CRASHED" NSFLua['cubic-dungeons\\server.lua'].LAST_SECTION_LINE = 14 Debug.log("cubic-dungeons\\server.lua > New section: \"CRASHED\" [Line: 14]")
+		NSFLua['cubic-dungeons\\server.lua'].LAST_SECTION = "CRASHED" NSFLua['cubic-dungeons\\server.lua'].LAST_SECTION_LINE = 14 Debug.log("cubic-dungeons\\server.lua > New section: '".."CRASHED".."' [Line: 14]")
 		Server.DidReceiveEvent = nil
 		Server.OnPlayerJoin = nil
 		Server.OnPlayerLeave = nil
@@ -88,4 +88,4 @@ end, function(err) CRASH("Server.tick.Tick - "..err.."") end)
 
 Debug.log("server() - created tick object with Tick function.")
 
-NSFLua['cubic-dungeons\\server.lua'].LAST_SECTION = "STARTED" NSFLua['cubic-dungeons\\server.lua'].LAST_SECTION_LINE = 80 Debug.log("cubic-dungeons\\server.lua > New section: \"STARTED\" [Line: 80]")
+NSFLua['cubic-dungeons\\server.lua'].LAST_SECTION = "STARTED" NSFLua['cubic-dungeons\\server.lua'].LAST_SECTION_LINE = 80 Debug.log("cubic-dungeons\\server.lua > New section: '".."STARTED".."' [Line: 80]")
