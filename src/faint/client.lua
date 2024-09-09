@@ -221,58 +221,6 @@ function doneLoading()
 		toast:create({message = "Game launched with Debug enabled."})
 	end
 
-	Debug.log("Loading rarity tiers...")
-	for id, tier in pairs(json.rarity_tiers) do
-		errorHandler(function()
-			Debug.log("Loading rarity tier '"..id.."'...")
-
-			local rt_config = copyTable(tier)
-			rt_config.color = Color(rt_config.color[1], rt_config.color[2], rt_config.color[3])
-
-			local rt = rarity(rt_config)
-			rarity_tiers[id] = rt
-		end, function(err) CRASH("Failed to load rarity tier ".. id .." - "..err) end)()
-	end
-
-	Debug.log("Loading weapon parts...")
-	for id, part in pairs(json.weapon_parts) do
-		errorHandler(function()
-			Debug.log("Loading weapon part '"..id.."'...")
-
-			local wp_config = copyTable(part)
-			for i, effect in ipairs(part.stat_effects) do
-				local code = effect:gsub("([%w_]+)%s*([%+%-/%*])=%s*([%w_]+)", "%1 = %1 %2 %3")
-				Debug.log("Loaded effect: '"..code.."' from '"..effect.."'")
-				wp_config.stat_effects[i] = function(stats)
-					loadFunction(code, stats)()
-				end
-			end
-
-			local wp = weapon_part(wp_config)
-			weapon_parts[id] = wp
-		end, function(err) CRASH("Failed to load weapon part ".. id .." - "..err) end)()
-	end
-
-	Debug.log("Loading weapons...")
-	for id, weapon_json in pairs(json.weapons) do
-		errorHandler(function()
-			Debug.log("Loading weapon '"..id.."'...")
-
-			local parts = {}
-			for i, part_name in ipairs(weapon_json.parts) do
-				table.insert(parts, weapon_parts[part_name])
-			end
-
-			local wp_config = copyTable(weapon_json)
-			wp_config.parts = parts
-			wp_config.rarity = rarity_tiers[wp_config.rarity]
-
-			local wp = weapon(wp_config)
-			
-			weapons[id] = wp
-		end, function(err) CRASH("Failed to load weapon ".. id .." - "..err) end)()
-	end
-
 	if loading_screen.created then loading_screen:remove() end
 	settings:load()
 	menu:create()
