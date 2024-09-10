@@ -41,6 +41,9 @@ Game.Object = {
         if cfg.model == nil then 
             error("Object must have 'model' field.", 2)
         end
+        if shapes[cfg.model] == nil then
+            error("Missing shape ["..cfg.model.."] for '"..cfg.id.."'.", 2)
+        end
 
         Debug.log("Registering '"..cfg.id.."' object...")
         if self[cfg.id] ~= nil then
