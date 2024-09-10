@@ -3,16 +3,16 @@
 
 if NSFLua == nil then rawset(_ENV, "NSFLua", {}) end
 
-NSFLua['faint\\classes\\Object.lua'] = {}
-NSFLua['faint\\classes\\Object.lua'].LAST_SECTION = ""
-NSFLua['faint\\classes\\Object.lua'].LAST_SECTION_LINE = 0
+NSFLua['faint\\classes\\Entity.lua'] = {}
+NSFLua['faint\\classes\\Entity.lua'].LAST_SECTION = ""
+NSFLua['faint\\classes\\Entity.lua'].LAST_SECTION_LINE = 0
 
 -- End of NSFLua code
 
-Game.Object = {
+Game.Entity = {
     New = function(self, config)
-        if self ~= Game.Object then
-            error("Game.Object.New() should be called with ':'!", 2)
+        if self ~= Game.Entity then
+            error("Game.Entity.New() should be called with ':'!", 2)
         end
 
         local defaultConfig = {
@@ -38,43 +38,43 @@ Game.Object = {
         end
 
         if cfg.id == nil then 
-            error("Object must have 'id' field.", 2)
+            error("Entity must have 'id' field.", 2)
         end
         if cfg.model == nil then 
-            error("Object must have 'model' field.", 2)
+            error("Entity must have 'model' field.", 2)
         end
         if shapes[cfg.model] == nil then
-            error("Missing shape ["..cfg.model.."] for object '"..cfg.id.."'.", 2)
+            error("Missing shape ["..cfg.model.."] for entity '"..cfg.id.."'.", 2)
         end
 
         Debug.log("Registering '"..cfg.id.."' object...")
         if self[cfg.id] ~= nil then
-            Debug.log("Error registering '"..cfg.id.."' object [Already registered]...")
-            error("Object "..cfg.id.." already exists.", 2)
+            Debug.log("Error registering '"..cfg.id.."' entity [Already registered]...")
+            error("Entity "..cfg.id.." already exists.", 2)
         end
 
         local constructor = function(...)
-            local obj = {}
+            local ent = {}
 
             if cfg.type == "Shape" then
-                obj.shape = Shape(shapes[cfg.model], {includeChildren = true})
+                ent.shape = Shape(shapes[cfg.model], {includeChildren = true})
             elseif cfg.type == "MutableShape" then
-                obj.shape = MutableShape(shapes[cfg.model], {includeChildren = true})
+                ent.shape = MutableShape(shapes[cfg.model], {includeChildren = true})
             end
 
-            obj.id = cfg.id
-            obj.Destroy = cfg.Destroy
-            obj.Init = cfg.Init
-            obj.Tick = cfg.Tick
-            obj:Init(...)
+            ent.id = cfg.id
+            ent.Destroy = cfg.Destroy
+            ent.Init = cfg.Init
+            ent.Tick = cfg.Tick
+            ent:Init(...)
 
-            if obj.Tick ~= nil then 
-                obj.TickListener = LocalEvent:Listen(LocalEvent.Name.Tick, function(...) 
-                    obj:Tick(...)
+            if ent.Tick ~= nil then 
+                ent.TickListener = LocalEvent:Listen(LocalEvent.Name.Tick, function(...) 
+                    ent:Tick(...)
                 end)
             end
 
-            return obj
+            return ent
         end
 
         self[cfg.id] = constructor
