@@ -46,7 +46,7 @@ Game.Object = {
             if cfg.type == "Shape" then
                 obj.shape = Shape(shapes[cfg.model], {includeChildren = true})
             elseif cfg.type == "MutableShape" then
-                obj.shape1 = MutableShape(shapes[cfg.model], {includeChildren = true})
+                obj.shape = MutableShape(shapes[cfg.model], {includeChildren = true})
             end
 
             obj.id = cfg.id
