@@ -15,8 +15,6 @@ Game.Object = {
             error("Game.Object.New() should be called with ':'!", 2)
         end
 
-        Debug.log("Registering '"..config.id.."' object...")
-
         local defaultConfig = {
             id = "Debug",
             type = "Shape",
@@ -39,8 +37,11 @@ Game.Object = {
             cfg[key] = value
         end
 
+        Debug.log("Registering '"..cfg.id.."' object...")
+
+
         if self[cfg.id] ~= nil then
-            Debug.log("Error registering '"..config.id.."' object [Already registered]...")
+            Debug.log("Error registering '"..cfg.id.."' object [Already registered]...")
             error("Object "..cfg.id.." already exists.", 2)
         end
 
