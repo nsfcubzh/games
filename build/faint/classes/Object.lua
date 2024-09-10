@@ -9,16 +9,18 @@ NSFLua['faint\\classes\\Object.lua'].LAST_SECTION_LINE = 0
 
 -- End of NSFLua code
 
-
-local object = {
+Game.Object = {
     New = function(self, config)
-        if self ~= object then
+        if self ~= Game.Object then
             error("Game.Object.New() should be called with ':'!", 2)
         end
+
+        Debug.log("Registering '"..config.id.."' object...")
+
         local defaultConfig = {
             id = "Debug",
             type = "Shape",
-            shape = "nanskip.v",
+            model = "nanskip.v",
             Init = function(s)
                 return
             end,
@@ -26,34 +28,36 @@ local object = {
                 s:SetParent(nil)
                 s = nil
             end,
-            Tick = nil, -- tick function
+            Tick = nil,
         }
+
         local cfg = {}
-        for key, value in pairs(default) do
+        for key, value in pairs(defaultConfig) do
             cfg[key] = value
         end
-        for key, value in pairs(custom) do
+        for key, value in pairs(config) do
             cfg[key] = value
         end
 
         if self[cfg.id] ~= nil then
+            Debug.log("Error registering '"..config.id.."' object [Already registered]...")
             error("Object "..cfg.id.." already exists.", 2)
         end
 
-        local constructor = function()
+        local constructor = function(...)
             local obj = {}
             
             if cfg.type == "Shape" then
-                obj = Shape(cfg.shape)
+                obj = Shape(cfg.model)
             elseif cfg.type == "MutableShape" then
-                obj = MutableShape(cfg.shape)
+                obj = MutableShape(cfg.model)
             end
 
             obj.id = cfg.id
             obj.Destroy = cfg.Destroy
             obj.Init = cfg.Init
-            obj:Init()
             obj.Tick = cfg.Tick
+            obj:Init(...)
 
             return obj
         end
@@ -61,5 +65,3 @@ local object = {
         self[cfg.id] = constructor
     end,
 }
-
-Game.Object = object

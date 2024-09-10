@@ -181,6 +181,10 @@ loadModules = {
 	settings = "build/faint/settings.lua",
 }
 
+loadClasses = {
+	"build/faint/classes/Object.lua"
+}
+
 animations = {}
 loadAnimations = {
 
@@ -220,7 +224,7 @@ need_to_load_jsons = 0
 isLoaded = false
 
 function doneLoading()
-	NSFLua['faint\\client.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 212 Debug.log("faint\\client.lua > New section: '".."STARTED".."' [Line: 212]")
+	NSFLua['faint\\client.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 216 Debug.log("faint\\client.lua > New section: '".."STARTED".."' [Line: 216]")
 	isLoaded = true
 
 	Camera:SetParent(World)
@@ -279,7 +283,43 @@ for key, value in pairs(loadModules) do
 		end
 	end)
 end
-Debug.log("client() - Loading " .. need_to_load_modules.. " modules..")
+Debug.log("client() - Loading " .. need_to_load_classes.. " classes..")
+
+for key, value in pairs(loadClasses) do
+	if need_to_load_classes == nil then need_to_load_classes = 0 end
+	need_to_load_classes = need_to_load_classes + 1
+	need_to_load = need_to_load + 1
+
+	Loader:LoadFunction(value, function(class)
+		Debug.log("client() - Loaded '".. value .."'")
+
+		errorHandler(
+			function() class() end, 
+			function(err) CRASH("Failed to load class '"..value.."' - "..err) end
+		)()
+
+		if loaded_classes == nil then loaded_classes = 0 end
+		loaded_classes = loaded_classes + 1
+		loaded = loaded + 1
+
+		if loading_screen.created then
+			loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
+		elseif loading_screen ~= nil then
+			loading_screen:create()
+			
+			loadingBG:remove()
+			loadingBG = nil
+		end
+
+		if loaded_classes >= need_to_load_classes then
+			Debug.log("client() - Loaded all classes.")
+		end
+		if loaded >= need_to_load then
+			checkLoading()
+		end
+	end)
+end
+Debug.log("client() - Loading " .. need_to_load_classes.. " classes..")
 
 for key, value in pairs(loadAnimations) do
 	if need_to_load_animations == nil then need_to_load_animations = 0 end
@@ -448,4 +488,4 @@ Debug.log("client() - Loading " .. need_to_load_jsons .. " jsons..")
 
 
 Debug.log("client() - Total: " .. need_to_load .. " assets")
-NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 440 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 440]")
+NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 480 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 480]")
