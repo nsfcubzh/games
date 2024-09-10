@@ -118,7 +118,7 @@ function set(key, value)
 	rawset(_ENV, key, value)
 end
 
-
+-- CRASH DEFINITION
 set("CRASH", function(message)
 	message = tostring(message)
 	pcall(function()
@@ -147,6 +147,8 @@ set("CRASH", function(message)
 	error("CRASH() - crash was called", 2)
 end)
 
+-- GAME OBJECT SETTING
+set("Game", {})
 
 -- CONFIG
 set("VERSION", "v0.0")
@@ -218,7 +220,7 @@ need_to_load_jsons = 0
 isLoaded = false
 
 function doneLoading()
-	NSFLua['faint\\client.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 210 Debug.log("faint\\client.lua > New section: '".."STARTED".."' [Line: 210]")
+	NSFLua['faint\\client.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 212 Debug.log("faint\\client.lua > New section: '".."STARTED".."' [Line: 212]")
 	isLoaded = true
 
 	Camera:SetParent(World)
@@ -446,4 +448,4 @@ Debug.log("client() - Loading " .. need_to_load_jsons .. " jsons..")
 
 
 Debug.log("client() - Total: " .. need_to_load .. " assets")
-NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 438 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 438]")
+NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 440 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 440]")

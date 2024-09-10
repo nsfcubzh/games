@@ -107,7 +107,7 @@ function set(key, value)
 	rawset(_ENV, key, value)
 end
 
-
+-- CRASH DEFINITION
 set("CRASH", function(message)
 	message = tostring(message)
 	pcall(function()
@@ -136,6 +136,8 @@ set("CRASH", function(message)
 	error("CRASH() - crash was called", 2)
 end)
 
+-- GAME OBJECT SETTING
+set("Game", {})
 
 -- CONFIG
 set("VERSION", "v0.0")
