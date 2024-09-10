@@ -36,22 +36,37 @@ Game.Object = {
 
         local constructor = function(...)
             local obj = {}
-            
-            if cfg.type == "Shape" then
-                obj = Shape(cfg.model)
-            elseif cfg.type == "MutableShape" then
-                obj = MutableShape(cfg.model)
+
+            local create = function(cfg)
+                local obj = {}
+                
+                if cfg.type == "Shape" then
+                    obj = Shape(Game.Object.Cache[cfg.id])
+                elseif cfg.type == "MutableShape" then
+                    obj = MutableShape(Game.Object.Cache[cfg.id])
+                end
+
+                obj.id = cfg.id
+                obj.Destroy = cfg.Destroy
+                obj.Init = cfg.Init
+                obj.Tick = cfg.Tick
+                obj:Init(...)
+
+                return obj
             end
 
-            obj.id = cfg.id
-            obj.Destroy = cfg.Destroy
-            obj.Init = cfg.Init
-            obj.Tick = cfg.Tick
-            obj:Init(...)
-
-            return obj
+            if Game.Object.Cache[cfg.id] == nil then
+                Object:Load(cfg.model, function(model)
+                    Game.Object.Cache[cfg.id] = model
+                    create(cfg)
+                end)
+            else
+                create(cfg)
+            end
         end
 
         self[cfg.id] = constructor
     end,
+
+    Cache = {}
 }
