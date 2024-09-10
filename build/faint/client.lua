@@ -283,7 +283,7 @@ for key, value in pairs(loadModules) do
 		end
 	end)
 end
-Debug.log("client() - Loading " .. need_to_load_classes.. " classes..")
+Debug.log("client() - Loading " .. need_to_load_modules.. " modules..")
 
 for key, value in pairs(loadClasses) do
 	if need_to_load_classes == nil then need_to_load_classes = 0 end
