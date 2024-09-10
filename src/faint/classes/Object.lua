@@ -5,15 +5,13 @@ Game.Object = {
         end
 
         local defaultConfig = {
-            id = "Debug",
             type = "Shape",
-            model = "nanskip.v",
             Init = function(s)
                 return
             end,
             Destroy = function(s)
-                s:SetParent(nil)
-                s = nil
+                s.shape:SetParent(nil)
+                s.shape = nil
             end,
             Tick = nil,
         }
@@ -26,9 +24,14 @@ Game.Object = {
             cfg[key] = value
         end
 
+        if cfg.id == nil then 
+            error("Object must have 'id' field.", 2)
+        end
+        if cfg.model == nil then 
+            error("Object must have 'model' field.", 2)
+        end
+
         Debug.log(f"Registering '{cfg.id}' object...")
-
-
         if self[cfg.id] ~= nil then
             Debug.log(f"Error registering '{cfg.id}' object [Already registered]...")
             error(f"Object {cfg.id} already exists.", 2)
@@ -37,36 +40,28 @@ Game.Object = {
         local constructor = function(...)
             local obj = {}
 
-            local create = function(cfg)
-                local obj = {}
-                
-                if cfg.type == "Shape" then
-                    obj = Shape(Game.Object.Cache[cfg.id])
-                elseif cfg.type == "MutableShape" then
-                    obj = MutableShape(Game.Object.Cache[cfg.id])
-                end
-
-                obj.id = cfg.id
-                obj.Destroy = cfg.Destroy
-                obj.Init = cfg.Init
-                obj.Tick = cfg.Tick
-                obj:Init(...)
-
-                return obj
+            if cfg.type == "Shape" then
+                obj.shape = Shape(shapes[cfg.model], {includeChildren = true})
+            elseif cfg.type == "MutableShape" then
+                obj.shape1 = MutableShape(shapes[cfg.model], {includeChildren = true})
             end
 
-            if Game.Object.Cache[cfg.id] == nil then
-                Object:Load(cfg.model, function(model)
-                    Game.Object.Cache[cfg.id] = model
-                    create(cfg)
+            obj.id = cfg.id
+            obj.Destroy = cfg.Destroy
+            obj.Init = cfg.Init
+            obj.Tick = cfg.Tick
+            obj:Init(...)
+
+            if obj.Tick ~= nil then 
+                obj.TickListener = LocalEvent:Listen(LocalEvent.Name.Tick, function(...) 
+                    obj:Tick(...)
                 end)
-            else
-                create(cfg)
             end
+
+            return obj
         end
 
         self[cfg.id] = constructor
-    end,
-
-    Cache = {}
+        return constructor
+    end
 }
