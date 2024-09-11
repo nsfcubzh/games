@@ -6,12 +6,13 @@ function worldgen.Generate(config)
     end
 
     local defaultConfig = {
-        scale = 32,
-        zoom = 0.1
-        seed = 0,
+        width = 64,
+        height = 200,
+        zoom = 0.1,
+        seed = 1,
         octaves = 2,
         waterLevel = 0.2,
-        sandLevel = 0.3,
+        sandLevel = 0.4,
         grassLevel = 0.7,
         gravelLevel = 0.8,
         graniteLevel = 1,
@@ -40,17 +41,19 @@ function worldgen.Generate(config)
     end
 
     local world = {}
-    for x, cfg.scale do
+    perlin.seed(cfg.seed)
+    for x = 1, cfg.width do
         world[x] = {}
-        for y, cfg.scale do
+        for y = 1, cfg.height do
             world[x][y] = {}
             local cell = world[x][y]
 
-            perlin.seed(cfg.seed)
-            local height = (perlin.get(x*cfg.zoom, y*cfg.zoom) + 1)/2 -- getting height value from 0 to 1
+            local height = (perlin.get(x*cfg.zoom, y*cfg.zoom)+1)/2 -- getting height value from 0 to 1
 
             cell.block = "debug"
-            if height < cfg.waterLevel then
+            if height < 0 then
+                cell.block = "debug"
+            elseif height < cfg.waterLevel then
                 cell.block = "water"
             elseif height < cfg.sandLevel then
                 cell.block = "sand"
@@ -64,17 +67,19 @@ function worldgen.Generate(config)
         end
     end
 
-    for x, cfg.scale do
+    for x = 1, cfg.width do
         local text = ""
-        for y, cfg.scale do
-            if world[x][y].block == "water" then
+        for y=1, cfg.height do
+            if world[x][y].block == "debug" then
                 text = text .. " "
-            elseif world[x][y].block == "sand" then
+            elseif world[x][y].block == "water" then
                 text = text .. "."
+            elseif world[x][y].block == "sand" then
+                text = text .. ":"
             elseif world[x][y].block == "grass" then
-                text = text .. "I"
+                text = text .. "|"
             elseif world[x][y].block == "gravel" then
-                text = text .. "0"
+                text = text .. "I"
             elseif world[x][y].block == "granite" then
                 text = text .. "#"
             end
