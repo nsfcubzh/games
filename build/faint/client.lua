@@ -179,6 +179,7 @@ loadModules = {
 	loading_screen = "build/faint/loading_screen.lua",
 	menu = "build/faint/menu.lua",
 	settings = "build/faint/settings.lua",
+	worldgen = "build/faint/modules/world_generator.lua",
 }
 
 loadClasses = {
@@ -225,7 +226,7 @@ need_to_load_jsons = 0
 isLoaded = false
 
 function doneLoading()
-	NSFLua['faint\\client.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 217 Debug.log("faint\\client.lua > New section: '".."STARTED".."' [Line: 217]")
+	NSFLua['faint\\client.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 218 Debug.log("faint\\client.lua > New section: '".."STARTED".."' [Line: 218]")
 	isLoaded = true
 
 	Camera:SetParent(World)
@@ -489,4 +490,4 @@ Debug.log("client() - Loading " .. need_to_load_jsons .. " jsons..")
 
 
 Debug.log("client() - Total: " .. need_to_load .. " assets")
-NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 481 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 481]")
+NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 482 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 482]")

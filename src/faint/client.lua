@@ -168,6 +168,7 @@ loadModules = {
 	loading_screen = "build/faint/loading_screen.lua",
 	menu = "build/faint/menu.lua",
 	settings = "build/faint/settings.lua",
+	worldgen = "build/faint/modules/world_generator.lua",
 }
 
 loadClasses = {
