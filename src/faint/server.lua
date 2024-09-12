@@ -32,6 +32,9 @@ end)
 -- CONFIG
 set("VERSION", "v0.0")
 set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
+set("READY", false)
+
+queue = {}
 
 Debug.log(f"server() - version: {VERSION}")
 
@@ -41,6 +44,14 @@ end
 
 Server.OnPlayerLeave = function(player)
 	Debug.log(f"server() - player leaved [{player.Username}]")
+
+	local new_queue = {}
+	for i, p in ipairs(queue) do
+		if p.Username ~= player.Username then
+			table.insert(new_queue, p)
+		end
+	end
+	queue = new_queue
 end
 
 Server.DidReceiveEvent = errorHandler(function(e) 
@@ -61,6 +72,12 @@ Server.DidReceiveEvent = errorHandler(function(e)
 			end
 		end
 	end,
+
+	start = function(event)
+		if READY == false then
+			table.insert(queue, event.Sender)
+		end
+	end
 
 	["_"] = function(event)
 		Debug.log(f"server() - got unknown event: {tostring(event.action)}")
