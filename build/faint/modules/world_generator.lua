@@ -183,7 +183,7 @@ function worldgen.Generate(config)
                     chance = chance * item.chances[cell.block]
                 end
     
-                local result = math.random(0, 1/chance)
+                local result = math.random(0, worldgen.round(1/chance))
 
                 if result == 0 and cell.object == nil and item.chances[cell.block] ~= nil then
                     cell.object = name
@@ -197,7 +197,7 @@ function worldgen.Generate(config)
         for x = 1, cfg.width do
             for y = 1, cfg.height do
                 --local cell = world[x][y]
-                if math.random(0, 1/structure.chance) == 0 then
+                if math.random(0, worldgen.round(1/structure.chance)) == 0 then
                     local directions = {
                         x = {1, -1},
                         y = {1, -1},
@@ -219,7 +219,7 @@ function worldgen.Generate(config)
                             end
 
                             local block = nil
-                            if math.random(0, 1/(structure.removed_floors)) == 0 then
+                            if math.random(0, worldgen.round(1/(structure.removed_floors))) == 0 then
                                 block = "floor"
                             end
                             
@@ -229,7 +229,7 @@ function worldgen.Generate(config)
                                 end
 
                                 for name, item in pairs(structure.items) do
-                                    if math.random(0, 1/(structure.items[name].chance)) == 0 then
+                                    if math.random(0, worldgen.round(1/(structure.items[name].chance))) == 0 then
                                         if cell.object == nil and cell.block == "floor" then
                                             cell.object = name
                                         end
@@ -251,7 +251,7 @@ function worldgen.Generate(config)
                         end
 
                         local object = nil
-                        if math.random(0, 1/(structure.removed_walls)) == 0 then
+                        if math.random(0, worldgen.round(1/(structure.removed_walls))) == 0 then
                             object = "wall"
                         end
 
@@ -273,7 +273,7 @@ function worldgen.Generate(config)
                         end
 
                         local object = nil
-                        if math.random(0, 1/(structure.removed_walls)) == 0 then
+                        if math.random(0, worldgen.round(1/(structure.removed_walls))) == 0 then
                             object = "wall"
                         end
 
@@ -295,7 +295,7 @@ function worldgen.Generate(config)
                         end
 
                         local object = nil
-                        if math.random(0, 1/(structure.removed_walls)) == 0 then
+                        if math.random(0, worldgen.round(1/(structure.removed_walls))) == 0 then
                             object = "wall"
                         end
 
@@ -317,7 +317,7 @@ function worldgen.Generate(config)
                         end
 
                         local object = nil
-                        if math.random(0, 1/(structure.removed_walls)) == 0 then
+                        if math.random(0, worldgen.round(1/(structure.removed_walls))) == 0 then
                             object = "wall"
                         end
 
@@ -340,6 +340,14 @@ end
 function worldgen.Build(world)
     if world == nil then
         error("worldgen.Build(world) - 1st argument should be a world data.", 2)
+    end
+end
+
+function worldgen.round(value)
+    if value > 0.5 then
+        return math.ceil(value)
+    else
+        return math.floor(value)
     end
 end
 
