@@ -43,6 +43,9 @@ end)
 -- CONFIG
 set("VERSION", "v0.0")
 set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
+set("READY", false)
+
+queue = {}
 
 Debug.log("server() - version: "..VERSION.."")
 
@@ -52,6 +55,14 @@ end
 
 Server.OnPlayerLeave = function(player)
 	Debug.log("server() - player leaved ["..player.Username.."]")
+
+	local new_queue = {}
+	for i, p in ipairs(queue) do
+		if p.Username ~= player.Username then
+			table.insert(new_queue, p)
+		end
+	end
+	queue = new_queue
 end
 
 Server.DidReceiveEvent = errorHandler(function(e) 
@@ -73,6 +84,12 @@ Server.DidReceiveEvent = errorHandler(function(e)
 		end
 	end,
 
+	start = function(event)
+		if READY == false then
+			table.insert(queue, event.Sender)
+		end
+	end
+
 	["_"] = function(event)
 		Debug.log("server() - got unknown event: "..tostring(event.action).."")
 	end
@@ -88,4 +105,4 @@ end, function(err) CRASH("Server.tick.Tick - "..err.."") end)
 
 Debug.log("server() - created tick object with Tick function.")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 80 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 80]")
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 97 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 97]")
