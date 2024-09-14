@@ -173,7 +173,8 @@ loadModules = {
 
 loadClasses = {
 	"build/faint/classes/Object.lua",
-	"build/faint/classes/Entity.lua"
+	"build/faint/classes/Entity.lua",
+	"build/faint/classes/Item.lua"
 }
 
 animations = {}
