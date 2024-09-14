@@ -326,7 +326,7 @@ function worldgen.Generate(config)
     return world
 end
 
-function worldgen.Build(world)
+function worldgen.Build(world, object)
     if world == nil then
         error("worldgen.Build(world) - 1st argument should be a world data.", 2)
     end
@@ -350,10 +350,10 @@ function worldgen.Build(world)
                 block.Color = Color(139, 134, 129)
                 local block2 = Block(Color(139, 134, 129), Number3(x, 1, y))
 
-                Map:AddBlock(block2)
+                object:AddBlock(block2)
             end
 
-            Map:AddBlock(block)
+            object:AddBlock(block)
         end
     end
 end
