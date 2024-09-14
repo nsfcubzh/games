@@ -333,10 +333,10 @@ function worldgen.Build(world, object, chunkScale)
 
     for chunkX = 1, #world/chunkScale do
         for chunkY = 1, #world[1]/chunkScale do
-            Timer(chunkX*chunkY/60, false, function()
+            Timer(chunkX+chunkY, false, function()
                 for x = 1, chunkScale do
                     for y = 1, chunkScale do
-                        local block = Block(Color(255, 255, 255), Number3(x*chunkX, 0, y*chunkY))
+                        local block = Block(Color(255, 255, 255), Number3(x+(chunkX*chunkScale), 0, y+(chunkY*chunkScale)))
 
                         local cell = world[x*chunkX][y*chunkY]
                         if cell.block == "water" then
@@ -351,7 +351,7 @@ function worldgen.Build(world, object, chunkScale)
                             block.Color = Color(172, 163, 153)
                         elseif cell.block == "granite" then
                             block.Color = Color(139, 134, 129)
-                            local block2 = Block(Color(139, 134, 129), Number3(x*chunkX, 1, y*chunkY))
+                            local block2 = Block(Color(139, 134, 129), Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)))
 
                             object:AddBlock(block2)
                         elseif cell.block == "floor" then
@@ -359,7 +359,7 @@ function worldgen.Build(world, object, chunkScale)
                         end
 
                         if cell.object == "wall" then
-                            local block2 = Block(Color(101, 68, 40), Number3(x*chunkX, 1, y*chunkY))
+                            local block2 = Block(Color(101, 68, 40), Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)))
 
                             object:AddBlock(block2)
                         end
