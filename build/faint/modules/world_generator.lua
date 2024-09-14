@@ -337,42 +337,48 @@ function worldgen.Generate(config)
     return world
 end
 
-function worldgen.Build(world, object)
+function worldgen.Build(world, object, chunkScale)
     if world == nil then
         error("worldgen.Build(world) - 1st argument should be a world data.", 2)
     end
 
-    for x = 1, #world do
-        for y = 1, #world[x] do
-            local block = Block(Color(255, 255, 255), Number3(x, 0, y))
+    for chunkX = 1, #world/chunkScale do
+        for chunkY = 1, #world[1]/chunkScale do
+            Timer(chunkX*chunkY/60, false, function()
+                for x = 1, chunkScale do
+                    for y = 1, chunkScale do
+                        local block = Block(Color(255, 255, 255), Number3(x*chunkX, 0, y*chunkY))
 
-            local cell = world[x][y]
-            if cell.block == "water" then
-                block.Color = Color(134, 192, 232)
-            elseif cell.block == "sand" then
-                block.Color = Color(223, 180, 183)
-            elseif cell.block == "grass" then
-                block.Color = Color(158, 197, 112)
-            elseif cell.block == "podzole" then
-                block.Color = Color(136, 190, 118)
-            elseif cell.block == "gravel" then
-                block.Color = Color(172, 163, 153)
-            elseif cell.block == "granite" then
-                block.Color = Color(139, 134, 129)
-                local block2 = Block(Color(139, 134, 129), Number3(x, 1, y))
+                        local cell = world[x*chunkX][y*chunkY]
+                        if cell.block == "water" then
+                            block.Color = Color(134, 192, 232)
+                        elseif cell.block == "sand" then
+                            block.Color = Color(223, 180, 183)
+                        elseif cell.block == "grass" then
+                            block.Color = Color(158, 184, 121)
+                        elseif cell.block == "podzole" then
+                            block.Color = Color(129, 170, 107)
+                        elseif cell.block == "gravel" then
+                            block.Color = Color(172, 163, 153)
+                        elseif cell.block == "granite" then
+                            block.Color = Color(139, 134, 129)
+                            local block2 = Block(Color(139, 134, 129), Number3(x*chunkX, 1, y*chunkY))
 
-                object:AddBlock(block2)
-            elseif cell.block == "floor" then
-                block.Color = Color(124, 83, 52)
-            end
+                            object:AddBlock(block2)
+                        elseif cell.block == "floor" then
+                            block.Color = Color(101, 68, 40)
+                        end
 
-            if cell.object == "wall" then
-                local block2 = Block(Color(124, 83, 52), Number3(x, 1, y))
+                        if cell.object == "wall" then
+                            local block2 = Block(Color(101, 68, 40), Number3(x*chunkX, 1, y*chunkY))
 
-                object:AddBlock(block2)
-            end
+                            object:AddBlock(block2)
+                        end
 
-            object:AddBlock(block)
+                        object:AddBlock(block)
+                    end
+                end
+            end)
         end
     end
 end
