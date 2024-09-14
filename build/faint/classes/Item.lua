@@ -1,3 +1,14 @@
+
+-- NSFLua Code
+
+if NSFLua == nil then rawset(_ENV, "NSFLua", {}) end
+
+NSFLua['faint\\classes\\Item.lua'] = {}
+NSFLua['faint\\classes\\Item.lua'].LAST_SECTION = ""
+NSFLua['faint\\classes\\Item.lua'].LAST_SECTION_LINE = 0
+
+-- End of NSFLua code
+
 Game.Item = {
     New = function(self, config)
         if self ~= Game.Item then
@@ -24,13 +35,13 @@ Game.Item = {
             error("Item must have 'model' field.", 2)
         end
         if shapes[cfg.model] == nil then
-            error(f"Missing shape [{cfg.model}] for item '{cfg.id}'.", 2)
+            error("Missing shape ["..cfg.model.."] for item '"..cfg.id.."'.", 2)
         end
 
-        Debug.log(f"Registering '{cfg.id}' item...")
+        Debug.log("Registering '"..cfg.id.."' item...")
         if self[cfg.id] ~= nil then
-            Debug.log(f"Error registering '{cfg.id}' item [Already registered]...")
-            error(f"Item {cfg.id} already exists.", 2)
+            Debug.log("Error registering '"..cfg.id.."' item [Already registered]...")
+            error("Item "..cfg.id.." already exists.", 2)
         end
 
         local constructor = function(...)
