@@ -341,6 +341,32 @@ function worldgen.Build(world)
     if world == nil then
         error("worldgen.Build(world) - 1st argument should be a world data.", 2)
     end
+
+    for x = 1, #world do
+        for y = 1, #world[x] do
+            local block = Block(Color(255, 255, 255), Number3(x, 0, y))
+
+            local cell = world[x][y]
+            if cell.block == "water" then
+                block.Color = Color(134, 192, 232)
+            elseif cell.block == "sand" then
+                block.Color = Color(253, 210, 213)
+            elseif cell.block == "grass" then
+                block.Color = Color(158, 197, 112)
+            elseif cell.block == "podzole" then
+                block.Color = Color(136, 190, 118)
+            elseif cell.block == "gravel" then
+                block.Color = Color(172, 163, 153)
+            elseif cell.block == "granite" then
+                block.Color = Color(139, 134, 129)
+                local block2 = Block(Color(139, 134, 129), Number3(x, 1, y))
+
+                Map:AddBlock(block2)
+            end
+
+            Map:AddBlock(block)
+        end
+    end
 end
 
 function worldgen.round(value)
