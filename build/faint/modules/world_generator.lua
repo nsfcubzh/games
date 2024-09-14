@@ -342,8 +342,8 @@ function worldgen.Build(world, object, chunkScale)
         error("worldgen.Build(world) - 1st argument should be a world data.", 2)
     end
 
-    for chunkX = 1, #world/chunkScale do
-        for chunkY = 1, #world[1]/chunkScale do
+    for chunkX = 1, #world/chunkScale-1 do
+        for chunkY = 1, #world[1]/chunkScale-1 do
             Timer(chunkX/60/((#world[1]/chunkScale)/32), false, function()
                 for x = 1, chunkScale do
                     for y = 1, chunkScale do
