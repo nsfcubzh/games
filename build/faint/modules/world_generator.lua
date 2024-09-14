@@ -350,7 +350,7 @@ function worldgen.Build(world, object)
             if cell.block == "water" then
                 block.Color = Color(134, 192, 232)
             elseif cell.block == "sand" then
-                block.Color = Color(253, 210, 213)
+                block.Color = Color(223, 180, 183)
             elseif cell.block == "grass" then
                 block.Color = Color(158, 197, 112)
             elseif cell.block == "podzole" then
@@ -360,6 +360,14 @@ function worldgen.Build(world, object)
             elseif cell.block == "granite" then
                 block.Color = Color(139, 134, 129)
                 local block2 = Block(Color(139, 134, 129), Number3(x, 1, y))
+
+                object:AddBlock(block2)
+            elseif cell.block == "floor" then
+                block.Color = Color(124, 83, 52)
+            end
+
+            if cell.object == "wall" then
+                local block2 = Block(Color(124, 83, 52), Number3(x, 1, y))
 
                 object:AddBlock(block2)
             end
