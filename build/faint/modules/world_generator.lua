@@ -344,12 +344,12 @@ function worldgen.Build(world, object, chunkScale)
 
     for chunkX = 1, #world/chunkScale do
         for chunkY = 1, #world[1]/chunkScale do
-            Timer(chunkX+chunkY, false, function()
+            Timer(chunkX+chunkY/60, false, function()
                 for x = 1, chunkScale do
                     for y = 1, chunkScale do
                         local block = Block(Color(255, 255, 255), Number3(x+(chunkX*chunkScale), 0, y+(chunkY*chunkScale)))
 
-                        local cell = world[x*chunkX][y*chunkY]
+                        local cell = world[x+(chunkX*chunkScale)][y+(chunkY*chunkScale)]
                         if cell.block == "water" then
                             block.Color = Color(134, 192, 232)
                         elseif cell.block == "sand" then
