@@ -333,7 +333,7 @@ function worldgen.Build(world, object, chunkScale)
 
     for chunkX = 1, #world/chunkScale do
         for chunkY = 1, #world[1]/chunkScale do
-            Timer(chunkX+chunkY/60, false, function()
+            Timer(chunkX+chunkY/60/20, false, function()
                 for x = 1, chunkScale do
                     for y = 1, chunkScale do
                         local block = Block(Color(255, 255, 255), Number3(x+(chunkX*chunkScale), 0, y+(chunkY*chunkScale)))
