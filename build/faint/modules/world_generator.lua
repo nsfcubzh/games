@@ -32,6 +32,7 @@ function worldgen.Generate(config)
         podzoleLevel = 0.75,
         gravelLevel = 0.8,
         graniteLevel = 1,
+        mountainLevel = 1.2,
 
         items = {
             tree = {
@@ -130,7 +131,7 @@ function worldgen.Generate(config)
 
             height = (((height + 1) / 2)^cfg.erosion) * cfg.contrast
 
-            height = math.min(math.max(height, 0), 1)
+            height = math.min(math.max(height, 0), 1.2)
 
             if height < 0 then
                 cell.block = "debug"
@@ -146,6 +147,8 @@ function worldgen.Generate(config)
                 cell.block = "gravel"
             elseif height <= cfg.graniteLevel then
                 cell.block = "granite"
+            elseif height <= cfg.mountainLevel then
+                cell.block = "mountain"
             else
                 cell.block = "error"
             end
@@ -371,9 +374,13 @@ function worldgen.Build(world, object, chunkScale)
                             color = Color(87, 83, 81)
                         elseif cell.block == "granite" then
                             color = Color(56, 55, 54)
-
+                            
                             object:AddBlock(Color(56, 55, 54), originalX, 1, originalY)
-                            object:AddBlock(Color(56, 55, 54), originalX, 2, originalY)
+                        elseif cell.block == "mountain" then
+                            color = Color(44, 45, 46)
+
+                            object:AddBlock(Color(44, 45, 46), originalX, 1, originalY)
+                            object:AddBlock(Color(44, 45, 46), originalX, 2, originalY)
                         elseif cell.block == "floor" then
                             color = Color(101, 68, 40)
                         end
