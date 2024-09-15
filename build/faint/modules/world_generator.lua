@@ -350,7 +350,7 @@ function worldgen.Build(world, object, chunkScale)
 
     for chunkX = 1, #world/chunkScale-1 do
         for chunkY = 1, #world[1]/chunkScale-1 do
-            Timer(chunkX/60*((#world[1]/chunkScale)/32), false, function()
+            Timer(chunkX/20*((#world[1]/chunkScale)/32), false, function()
                 for x = 1, chunkScale do
                     for y = 1, chunkScale do
                         local color = Color(255, 255, 255)
@@ -381,21 +381,27 @@ function worldgen.Build(world, object, chunkScale)
                         elseif cell.object == "tree" then
                             local tree = Game.Object.Tree()
 
-                            tree.shape:SetParent(object)
-                            tree.shape.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale + Number3(0.5, 0, 0.5) * object_scale
-                            tree.shape.Scale = object_scale/17
+                            tree.place = function(self)
+                                self.shape:SetParent(object)
+                                self.shape.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale + Number3(0.5, 0, 0.5) * object_scale
+                                self.shape.Scale = object_scale/17
+                            end
                         elseif cell.object == "grass" then
                             local grass = Game.Object.Grass()
 
-                            grass.shape:SetParent(object)
-                            grass.shape.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale + Number3(0.5, -0.1, 0.5) * object_scale
-                            grass.shape.Scale = object_scale/17
+                            grass.place = function(self)
+                                self.shape:SetParent(object)
+                                self.shape.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale + Number3(0.5, 0, 0.5) * object_scale
+                                self.shape.Scale = object_scale/17
+                            end
                         elseif cell.object == "rock" then
                             local rock = Game.Object.Rock()
 
-                            rock.shape:SetParent(object)
-                            rock.shape.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale + Number3(0.5, 0, 0.5) * object_scale
-                            rock.shape.Scale = object_scale/17
+                            rock.place = function(self)
+                                self.shape:SetParent(object)
+                                self.shape.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale + Number3(0.5, 0, 0.5) * object_scale
+                                self.shape.Scale = object_scale/17
+                            end
                         end
 
                         object:AddBlock(color, x+(chunkX*chunkScale), 0, y+(chunkY*chunkScale))
