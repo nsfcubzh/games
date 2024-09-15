@@ -19,9 +19,9 @@ function worldgen.Generate(config)
     end
 
     local defaultConfig = {
-        width = 512,
-        height = 512,
-        zoom = 0.015,
+        width = 320,
+        height = 320,
+        zoom = 0.02,
         seed = 1,
         octaves = 5,
         contrast = 1.3,
