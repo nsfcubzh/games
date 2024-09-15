@@ -21,7 +21,7 @@ function worldgen.Generate(config)
         podzoleLevel = 0.75,
         gravelLevel = 0.8,
         graniteLevel = 1,
-        mountainLevel = 1.1,
+        mountainLevel = 1.03,
 
         items = {
             tree = {
@@ -120,7 +120,7 @@ function worldgen.Generate(config)
 
             height = (((height + 1) / 2)^cfg.erosion) * cfg.contrast
 
-            height = math.min(math.max(height, 0), 1.2)
+            height = math.min(math.max(height, 0), 1.03)
 
             if height < 0 then
                 cell.block = "debug"
