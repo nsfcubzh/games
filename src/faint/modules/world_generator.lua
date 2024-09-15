@@ -332,7 +332,7 @@ function worldgen.Build(world, object, chunkScale)
 
     for chunkX = 1, #world/chunkScale-1 do
         for chunkY = 1, #world[1]/chunkScale-1 do
-            Timer(chunkX/60/((#world[1]/chunkScale)/32), false, function()
+            Timer(chunkX/60*((#world[1]/chunkScale)/32), false, function()
                 for x = 1, chunkScale do
                     for y = 1, chunkScale do
                         local block = Block(Color(255, 255, 255), Number3(x+(chunkX*chunkScale), 0, y+(chunkY*chunkScale)))
@@ -343,16 +343,18 @@ function worldgen.Build(world, object, chunkScale)
                         elseif cell.block == "sand" then
                             block.Color = Color(200, 204, 145)
                         elseif cell.block == "grass" then
-                            block.Color = Color(136, 161, 93)
+                            block.Color = Color(103, 120, 73)
                         elseif cell.block == "podzole" then
-                            block.Color = Color(116, 138, 80)
+                            block.Color = Color(79, 92, 57)
                         elseif cell.block == "gravel" then
-                            block.Color = Color(125, 119, 116)
+                            block.Color = Color(87, 83, 81)
                         elseif cell.block == "granite" then
-                            block.Color = Color(89, 87, 86)
-                            local block2 = Block(Color(89, 87, 86), Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)))
-
+                            block.Color = Color(56, 55, 54)
+                            local block2 = Block(Color(56, 55, 54), Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)))
                             object:AddBlock(block2)
+
+                            local block3 = Block(Color(56, 55, 54), Number3(x+(chunkX*chunkScale), 2, y+(chunkY*chunkScale)))
+                            object:AddBlock(block3)
                         elseif cell.block == "floor" then
                             block.Color = Color(101, 68, 40)
                         end
