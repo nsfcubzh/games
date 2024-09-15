@@ -9,6 +9,6 @@ NSFLua['faint\\data\\objects.lua'].LAST_SECTION_LINE = 0
 
 -- End of NSFLua code
 
-Game.Object:New({id = "Tree", model = "tree", type = "Shape"})
-Game.Object:New({id = "Grass", model = "grass", type = "Shape"})
-Game.Object:New({id = "Rock", model = "rock", type = "Shape"})
+Game.Object:New({id = "Tree", model = "tree", type = "Shape", Init = function(self) self.shape.Rotation.Y = math.random(-314, 314)*0.01 end})
+Game.Object:New({id = "Grass", model = "grass", type = "Shape", Init = function(self) self.shape.Rotation.Y = math.random(-314, 314)*0.01 end})
+Game.Object:New({id = "Rock", model = "rock", type = "Shape", Init = function(self) self.shape.Rotation.Y = math.random(-314, 314)*0.01 end})
