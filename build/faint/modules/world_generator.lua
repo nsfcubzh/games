@@ -151,45 +151,9 @@ function worldgen.Generate(config)
             end
         end
     end
-    --Debug.log("world_generator - placing objects...")
-    for name, item in pairs(cfg.items) do
-        perlin.seed(item.seed)
-
-        for x = 1, cfg.width do
-            for y = 1, cfg.height do
-                local cell = world[x][y]
-
-                local chance = 0
-                local amplitude = 1
-                local frequency = 1
-                local max_amp = 0
-                
-                for i = 1, item.octaves do
-                    local result = perlin.get(x * item.zoom * frequency, y * item.zoom * frequency)
-    
-                    chance = chance + result * amplitude
-                    
-                    max_amp = max_amp + amplitude
-                    amplitude = amplitude / 2
-                    frequency = frequency * 2
-                end
-    
-                chance = ((chance + 1) / 2)^4
-
-                if item.chances[cell.block] ~= nil then
-                    chance = chance * item.chances[cell.block]
-                end
-    
-                local result = math.random(0, worldgen.round(1/chance))
-
-                if result == 0 and cell.object == nil and item.chances[cell.block] ~= nil then
-                    cell.object = name
-                end
-            end
-        end
-    end
-
     --Debug.log("world_generator - placing structures...")
+    local num_objects = 0
+    local num_structures = 0
     for name, structure in pairs(cfg.structures) do
         for x = 1, cfg.width do
             for y = 1, cfg.height do
@@ -321,14 +285,57 @@ function worldgen.Generate(config)
                         if cell ~= nil then
                             if structure.allowed_materials[cell.block] and object ~= nil then
                                 cell.object = object
+                                num_objects = num_objects + 1
                             end
                         end
                     end
+                    num_structures = num_structures + 1
                 end
             end
         end
     end
+    --Debug.log("world_generator - Placed "..num_structures.." with "..num_objects.." objects inside.")
+    
+    --Debug.log("world_generator - placing objects...")
+    local num_objects = 0
+    for name, item in pairs(cfg.items) do
+        perlin.seed(item.seed)
 
+        for x = 1, cfg.width do
+            for y = 1, cfg.height do
+                local cell = world[x][y]
+
+                local chance = 0
+                local amplitude = 1
+                local frequency = 1
+                local max_amp = 0
+                
+                for i = 1, item.octaves do
+                    local result = perlin.get(x * item.zoom * frequency, y * item.zoom * frequency)
+    
+                    chance = chance + result * amplitude
+                    
+                    max_amp = max_amp + amplitude
+                    amplitude = amplitude / 2
+                    frequency = frequency * 2
+                end
+    
+                chance = ((chance + 1) / 2)^4
+
+                if item.chances[cell.block] ~= nil then
+                    chance = chance * item.chances[cell.block]
+                end
+    
+                local result = math.random(0, worldgen.round(1/chance))
+
+                if result == 0 and cell.object == nil and item.chances[cell.block] ~= nil then
+                    cell.object = name
+                    num_objects = num_objects + 1
+                end
+            end
+        end
+    end
+    --Debug.log("world_generator - Placed "..num_objects.." objects.")
     --Debug.log("world_generator - World generation completed.")
 
     return world
@@ -350,11 +357,11 @@ function worldgen.Build(world, object, chunkScale)
 
                         local cell = world[x+(chunkX*chunkScale)][y+(chunkY*chunkScale)]
                         if cell.block == "water" then
-                            block.Color = Color(140, 169, 209)
+                            block.Color = Color(114, 140, 176)
                         elseif cell.block == "sand" then
-                            block.Color = Color(200, 204, 145)
+                            block.Color = Color(181, 175, 114)
                         elseif cell.block == "grass" then
-                            block.Color = Color(103, 120, 73)
+                            block.Color = Color(89, 102, 66)
                         elseif cell.block == "podzole" then
                             block.Color = Color(79, 92, 57)
                         elseif cell.block == "gravel" then
