@@ -18,6 +18,7 @@ set("CRASH", function(message)
 		Server.Tick = nil
 	end)
 
+	print(Network, Network.Event)
 	local e = Network.Event("server_crash", {error=message})
 	e:SendTo(Players)
 

@@ -346,8 +346,6 @@ function worldgen.Build(world, object, chunkScale)
         error("worldgen.Build(world) - 1st argument should be a world data.", 2)
     end
 
-    object.data = {}
-
     local object_scale = (object.Scale.X + object.Scale.Y + object.Scale.Z)/3
 
     for chunkX = 1, #world/chunkScale-1 do
@@ -380,44 +378,10 @@ function worldgen.Build(world, object, chunkScale)
                             color = Color(101, 68, 40)
                         end
 
-                        if object.data[originalX] == nil then
-                            object.data[originalX] = {}
-                        end
-
                         if cell.object == "wall" then
                             local block2 = Block(Color(101, 68, 40), Number3(originalX, 1, originalY))
 
                             object:AddBlock(block2)
-                        elseif cell.object == "tree" then
-                            local tree = Game.Object.Tree()
-
-                            tree.place = function(self)
-                                self.shape:SetParent(object)
-                                self.shape.Position = Number3(originalX, 1, originalY) * object_scale + Number3(0.5, 0, 0.5) * object_scale
-                                self.shape.Scale = object_scale/17
-                            end
-
-                            object.data[originalX][originalY] = tree
-                        elseif cell.object == "grass" then
-                            local grass = Game.Object.Grass()
-
-                            grass.place = function(self)
-                                self.shape:SetParent(object)
-                                self.shape.Position = Number3(originalX, 1, originalY) * object_scale + Number3(0.5, 0, 0.5) * object_scale
-                                self.shape.Scale = object_scale/17
-                            end
-                            
-                            object.data[originalX][originalY] = grass
-                        elseif cell.object == "rock" then
-                            local rock = Game.Object.Rock()
-
-                            rock.place = function(self)
-                                self.shape:SetParent(object)
-                                self.shape.Position = Number3(originalX, 1, originalY) * object_scale + Number3(0.5, 0, 0.5) * object_scale
-                                self.shape.Scale = object_scale/17
-                            end
-                            
-                            object.data[originalX][originalY] = rock
                         end
 
                         object:AddBlock(color, originalX, 0, originalY)
