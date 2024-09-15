@@ -24,7 +24,7 @@ Game.Item = {
             error("Item must have 'model' field.", 2)
         end
         if shapes[cfg.model] == nil then
-            error(f"Missing shape [{cfg.model}] for item '{cfg.id}'.", 2)
+            error(f"Missing shape for item '{cfg.id}'.", 2)
         end
 
         Debug.log(f"Registering '{cfg.id}' item...")

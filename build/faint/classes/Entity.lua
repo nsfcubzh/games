@@ -44,7 +44,7 @@ Game.Entity = {
             error("Entity must have 'model' field.", 2)
         end
         if shapes[cfg.model] == nil then
-            error("Missing shape ["..cfg.model.."] for entity '"..cfg.id.."'.", 2)
+            error("Missing shape for entity '"..cfg.id.."'.", 2)
         end
 
         Debug.log("Registering '"..cfg.id.."' object...")
