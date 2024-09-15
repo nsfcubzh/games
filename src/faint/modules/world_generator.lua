@@ -335,7 +335,7 @@ function worldgen.Build(world, object, chunkScale)
         error("worldgen.Build(world) - 1st argument should be a world data.", 2)
     end
 
-    world.data = {}
+    object.data = {}
 
     local object_scale = (object.Scale.X + object.Scale.Y + object.Scale.Z)/3
 
@@ -369,8 +369,8 @@ function worldgen.Build(world, object, chunkScale)
                             color = Color(101, 68, 40)
                         end
 
-                        if world.data[originalX] == nil then
-                            world.data[originalX] = {}
+                        if object.data[originalX] == nil then
+                            object.data[originalX] = {}
                         end
 
                         if cell.object == "wall" then
@@ -386,7 +386,7 @@ function worldgen.Build(world, object, chunkScale)
                                 self.shape.Scale = object_scale/17
                             end
 
-                            world.data[originalX][originalY] = tree
+                            object.data[originalX][originalY] = tree
                         elseif cell.object == "grass" then
                             local grass = Game.Object.Grass()
 
@@ -396,7 +396,7 @@ function worldgen.Build(world, object, chunkScale)
                                 self.shape.Scale = object_scale/17
                             end
                             
-                            world.data[originalX][originalY] = grass
+                            object.data[originalX][originalY] = grass
                         elseif cell.object == "rock" then
                             local rock = Game.Object.Rock()
 
@@ -406,7 +406,7 @@ function worldgen.Build(world, object, chunkScale)
                                 self.shape.Scale = object_scale/17
                             end
                             
-                            world.data[originalX][originalY] = rock
+                            object.data[originalX][originalY] = rock
                         end
 
                         object:AddBlock(color, originalX, 0, originalY)
