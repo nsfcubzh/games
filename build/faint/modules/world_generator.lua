@@ -346,6 +346,8 @@ function worldgen.Build(world, object, chunkScale)
         error("worldgen.Build(world) - 1st argument should be a world data.", 2)
     end
 
+    world.data = {}
+
     local object_scale = (object.Scale.X + object.Scale.Y + object.Scale.Z)/3
 
     for chunkX = 1, #world/chunkScale-1 do
@@ -353,29 +355,37 @@ function worldgen.Build(world, object, chunkScale)
             Timer(chunkX/20*((#world[1]/chunkScale)/32), false, function()
                 for x = 1, chunkScale do
                     for y = 1, chunkScale do
+                        local originalX = x+(chunkX*chunkScale)
+                        local originalY = y+(chunkY*chunkScale)
+
                         local color = Color(255, 255, 255)
-                        local cell = world[x+(chunkX*chunkScale)][y+(chunkY*chunkScale)]
+                        local cell = world[originalX][originalY]
+
                         if cell.block == "water" then
                             color = Color(114, 140, 176)
                         elseif cell.block == "sand" then
                             color = Color(181, 175, 114)
                         elseif cell.block == "grass" then
-                            color = Color(89, 102, 66)
+                            color = Color(98, 115, 69)
                         elseif cell.block == "podzole" then
-                            color = Color(79, 92, 57)
+                            color = Color(91, 107, 63)
                         elseif cell.block == "gravel" then
                             color = Color(87, 83, 81)
                         elseif cell.block == "granite" then
                             color = Color(56, 55, 54)
 
-                            object:AddBlock(Color(56, 55, 54), x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale))
-                            object:AddBlock(Color(56, 55, 54), x+(chunkX*chunkScale), 2, y+(chunkY*chunkScale))
+                            object:AddBlock(Color(56, 55, 54), originalX, 1, originalY)
+                            object:AddBlock(Color(56, 55, 54), originalX, 2, originalY)
                         elseif cell.block == "floor" then
                             color = Color(101, 68, 40)
                         end
 
+                        if world.data[originalX] == nil then
+                            world.data[originalX] = {}
+                        end
+
                         if cell.object == "wall" then
-                            local block2 = Block(Color(101, 68, 40), Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)))
+                            local block2 = Block(Color(101, 68, 40), Number3(originalX, 1, originalY))
 
                             object:AddBlock(block2)
                         elseif cell.object == "tree" then
@@ -383,28 +393,34 @@ function worldgen.Build(world, object, chunkScale)
 
                             tree.place = function(self)
                                 self.shape:SetParent(object)
-                                self.shape.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale + Number3(0.5, 0, 0.5) * object_scale
+                                self.shape.Position = Number3(originalX, 1, originalY) * object_scale + Number3(0.5, 0, 0.5) * object_scale
                                 self.shape.Scale = object_scale/17
                             end
+
+                            world.data[originalX][originalY] = tree
                         elseif cell.object == "grass" then
                             local grass = Game.Object.Grass()
 
                             grass.place = function(self)
                                 self.shape:SetParent(object)
-                                self.shape.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale + Number3(0.5, 0, 0.5) * object_scale
+                                self.shape.Position = Number3(originalX, 1, originalY) * object_scale + Number3(0.5, 0, 0.5) * object_scale
                                 self.shape.Scale = object_scale/17
                             end
+                            
+                            world.data[originalX][originalY] = grass
                         elseif cell.object == "rock" then
                             local rock = Game.Object.Rock()
 
                             rock.place = function(self)
                                 self.shape:SetParent(object)
-                                self.shape.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale + Number3(0.5, 0, 0.5) * object_scale
+                                self.shape.Position = Number3(originalX, 1, originalY) * object_scale + Number3(0.5, 0, 0.5) * object_scale
                                 self.shape.Scale = object_scale/17
                             end
+                            
+                            world.data[originalX][originalY] = rock
                         end
 
-                        object:AddBlock(color, x+(chunkX*chunkScale), 0, y+(chunkY*chunkScale))
+                        object:AddBlock(color, originalX, 0, originalY)
                     end
                 end
             end)
