@@ -375,21 +375,21 @@ function worldgen.Build(world, object, chunkScale)
                         elseif cell.object == "tree" then
                             local tree = Game.Object.Tree()
 
-                            tree.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale
-                            tree.Scale = object_scale/2
-                            tree:SetParent(World)
+                            tree.shape.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale
+                            tree.shape.Scale = object_scale/2
+                            tree.shape:SetParent(World)
                         elseif cell.object == "grass" then
                             local grass = Game.Object.Grass()
 
-                            grass.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale
-                            grass.Scale = object_scale/2
-                            grass:SetParent(World)
+                            grass.shape.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale
+                            grass.shape.Scale = object_scale/2
+                            grass.shape:SetParent(World)
                         elseif cell.object == "rock" then
                             local rock = Game.Object.Rock()
 
-                            rock.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale
-                            rock.Scale = object_scale/2
-                            rock:SetParent(World)
+                            rock.shape.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale
+                            rock.shape.Scale = object_scale/2
+                            rock.shape:SetParent(World)
                         end
 
                         object:AddBlock(block)
