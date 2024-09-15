@@ -188,10 +188,6 @@ loadClasses = {
 	"build/faint/classes/Item.lua",
 }
 
-loadLua = {
-	"build/faint/data/objects.lua",
-}
-
 animations = {}
 loadAnimations = {
 
@@ -203,6 +199,11 @@ loadShapes = {
 	grass = "nanskip.faint_grass",
 	rock = "nanskip.faint_rock"
 }
+
+loadLua = {
+	"build/faint/data/objects.lua",
+}
+loadedLua = {}
 
 audio = {}
 loadAudios = {
@@ -233,7 +234,7 @@ need_to_load_jsons = 0
 isLoaded = false
 
 function doneLoading()
-	NSFLua['faint\\client.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 225 Debug.log("faint\\client.lua > New section: '".."STARTED".."' [Line: 225]")
+	NSFLua['faint\\client.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 226 Debug.log("faint\\client.lua > New section: '".."STARTED".."' [Line: 226]")
 	isLoaded = true
 
 	Camera:SetParent(World)
@@ -245,6 +246,10 @@ function doneLoading()
 
 	if Debug.enabled == true then
 		toast:create({message = "Game launched with Debug enabled."})
+	end
+
+	for key, value in pairs(loadedLua) do
+		value()
 	end
 
 	if loading_screen.created then loading_screen:remove() end
@@ -340,7 +345,7 @@ for key, value in pairs(loadLua) do
 		Debug.log("client() - Loaded '".. value .."'")
 
 		errorHandler(
-			function() file() end, 
+			function() loadedLua[value] = file end, 
 			function(err) CRASH("Failed to load lua file '"..value.."' - "..err) end
 		)()
 
@@ -534,4 +539,4 @@ Debug.log("client() - Loading " .. need_to_load_jsons .. " jsons..")
 
 
 Debug.log("client() - Total: " .. need_to_load .. " assets")
-NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 526 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 526]")
+NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 531 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 531]")

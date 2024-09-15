@@ -177,10 +177,6 @@ loadClasses = {
 	"build/faint/classes/Item.lua",
 }
 
-loadLua = {
-	"build/faint/data/objects.lua",
-}
-
 animations = {}
 loadAnimations = {
 
@@ -192,6 +188,11 @@ loadShapes = {
 	grass = "nanskip.faint_grass",
 	rock = "nanskip.faint_rock"
 }
+
+loadLua = {
+	"build/faint/data/objects.lua",
+}
+loadedLua = {}
 
 audio = {}
 loadAudios = {
@@ -234,6 +235,10 @@ function doneLoading()
 
 	if Debug.enabled == true then
 		toast:create({message = "Game launched with Debug enabled."})
+	end
+
+	for key, value in pairs(loadedLua) do
+		value()
 	end
 
 	if loading_screen.created then loading_screen:remove() end
@@ -329,7 +334,7 @@ for key, value in pairs(loadLua) do
 		Debug.log("client() - Loaded '".. value .."'")
 
 		errorHandler(
-			function() file() end, 
+			function() loadedLua[value] = file end, 
 			function(err) CRASH("Failed to load lua file '"..value.."' - "..err) end
 		)()
 
