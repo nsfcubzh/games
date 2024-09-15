@@ -175,8 +175,9 @@ loadClasses = {
 	"build/faint/classes/Object.lua",
 	"build/faint/classes/Entity.lua",
 	"build/faint/classes/Item.lua",
+}
 
-	-- class data loading
+loadLua = {
 	"build/faint/data/objects.lua",
 }
 
@@ -317,6 +318,43 @@ for key, value in pairs(loadClasses) do
 	end)
 end
 Debug.log("client() - Loading " .. need_to_load_classes.. " classes..")
+
+
+for key, value in pairs(loadLua) do
+	if need_to_load_lua == nil then need_to_load_lua = 0 end
+	need_to_load_lua = need_to_load_lua + 1
+	need_to_load = need_to_load + 1
+
+	Loader:LoadFunction(value, function(file)
+		Debug.log("client() - Loaded '".. value .."'")
+
+		errorHandler(
+			function() file() end, 
+			function(err) CRASH("Failed to load lua file '"..value.."' - "..err) end
+		)()
+
+		if loaded_lua == nil then loaded_lua = 0 end
+		loaded_lua = loaded_lua + 1
+		loaded = loaded + 1
+
+		if loading_screen.created then
+			loading_screen:setText("Loading... (" .. loaded .. "/" .. need_to_load .. ")")
+		elseif loading_screen ~= nil then
+			loading_screen:create()
+			
+			loadingBG:remove()
+			loadingBG = nil
+		end
+
+		if loaded_lua >= need_to_load_lua then
+			Debug.log("client() - Loaded all lua files.")
+		end
+		if loaded >= need_to_load then
+			checkLoading()
+		end
+	end)
+end
+Debug.log("client() - Loading " .. need_to_load_lua.. " lua files..")
 
 for key, value in pairs(loadAnimations) do
 	if need_to_load_animations == nil then need_to_load_animations = 0 end
