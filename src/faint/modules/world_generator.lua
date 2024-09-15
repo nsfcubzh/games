@@ -365,20 +365,20 @@ function worldgen.Build(world, object, chunkScale)
                             local tree = Game.Object.Tree()
 
                             tree.shape.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale
-                            tree.shape.Scale = object_scale/2
-                            tree.shape:SetParent(World)
+                            tree.shape.Scale = object_scale/10
+                            tree.shape:SetParent(object)
                         elseif cell.object == "grass" then
                             local grass = Game.Object.Grass()
 
                             grass.shape.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale
-                            grass.shape.Scale = object_scale/2
-                            grass.shape:SetParent(World)
+                            grass.shape.Scale = object_scale/10
+                            grass.shape:SetParent(object)
                         elseif cell.object == "rock" then
                             local rock = Game.Object.Rock()
 
                             rock.shape.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale
-                            rock.shape.Scale = object_scale/2
-                            rock.shape:SetParent(World)
+                            rock.shape.Scale = object_scale/10
+                            rock.shape:SetParent(object)
                         end
 
                         object:AddBlock(block)
