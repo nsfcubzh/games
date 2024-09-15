@@ -52,7 +52,7 @@ function worldgen.Generate(config)
                     podzole = 0.2
                 }
             },
-            stone = {
+            rock = {
                 zoom = 0.025,
                 seed = 4,
                 octaves = 2,
@@ -65,7 +65,7 @@ function worldgen.Generate(config)
         },
         structures = {
             abandoned_room = {
-                chance = 0.0001,
+                chance = 0.00015,
                 min_scale = {5, 5},
                 max_scale = {9, 9},
                 floor = true,
@@ -76,15 +76,12 @@ function worldgen.Generate(config)
                 items = {
                     blue = {
                         chance = 0.01,
-                        scale = {1, 1}
                     },
                     red = {
                         chance = 0.02,
-                        scale = {1, 1}
                     },
                     black = {
                         chance = 0.01,
-                        scale = {2, 2}
                     }
                 },
                 allowed_materials = {
@@ -342,6 +339,8 @@ function worldgen.Build(world, object, chunkScale)
         error("worldgen.Build(world) - 1st argument should be a world data.", 2)
     end
 
+    local object_scale = (object.Scale.X + object.Scale.Y + object.Scale.Z)/3
+
     for chunkX = 1, #world/chunkScale-1 do
         for chunkY = 1, #world[1]/chunkScale-1 do
             Timer(chunkX/60/((#world[1]/chunkScale)/32), false, function()
@@ -355,7 +354,7 @@ function worldgen.Build(world, object, chunkScale)
                         elseif cell.block == "sand" then
                             block.Color = Color(223, 180, 183)
                         elseif cell.block == "grass" then
-                            block.Color = Color(158, 184, 121)
+                            block.Color = Color(136, 161, 93)
                         elseif cell.block == "podzole" then
                             block.Color = Color(129, 170, 107)
                         elseif cell.block == "gravel" then
@@ -373,6 +372,24 @@ function worldgen.Build(world, object, chunkScale)
                             local block2 = Block(Color(101, 68, 40), Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)))
 
                             object:AddBlock(block2)
+                        elseif cell.object == "tree" then
+                            local tree = Game.Object.Tree()
+
+                            tree.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale
+                            tree.Scale = object_scale/2
+                            tree:SetParent(World)
+                        elseif cell.object == "grass" then
+                            local grass = Game.Object.Grass()
+
+                            grass.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale
+                            grass.Scale = object_scale/2
+                            grass:SetParent(World)
+                        elseif cell.object == "rock" then
+                            local rock = Game.Object.Rock()
+
+                            rock.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale
+                            rock.Scale = object_scale/2
+                            rock:SetParent(World)
                         end
 
                         object:AddBlock(block)

@@ -174,7 +174,10 @@ loadModules = {
 loadClasses = {
 	"build/faint/classes/Object.lua",
 	"build/faint/classes/Entity.lua",
-	"build/faint/classes/Item.lua"
+	"build/faint/classes/Item.lua",
+
+	-- class data loading
+	"build/faint/data/objects.lua",
 }
 
 animations = {}
@@ -184,7 +187,9 @@ loadAnimations = {
 
 shapes = {}
 loadShapes = {
-
+	"nanskip.faint_tree1",
+	"nanskip.faint_grass",
+	"nanskip.faint_rock"
 }
 
 audio = {}
