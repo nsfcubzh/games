@@ -339,18 +339,18 @@ function worldgen.Build(world, object, chunkScale)
 
                         local cell = world[x+(chunkX*chunkScale)][y+(chunkY*chunkScale)]
                         if cell.block == "water" then
-                            block.Color = Color(134, 192, 232)
+                            block.Color = Color(140, 169, 209)
                         elseif cell.block == "sand" then
-                            block.Color = Color(223, 180, 183)
+                            block.Color = Color(200, 204, 145)
                         elseif cell.block == "grass" then
                             block.Color = Color(136, 161, 93)
                         elseif cell.block == "podzole" then
-                            block.Color = Color(129, 170, 107)
+                            block.Color = Color(116, 138, 80)
                         elseif cell.block == "gravel" then
-                            block.Color = Color(172, 163, 153)
+                            block.Color = Color(125, 119, 116)
                         elseif cell.block == "granite" then
-                            block.Color = Color(139, 134, 129)
-                            local block2 = Block(Color(139, 134, 129), Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)))
+                            block.Color = Color(89, 87, 86)
+                            local block2 = Block(Color(89, 87, 86), Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)))
 
                             object:AddBlock(block2)
                         elseif cell.block == "floor" then
@@ -371,7 +371,7 @@ function worldgen.Build(world, object, chunkScale)
                             local grass = Game.Object.Grass()
 
                             grass.shape:SetParent(object)
-                            grass.shape.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale + Number3(0.5, 0, 0.5) * object_scale
+                            grass.shape.Position = Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)) * object_scale + Number3(0.5, -0.1, 0.5) * object_scale
                             grass.shape.Scale = object_scale/17
                         elseif cell.object == "rock" then
                             local rock = Game.Object.Rock()
