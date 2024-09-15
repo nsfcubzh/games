@@ -32,7 +32,7 @@ function worldgen.Generate(config)
         podzoleLevel = 0.75,
         gravelLevel = 0.8,
         graniteLevel = 1,
-        mountainLevel = 1.2,
+        mountainLevel = 1.1,
 
         items = {
             tree = {
