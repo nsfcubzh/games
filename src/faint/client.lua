@@ -187,9 +187,9 @@ loadAnimations = {
 
 shapes = {}
 loadShapes = {
-	"nanskip.faint_tree1",
-	"nanskip.faint_grass",
-	"nanskip.faint_rock"
+	tree = "nanskip.faint_tree1",
+	grass = "nanskip.faint_grass",
+	rock = "nanskip.faint_rock"
 }
 
 audio = {}
