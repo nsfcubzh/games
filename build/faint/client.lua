@@ -156,15 +156,15 @@ set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
 
 Debug.log("client() - version: "..VERSION.."")
 
-Client.DirectionalPad = nil
-Client.AnalogPad = nil
+--Client.DirectionalPad = nil
+--Client.AnalogPad = nil
 Client.OnPlayerJoin = function(p)
 	if p == Player and not playerJoined then
 		playerJoined = true
 		checkLoading()
 	end
 end
-Pointer.Drag = nil
+--Pointer.Drag = nil
 
 
 loadingBG = ui:createFrame(Color(0, 0, 0, 255))
