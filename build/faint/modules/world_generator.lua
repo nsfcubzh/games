@@ -353,28 +353,25 @@ function worldgen.Build(world, object, chunkScale)
             Timer(chunkX/60*((#world[1]/chunkScale)/32), false, function()
                 for x = 1, chunkScale do
                     for y = 1, chunkScale do
-                        local block = Block(Color(255, 255, 255), Number3(x+(chunkX*chunkScale), 0, y+(chunkY*chunkScale)))
-
+                        local color = Color(255, 255, 255)
                         local cell = world[x+(chunkX*chunkScale)][y+(chunkY*chunkScale)]
                         if cell.block == "water" then
-                            block.Color = Color(114, 140, 176)
+                            color = Color(114, 140, 176)
                         elseif cell.block == "sand" then
-                            block.Color = Color(181, 175, 114)
+                            color = Color(181, 175, 114)
                         elseif cell.block == "grass" then
-                            block.Color = Color(89, 102, 66)
+                            color = Color(89, 102, 66)
                         elseif cell.block == "podzole" then
-                            block.Color = Color(79, 92, 57)
+                            color = Color(79, 92, 57)
                         elseif cell.block == "gravel" then
-                            block.Color = Color(87, 83, 81)
+                            color = Color(87, 83, 81)
                         elseif cell.block == "granite" then
-                            block.Color = Color(56, 55, 54)
-                            local block2 = Block(Color(56, 55, 54), Number3(x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale)))
-                            object:AddBlock(block2)
+                            color = Color(56, 55, 54)
 
-                            local block3 = Block(Color(56, 55, 54), Number3(x+(chunkX*chunkScale), 2, y+(chunkY*chunkScale)))
-                            object:AddBlock(block3)
+                            object:AddBlock(Color(56, 55, 54), x+(chunkX*chunkScale), 1, y+(chunkY*chunkScale))
+                            object:AddBlock(Color(56, 55, 54), x+(chunkX*chunkScale), 2, y+(chunkY*chunkScale))
                         elseif cell.block == "floor" then
-                            block.Color = Color(101, 68, 40)
+                            color = Color(101, 68, 40)
                         end
 
                         if cell.object == "wall" then
@@ -401,7 +398,7 @@ function worldgen.Build(world, object, chunkScale)
                             rock.shape.Scale = object_scale/17
                         end
 
-                        object:AddBlock(block)
+                        object:AddBlock(color, x+(chunkX*chunkScale), 0, y+(chunkY*chunkScale))
                     end
                 end
             end)
