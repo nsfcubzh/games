@@ -89,7 +89,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 		if READY == false then
 			table.insert(queue, event.Sender)
 		end
-	end
+	end,
 
 	["_"] = function(event)
 		Debug.log("server() - got unknown event: "..tostring(event.action).."")
