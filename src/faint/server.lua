@@ -18,7 +18,6 @@ set("CRASH", function(message)
 		Server.Tick = nil
 	end)
 
-	print(Network, Network.Event)
 	local e = Network.Event("server_crash", {error=message})
 	e:SendTo(Players)
 
@@ -78,7 +77,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 		if READY == false then
 			table.insert(queue, event.Sender)
 		end
-	end
+	end,
 
 	["_"] = function(event)
 		Debug.log(f"server() - got unknown event: {tostring(event.action)}")

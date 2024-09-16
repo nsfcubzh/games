@@ -29,7 +29,6 @@ set("CRASH", function(message)
 		Server.Tick = nil
 	end)
 
-	print(Network, Network.Event)
 	local e = Network.Event("server_crash", {error=message})
 	e:SendTo(Players)
 
@@ -106,4 +105,4 @@ end, function(err) CRASH("Server.tick.Tick - "..err.."") end)
 
 Debug.log("server() - created tick object with Tick function.")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 98 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 98]")
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 97 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 97]")
