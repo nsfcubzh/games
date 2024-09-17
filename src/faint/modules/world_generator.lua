@@ -418,8 +418,8 @@ function worldgen.serialize_data(data)
     local binary_data = {}
     for i, row in ipairs(data) do
         for j, cell in ipairs(row) do
-            local block_code = block_codes[cell.block] or 0
-            local object_code = object_codes[cell.object] or 0
+            local block_code = worldgen.block_codes[cell.block] or 0
+            local object_code = worldgen.object_codes[cell.object] or 0
 
             local packed = string.pack("I1I1", block_code, object_code)
             table.insert(binary_data, packed)
@@ -447,8 +447,8 @@ function worldgen.deserialize_data(binary_data, width, height)
             local block_code, object_code
             block_code, object_code, index = string.unpack("I1I1", binary_data, index)
 
-            local block = worldgen.get_key_by_value(block_codes, block_code)
-            local object = worldgen.get_key_by_value(object_codes, object_code)
+            local block = worldgen.get_key_by_value(worldgen.block_codes, block_code)
+            local object = worldgen.get_key_by_value(worldgen.object_codes, object_code)
             table.insert(row, {block = block, object = object})
         end
         table.insert(data, row)
