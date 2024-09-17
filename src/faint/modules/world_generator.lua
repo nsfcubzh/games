@@ -1,23 +1,5 @@
 local worldgen = {}
 
-worldgen.block_codes = {
-    error = 0,
-    water = 1,
-    sand = 2,
-    grass = 3,
-    podzole = 4,
-    gravel = 5,
-    granite = 6,
-    mountain = 7,
-}
-worldgen.object_codes = {
-    none = 0,
-    tree = 1,
-    grass = 2,
-    rock = 3,
-    wall = 4
-}
-
 function worldgen.Generate(config)
     ---SECTION("WORLD GENERATION")
 
@@ -412,56 +394,6 @@ function worldgen.round(value)
     else
         return math.floor(value)
     end
-end
-
-function worldgen.serialize_data(data)
-    local binary_data = {}
-    for i, row in ipairs(data) do
-        for j, cell in ipairs(row) do
-            local block_code = block_codes[cell.block] or 0
-            local object_code = object_codes[cell.object] or 0
-
-            local packed = string.pack("I1I1", block_code, object_code)
-            table.insert(binary_data, packed)
-        end
-    end
-
-    return table.concat(binary_data)
-end
-
-function worldgen.get_key_by_value(tbl, value)
-    for k, v in pairs(tbl) do
-        if v == value then
-            return k
-        end
-    end
-    return "unknown"
-end
-
-function worldgen.deserialize_data(binary_data, width, height)
-    local data = {}
-    local index = 1
-    for i = 1, height do
-        local row = {}
-        for j = 1, width do
-            local block_code, object_code
-            block_code, object_code, index = string.unpack("I1I1", binary_data, index)
-
-            local block = worldgen.get_key_by_value(block_codes, block_code)
-            local object = worldgen.get_key_by_value(object_codes, object_code)
-            table.insert(row, {block = block, object = object})
-        end
-        table.insert(data, row)
-    end
-    return data
-end
-
-function worldgen.serialize(world)
-    return worldgen.serialize_data(world)
-end
-
-function worldgen.deserialize(world, width, height)
-    return worldgen.deserialize_data(world, width, height)
 end
 
 return worldgen
