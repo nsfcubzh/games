@@ -396,4 +396,69 @@ function worldgen.round(value)
     end
 end
 
+function worldgen.serializeTable(tbl, data)
+    -- Iterate over the table
+    for key, value in pairs(tbl) do
+        -- Serialize based on type
+        if type(value) == "number" then
+            if math.floor(value) == value then
+                -- Write integers
+                if value >= -128 and value <= 127 then
+                    data:WriteInt8(value)
+                elseif value >= -32768 and value <= 32767 then
+                    data:WriteInt16(value)
+                elseif value >= -2147483648 and value <= 2147483647 then
+                    data:WriteInt32(value)
+                else
+                    data:WriteNumber(value) -- For larger numbers
+                end
+            else
+                -- Write floats
+                data:WriteFloat(value)
+            end
+        elseif type(value) == "string" then
+            data:WriteString(value)
+        elseif type(value) == "table" then
+            -- Serialize nested tables
+            serializeTable(value, data)
+        end
+    end
+end
+
+function worldgen.serialize(tbl)
+    local data = Data()
+    worldgen.serializeTable(tbl, data)
+    return data
+end
+
+function worldgen.deserializeTable(data, tbl)
+    -- Keep reading bytes from the data until exhausted
+    while data.Cursor < data.Length do
+        local value = nil
+        local byte = data:ReadByte()
+        
+        if byte >= 0 and byte <= 255 then
+            -- Assuming the next byte is the data type identifier (for custom design)
+            -- Deserialize accordingly. Add custom logic for specific data structures here
+            -- Example:
+            if byte == 1 then -- assuming 1 represents Int32
+                value = data:ReadInt32()
+            elseif byte == 2 then -- assuming 2 represents Float
+                value = data:ReadFloat()
+            elseif byte == 3 then -- assuming 3 represents String
+                value = data:ReadString()
+            end
+            
+            -- Insert value into the table
+            table.insert(tbl, value)
+        end
+    end
+end
+
+function worldgen.deserialize(data)
+    local tbl = {}
+    worldgen.deserializeTable(data, tbl)
+    return tbl
+end
+
 return worldgen
