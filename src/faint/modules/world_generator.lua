@@ -420,7 +420,7 @@ function worldgen.serializeTable(tbl, data)
             data:WriteString(value)
         elseif type(value) == "table" then
             -- Serialize nested tables
-            serializeTable(value, data)
+            worldgen.serializeTable(value, data)
         end
     end
 end
