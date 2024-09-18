@@ -401,7 +401,10 @@ function worldgen.Build(world, object, chunkScale, callback)
                         end
 
                         if chunkX == #world/chunkScale-1 and chunkY == #world/chunkScale-1 and x == chunkScale and y == chunkScale then
-                            Debug.log(f"world_generator - building world completed. Total chunks: [{total_chunks}].")
+                            local total_blocks = total_chunks*total_chunks*chunkScale*chunkScale
+                            Debug.log(f"world_generator - building world completed.")
+                            Debug.log(f"world_generator - Total chunks: [{total_chunks}].")
+                            Debug.log(f"world_generator - Total blocks: [{total_blocks}].")
                             callback()
                         end
                     end

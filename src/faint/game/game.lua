@@ -42,10 +42,21 @@ function game.play()
     Player:SetParent(World)
     Player.Position = Number3(0, 0, 0)
     Camera.FOV = 15
+    Player.cam = Object()
+
     Camera.Tick = function(self, dt)
         Camera.Position = Player.Position + Number3(0, 250, -250)
         Camera.Forward = (Player.Position + Number3(0, 5, 0)) - Camera.Position
         game.updateChunks(Player.Position)
+
+        if Player.Motion ~= Number3(0, 0, 0) then
+            Player.Rotation:Slerp(Player.Rotation, Player.cam.Rotation, 0.01)
+        end
+    end
+
+    Client.DirectionalPad = function(x, y)
+        Player.Motion = Number3(x, 0, y) * 50
+        Player.cam.Forward = Number3(x*(math.random(-10, 10)*0.002), 0, y*(math.random(-10, 10)*0.002))
     end
 end
 
