@@ -29,8 +29,8 @@ function worldgen.Generate(config)
                 seed = 2,
                 octaves = 1,
                 chances = {
-                    grass = 1,
-                    podzole = 2
+                    grass = 0.3,
+                    podzole = 1.2
                 }
             },
             grass = {
@@ -47,8 +47,8 @@ function worldgen.Generate(config)
                 seed = 4,
                 octaves = 2,
                 chances = {
-                    grass = 0.8,
-                    podzole = 1,
+                    grass = 0.3,
+                    podzole = 0.5,
                     gravel = 2,
                 }
             },
