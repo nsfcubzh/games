@@ -125,7 +125,7 @@ function game.loadChunk(map, posX, posY)
             elseif cell.object == "wall" then
                 game.data[originalX + 1][originalY + 1] = Game.Object.Wall()
                 game.data[originalX + 1][originalY + 1].setScale = function(self)
-                    self.Scale = 10/7
+                    self.shape.Scale = 10/7
                 end
             end
 
