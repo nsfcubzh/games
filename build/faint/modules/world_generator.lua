@@ -84,6 +84,7 @@ function worldgen.Generate(config)
                     grass = true,
                     podzole = true,
                     gravel = true,
+                    floor = true,
                 }
             }
         }
