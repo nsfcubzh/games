@@ -49,7 +49,7 @@ function game.loadChunk(map, posX, posY)
                 datacell = Game.Object.Grass()
             end
 
-            if cell.object ~= nil then
+            if datacell ~= nil then
                 datacell.shape:SetParent(map)
                 datacell.shape.Scale = map.Scale.X/17
                 datacell.shape.Position = Number3(originalX, 1, originalY)*map.Scale.X
@@ -65,10 +65,11 @@ function game.unloadChunk(map, posX, posY)
             local originalY = y+(posY*game.chunkScale)-1
 
             local cell = world[originalX+1][originalY+1]
+            local datacell = game.data[originalX+1][originalY+1]
 
             if cell.object ~= nil then
-                game.data[originalX][originalY]:Destroy()
-                game.data[originalX][originalY] = nil
+                datacell:Destroy()
+                datacell = nil
             end
         end
     end
