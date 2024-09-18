@@ -4,7 +4,8 @@ function game.load()
     Debug.log("game() - game loaded.")
     game.chunkScale = 8
 
-    world = worldgen.Generate({width=128, height = 128})
+    game.mapScale = 256
+    world = worldgen.Generate({width=game.mapScale, height = game.mapScale})
     game.data = {}
     game.chunks = {}
 
@@ -18,11 +19,11 @@ function game.load()
         {0, 0, 0, 0, 0, 0, 0},
     }
 
-    for i = 1, 128 do
+    for i = 1, game.mapScale do
         game.data[i] = {}
     end
 
-    for i = 0, (128/game.chunkScale)-1 do
+    for i = 0, (game.mapScale/game.chunkScale)-1 do
         game.chunks[i] = {}
     end
 
