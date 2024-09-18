@@ -54,11 +54,11 @@ function game.play()
 
     Player:SetParent(World)
     Player.Position = Number3(0, 0, 0)
-    Camera.FOV = 15
+    Camera.FOV = 25
     Player.cam = Object()
 
     Camera.Tick = function(self, dt)
-        Camera.Position = Player.Position + Number3(0, 250, -250)
+        Camera.Position = Player.Position + Number3(0, 150, -150)
         Camera.Forward = (Player.Position + Number3(0, 5, 0)) - Camera.Position
         game.updateChunks(Player.Position)
 
