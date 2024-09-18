@@ -75,7 +75,6 @@ function game.unloadChunk(map, posX, posY)
             local originalY = y+(posY*game.chunkScale)-1
 
             local cell = world[originalX+1][originalY+1]
-            local game.data[originalX+1][originalY+1] = game.data[originalX+1][originalY+1]
 
             if game.data[originalX+1][originalY+1] ~= nil then
                 game.data[originalX+1][originalY+1]:Destroy()
