@@ -287,7 +287,7 @@ function worldgen.Generate(config)
             end
         end
     end
-    Debug.log(f"world_generator - Placed {num_structures} with {num_objects} objects inside.")
+    Debug.log(f"world_generator - placed {num_structures} structures with {num_objects} objects inside.")
     
     Debug.log("world_generator - placing objects...")
     local num_objects = 0
@@ -328,7 +328,7 @@ function worldgen.Generate(config)
             end
         end
     end
-    Debug.log(f"world_generator - Placed {num_objects} objects.")
+    Debug.log(f"world_generator - placed {num_objects} objects.")
     Debug.log("world_generator - World generation completed.")
 
     return world
@@ -339,7 +339,7 @@ function worldgen.Build(world, object, chunkScale)
         error("worldgen.Build(world) - 1st argument should be a world data.", 2)
     end
 
-    Debug.log(f"world_generator - Building world with {chunkScale} chunk scale...")
+    Debug.log(f"world_generator - building world with {chunkScale} chunk scale...")
     local total_chunks = 0
 
     local object_scale = (object.Scale.X + object.Scale.Y + object.Scale.Z)/3
@@ -347,6 +347,7 @@ function worldgen.Build(world, object, chunkScale)
     for chunkX = 1, #world/chunkScale-1 do
         for chunkY = 1, #world[1]/chunkScale-1 do
             Timer(chunkX/20*((#world[1]/chunkScale)/32), false, function()
+                total_chunks += 1
                 for x = 1, chunkScale do
                     for y = 1, chunkScale do
                         local originalX = x+(chunkX*chunkScale)
@@ -386,10 +387,8 @@ function worldgen.Build(world, object, chunkScale)
 
                         object:AddBlock(color, originalX, 0, originalY)
 
-                        total_chunks += 1
-
-                        if chunkX == #world/chunkScale-1 and chunkY == #world/chunkScale-1 then
-                            Debug.log(f"world_generator - Building world completed. Total chunks: [{total_chunks}].")
+                        if chunkX == #world/chunkScale-1 and chunkY == #world/chunkScale-1 and x == chunkScale and y == chunkScale then
+                            Debug.log(f"world_generator - building world completed. Total chunks: [{total_chunks}].")
                         end
                     end
                 end
