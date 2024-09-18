@@ -62,7 +62,7 @@ function game.loadChunk(map, posX, posY)
 
             if datacell ~= nil then
                 datacell.shape:SetParent(map)
-                datacell.shape.Scale = map.Scale.X/17
+                datacell.shape.Scale = 0.1
                 datacell.shape.Position = Number3(originalX, 1, originalY)*map.Scale.X
             end
         end
