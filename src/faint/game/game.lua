@@ -56,11 +56,11 @@ function game.updateChunks(pos)
             local chunkY = chunkpos[2]
             if v1 == 0 then
                 if game.chunks[chunkX][chunkY] then
-                    game.unloadChunk(chunkX, chunkY)
+                    game.unloadChunk(game.map, chunkX, chunkY)
                 end
             elseif v1 == 1 then
                 if not game.chunks[chunkX][chunkY] then
-                    game.loadChunk(chunkX, chunkY)
+                    game.loadChunk(game.map, chunkX, chunkY)
                 end
             end
         end
