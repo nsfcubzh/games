@@ -145,15 +145,15 @@ set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
 
 Debug.log(f"client() - version: {VERSION}")
 
---Client.DirectionalPad = nil
---Client.AnalogPad = nil
+Client.DirectionalPad = nil
+Client.AnalogPad = nil
 Client.OnPlayerJoin = function(p)
 	if p == Player and not playerJoined then
 		playerJoined = true
 		checkLoading()
 	end
 end
---Pointer.Drag = nil
+Pointer.Drag = nil
 
 
 loadingBG = ui:createFrame(Color(0, 0, 0, 255))
@@ -187,7 +187,8 @@ shapes = {}
 loadShapes = {
 	tree = "nanskip.faint_tree1",
 	grass = "nanskip.faint_grass",
-	rock = "nanskip.faint_rock"
+	rock = "nanskip.faint_rock",
+	wall_wood = "nanskip.faint_wall_wood",
 }
 
 loadLua = {

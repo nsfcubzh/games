@@ -156,15 +156,15 @@ set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
 
 Debug.log("client() - version: "..VERSION.."")
 
---Client.DirectionalPad = nil
---Client.AnalogPad = nil
+Client.DirectionalPad = nil
+Client.AnalogPad = nil
 Client.OnPlayerJoin = function(p)
 	if p == Player and not playerJoined then
 		playerJoined = true
 		checkLoading()
 	end
 end
---Pointer.Drag = nil
+Pointer.Drag = nil
 
 
 loadingBG = ui:createFrame(Color(0, 0, 0, 255))
@@ -198,7 +198,8 @@ shapes = {}
 loadShapes = {
 	tree = "nanskip.faint_tree1",
 	grass = "nanskip.faint_grass",
-	rock = "nanskip.faint_rock"
+	rock = "nanskip.faint_rock",
+	wall_wood = "nanskip.faint_wall_wood",
 }
 
 loadLua = {
@@ -235,7 +236,7 @@ need_to_load_jsons = 0
 isLoaded = false
 
 function doneLoading()
-	NSFLua['faint\\client.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 227 Debug.log("faint\\client.lua > New section: '".."STARTED".."' [Line: 227]")
+	NSFLua['faint\\client.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 228 Debug.log("faint\\client.lua > New section: '".."STARTED".."' [Line: 228]")
 	isLoaded = true
 
 	Camera:SetParent(World)
@@ -540,4 +541,4 @@ Debug.log("client() - Loading " .. need_to_load_jsons .. " jsons..")
 
 
 Debug.log("client() - Total: " .. need_to_load .. " assets")
-NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 532 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 532]")
+NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 533 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 533]")

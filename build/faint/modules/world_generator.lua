@@ -391,10 +391,6 @@ function worldgen.Build(world, object, chunkScale, callback)
                             color = Color(101, 68, 40)
                         end
 
-                        if cell.object == "wall" then
-                            object:AddBlock(Color(101, 68, 40), originalX-1, 1, originalY-1)
-                        end
-
                         if math.random(0, 1) == 0 then
                             color = Color(color.R+2, color.G+2, color.B+2)
                         end

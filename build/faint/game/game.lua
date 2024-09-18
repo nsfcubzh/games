@@ -133,6 +133,8 @@ function game.loadChunk(map, posX, posY)
                 game.data[originalX + 1][originalY + 1] = Game.Object.Rock()
             elseif cell.object == "grass" then
                 game.data[originalX + 1][originalY + 1] = Game.Object.Grass()
+            elseif cell.object == "wall" then
+                game.data[originalX + 1][originalY + 1] = Game.Object.Wall()
             end
 
             if game.data[originalX + 1][originalY + 1] ~= nil then
