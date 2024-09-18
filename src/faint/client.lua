@@ -1,6 +1,6 @@
 -SECTION("START")
 
-Debug.enabled = false
+Debug.enabled = true
 Debug.log(f"server() - Loaded from: '{repo}' repo. Commit: '{githash}'. Modules commit: '{nsfwhash}'")
 Debug.log(f"server() - Starting '{game}' server...")
 

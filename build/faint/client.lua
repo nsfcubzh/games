@@ -11,7 +11,7 @@ NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 0
 
 NSFLua['faint\\client.lua'].LAST_SECTION = "START" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 1 Debug.log("faint\\client.lua > New section: '".."START".."' [Line: 1]")
 
-Debug.enabled = false
+Debug.enabled = true
 Debug.log("server() - Loaded from: '"..repo.."' repo. Commit: '"..githash.."'. Modules commit: '"..nsfwhash.."'")
 Debug.log("server() - Starting '"..game.."' server...")
 
