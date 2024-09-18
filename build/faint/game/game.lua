@@ -54,12 +54,14 @@ function game.loadChunk(map, posX, posY)
 
             if cell.object == "tree" then
                 datacell = Game.Object.Tree()
-                datacell.shape.Position = Number3(originalX, 1, originalY)*map.Scale.X
             elseif cell.object == "rock" then
                 datacell = Game.Object.Rock()
-                datacell.shape.Position = Number3(originalX, 1, originalY)*map.Scale.X
             elseif cell.object == "grass" then
                 datacell = Game.Object.Grass()
+            end
+
+            if cell.object ~= nil then
+                datacell.shape:SetParent(map)
                 datacell.shape.Position = Number3(originalX, 1, originalY)*map.Scale.X
             end
         end
