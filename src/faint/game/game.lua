@@ -5,6 +5,11 @@ function game.load()
     game.chunkScale = 8
 
     world = worldgen.Generate({width=128, height = 128})
+    game.data = {}
+    for x = 1, 128 do
+        game.data[x] = {}
+    end
+
     map = MutableShape()
     map:SetParent(World)
     map.Physics = PhysicsMode.StaticPerBlock
@@ -35,11 +40,15 @@ function game.loadChunk(map, posX, posY)
 
             local cell = world[originalX+1][originalY+1]
 
-            if cell.object ~= nil then
-                local b = map:GetBlock(Number3(originalX, 0, originalY))
-                b:Remove()
-
-                map:AddBlock(Color(255, 255, 255), originalX, 0, originalY)
+            if cell.object == "tree" then
+                game.data[originalX][originalY] = Game.Object.Tree()
+                game.data[originalX][originalY].shape.Position = Number3(originalX, 1, originalY)*map.Scale.X
+            elseif cell.object == "rock" then
+                game.data[originalX][originalY] = Game.Object.Rock()
+                game.data[originalX][originalY].shape.Position = Number3(originalX, 1, originalY)*map.Scale.X
+            elseif cell.object == "grass" then
+                game.data[originalX][originalY] = Game.Object.Grass()
+                game.data[originalX][originalY].shape.Position = Number3(originalX, 1, originalY)*map.Scale.X
             end
         end
     end
@@ -54,30 +63,8 @@ function game.unloadChunk(map, posX, posY)
             local cell = world[originalX+1][originalY+1]
 
             if cell.object ~= nil then
-                local b = map:GetBlock(Number3(originalX, 0, originalY))
-                b:Remove()
-                
-                local color = Color(255, 255, 255)
-
-                if cell.block == "water" then
-                    color = Color(114, 140, 176)
-                elseif cell.block == "sand" then
-                    color = Color(181, 175, 114)
-                elseif cell.block == "grass" then
-                    color = Color(98, 115, 69)
-                elseif cell.block == "podzole" then
-                    color = Color(91, 107, 63)
-                elseif cell.block == "gravel" then
-                    color = Color(87, 83, 81)
-                elseif cell.block == "granite" then
-                    color = Color(56, 55, 54)
-                elseif cell.block == "mountain" then
-                    color = Color(44, 45, 46)
-                elseif cell.block == "floor" then
-                    color = Color(101, 68, 40)
-                end
-
-                map:AddBlock(color, originalX, 0, originalY)
+                game.data[originalX][originalY]:Destroy()
+                game.data[originalX][originalY] = nil
             end
         end
     end
