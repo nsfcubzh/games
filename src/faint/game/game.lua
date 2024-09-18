@@ -31,6 +31,7 @@ function game.load()
     game.map:SetParent(World)
     game.map.Physics = PhysicsMode.StaticPerBlock
     game.map.Scale = 10
+    game.map.Shadow = true
 
     HTTP:Get("https://raw.githubusercontent.com/nsfcubzh/games/main/build/faint/data/music.mp3", function(data)
         if data.StatusCode ~= 200 then
