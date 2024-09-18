@@ -75,50 +75,62 @@ function game.updateChunks(pos)
     end
 end
 
-
 function game.loadChunk(map, posX, posY)
+    -- Initialize the chunk row if it's nil
+    if not game.chunks[posX] then
+        game.chunks[posX] = {}
+    end
+
+    -- Proceed with loading the chunk
     for x = 1, game.chunkScale do
         for y = 1, game.chunkScale do
-            local originalX = x+(posX*game.chunkScale)-1
-            local originalY = y+(posY*game.chunkScale)-1
+            local originalX = x + (posX * game.chunkScale) - 1
+            local originalY = y + (posY * game.chunkScale) - 1
 
-            local cell = world[originalX+1][originalY+1]
+            local cell = world[originalX + 1][originalY + 1]
 
             if cell.object == "tree" then
-                game.data[originalX+1][originalY+1] = Game.Object.Tree()
+                game.data[originalX + 1][originalY + 1] = Game.Object.Tree()
             elseif cell.object == "rock" then
-                game.data[originalX+1][originalY+1] = Game.Object.Rock()
+                game.data[originalX + 1][originalY + 1] = Game.Object.Rock()
             elseif cell.object == "grass" then
-                game.data[originalX+1][originalY+1] = Game.Object.Grass()
+                game.data[originalX + 1][originalY + 1] = Game.Object.Grass()
             end
 
-            if game.data[originalX+1][originalY+1] ~= nil then
-                game.data[originalX+1][originalY+1].shape:SetParent(map)
-                game.data[originalX+1][originalY+1].shape.Scale = 0.07
-                game.data[originalX+1][originalY+1].shape.Position = Number3(originalX+0.5, 1, originalY+0.5)*map.Scale.X
+            if game.data[originalX + 1][originalY + 1] ~= nil then
+                game.data[originalX + 1][originalY + 1].shape:SetParent(map)
+                game.data[originalX + 1][originalY + 1].shape.Scale = 0.07
+                game.data[originalX + 1][originalY + 1].shape.Position = Number3(originalX + 0.5, 1, originalY + 0.5) * map.Scale.X
             end
         end
     end
 
+    -- Mark the chunk as loaded
     game.chunks[posX][posY] = true
 end
 
 function game.unloadChunk(map, posX, posY)
+    -- Check if the chunk exists before attempting to unload
+    if not game.chunks[posX] or not game.chunks[posX][posY] then
+        return -- No need to unload if the chunk is not loaded
+    end
+
+    -- Proceed with unloading the chunk
     for x = 1, game.chunkScale do
         for y = 1, game.chunkScale do
-            local originalX = x+(posX*game.chunkScale)-1
-            local originalY = y+(posY*game.chunkScale)-1
+            local originalX = x + (posX * game.chunkScale) - 1
+            local originalY = y + (posY * game.chunkScale) - 1
 
-            local cell = world[originalX+1][originalY+1]
-
-            if game.data[originalX+1][originalY+1] ~= nil then
-                game.data[originalX+1][originalY+1]:Destroy()
-                game.data[originalX+1][originalY+1] = nil
+            if game.data[originalX + 1][originalY + 1] ~= nil then
+                game.data[originalX + 1][originalY + 1]:Destroy()
+                game.data[originalX + 1][originalY + 1] = nil
             end
         end
     end
-    
+
+    -- Mark the chunk as unloaded
     game.chunks[posX][posY] = false
 end
+
 
 return game
