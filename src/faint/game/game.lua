@@ -76,6 +76,8 @@ function game.play()
 
     Player.CollisionBox = Box({-7.5, 0, -7.5}, {7.5, 29, 7.5})
     Player.Position = Number3(game.map.Width/2, 3, game.map.Depth/2) * game.map.Scale.X
+
+    game.loadAmbience()
 end
 
 function game.updateChunks(pos)
@@ -152,5 +154,31 @@ function game.unloadChunk(map, posX, posY)
     game.chunks[posX][posY] = false
 end
 
+function game.loadAmbience()
+    require("ambience"):set({
+        sky = {
+            skyColor = Color(0,168,255),
+            horizonColor = Color(137,222,229),
+            abyssColor = Color(76,144,255),
+            lightColor = Color(153,179,182),
+            lightIntensity = 0.580000,
+        },
+        fog = {
+            color = Color(19,159,204),
+            near = 300,
+            far = 700,
+            lightAbsorbtion = 0.400000,
+        },
+        sun = {
+            color = Color(208,230,135),
+            intensity = 0.890000,
+            rotation = Number3(0.991350, 3.612823, 0.000000),
+        },
+        ambient = {
+            skyLightFactor = 0.100000,
+            dirLightFactor = 0.200000,
+        }
+    })
+end
 
 return game
