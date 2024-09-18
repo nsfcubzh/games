@@ -48,10 +48,10 @@ function game.load()
             print("Error downloading music: "..data.StatusCode.."")
         end
         game.music = AudioSource()
-        game.music:SetParent(Player)
+        game.music:SetParent(Camera)
         game.music.Sound = data.Body
         game.music.Loop = true
-        game.music.Volume = 0.2
+        game.music.Volume = 0.4
         game.music:Play()
     end)
 
