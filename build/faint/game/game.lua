@@ -120,38 +120,40 @@ function game.loadChunk(map, posX, posY)
         game.chunks[posX] = {}
     end
 
-    for x = 1, game.chunkScale do
-        for y = 1, game.chunkScale do
-            local originalX = x + (posX * game.chunkScale) - 1
-            local originalY = y + (posY * game.chunkScale) - 1
+    Timer(0.016*math.random(0, 3), false function()
+        for x = 1, game.chunkScale do
+            for y = 1, game.chunkScale do
+                local originalX = x + (posX * game.chunkScale) - 1
+                local originalY = y + (posY * game.chunkScale) - 1
 
-            local cell = world[originalX + 1][originalY + 1]
+                local cell = world[originalX + 1][originalY + 1]
 
-            if cell.object == "tree" then
-                game.data[originalX + 1][originalY + 1] = Game.Object.Tree()
-            elseif cell.object == "rock" then
-                game.data[originalX + 1][originalY + 1] = Game.Object.Rock()
-            elseif cell.object == "grass" then
-                game.data[originalX + 1][originalY + 1] = Game.Object.Grass()
-            elseif cell.object == "wall" then
-                game.data[originalX + 1][originalY + 1] = Game.Object.Wall()
-                game.data[originalX + 1][originalY + 1].setScale = function(self)
-                    self.shape.Scale = 1/7
+                if cell.object == "tree" then
+                    game.data[originalX + 1][originalY + 1] = Game.Object.Tree()
+                elseif cell.object == "rock" then
+                    game.data[originalX + 1][originalY + 1] = Game.Object.Rock()
+                elseif cell.object == "grass" then
+                    game.data[originalX + 1][originalY + 1] = Game.Object.Grass()
+                elseif cell.object == "wall" then
+                    game.data[originalX + 1][originalY + 1] = Game.Object.Wall()
+                    game.data[originalX + 1][originalY + 1].setScale = function(self)
+                        self.shape.Scale = 1/7
+                    end
+                elseif cell.object == "test" then
+                    game.data[originalX + 1][originalY + 1] = Game.Object.Test()
                 end
-            elseif cell.object == "test" then
-                game.data[originalX + 1][originalY + 1] = Game.Object.Test()
-            end
 
-            if game.data[originalX + 1][originalY + 1] ~= nil then
-                game.data[originalX + 1][originalY + 1].shape:SetParent(map)
-                game.data[originalX + 1][originalY + 1].shape.Scale = 0.07
-                game.data[originalX + 1][originalY + 1].shape.Position = Number3(originalX + 0.5, 1, originalY + 0.5) * map.Scale.X
-                if game.data[originalX + 1][originalY + 1].setScale ~= nil then
-                    game.data[originalX + 1][originalY + 1]:setScale()
+                if game.data[originalX + 1][originalY + 1] ~= nil then
+                    game.data[originalX + 1][originalY + 1].shape:SetParent(map)
+                    game.data[originalX + 1][originalY + 1].shape.Scale = 0.07
+                    game.data[originalX + 1][originalY + 1].shape.Position = Number3(originalX + 0.5, 1, originalY + 0.5) * map.Scale.X
+                    if game.data[originalX + 1][originalY + 1].setScale ~= nil then
+                        game.data[originalX + 1][originalY + 1]:setScale()
+                    end
                 end
             end
         end
-    end
+    end)
 
     game.chunks[posX][posY] = true
 end
