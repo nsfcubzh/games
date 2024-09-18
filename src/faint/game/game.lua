@@ -60,12 +60,12 @@ function game.updateChunks(pos)
 
             if game.chunkMap[fx] ~= nil then
                 if game.chunkMap[fx][fy] == 0 then
-                    if game.chunks[fx][fx] then
-                        game.unloadChunk(game.map, fx, fx)
+                    if game.chunks[fx][fy] then
+                        game.unloadChunk(game.map, fx, fy)
                     end
                 elseif game.chunkMap[fx][fy] == 1 then
-                    if not game.chunks[fx][fx] then
-                        game.loadChunk(game.map, fx, fx)
+                    if not game.chunks[fx][fy] then
+                        game.loadChunk(game.map, fx, fy)
                     end
                 end
             end
