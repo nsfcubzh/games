@@ -65,12 +65,12 @@ function game.updateChunks(pos)
     local chunkX = chunkpos[1]
     local chunkY = chunkpos[2]
 
-    print(chunkX, chunkY)
-
     for x = 1, #game.chunkMap do
         for y = 1, #game.chunkMap[x] do
             local fx = x-(#game.chunkMap//2)+chunkX
             local fy = y-(#game.chunkMap[x]//2)+chunkY
+
+            print(fx, fy)
 
             if game.chunkMap[fx] ~= nil then
                 if game.chunkMap[fx][fy] == 0 then
