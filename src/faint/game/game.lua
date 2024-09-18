@@ -48,31 +48,33 @@ function game.play()
 end
 
 function game.updateChunks(pos)
-    local fixedpos = pos/game.map.Scale.X
-    local chunkpos = {fixedpos.X//game.chunkScale, fixedpos.Z//game.chunkScale}
+    -- Convert player's world position to chunk coordinates
+    local fixedpos = pos / game.map.Scale.X
+    local chunkX = math.floor(fixedpos.X / game.chunkScale)
+    local chunkY = math.floor(fixedpos.Z / game.chunkScale)
 
-    local chunkX = chunkpos[1]
-    local chunkY = chunkpos[2]
-
+    -- Iterate through the chunkMap to determine which chunks should be loaded/unloaded
     for x = 1, #game.chunkMap do
         for y = 1, #game.chunkMap[x] do
-            local fx = x-(#game.chunkMap//2)+chunkX
-            local fy = y-(#game.chunkMap[x]//2)+chunkY
+            -- Calculate the chunk's world position
+            local fx = chunkX + (x - math.ceil(#game.chunkMap / 2))
+            local fy = chunkY + (y - math.ceil(#game.chunkMap[x] / 2))
 
-            if game.chunkMap[x] ~= nil then
-                if game.chunkMap[x][y] == 0 then
-                    if game.chunks[fx][fy] then
-                        game.unloadChunk(game.map, fx, fy)
-                    end
-                elseif game.chunkMap[fx][fy] == 1 then
-                    if not game.chunks[fx][fy] then
-                        game.loadChunk(game.map, fx, fy)
-                    end
+            -- Unload chunk if chunkMap entry is 0 and the chunk is loaded
+            if game.chunkMap[x][y] == 0 then
+                if game.chunks[fx] and game.chunks[fx][fy] then
+                    game.unloadChunk(game.map, fx, fy)
+                end
+            -- Load chunk if chunkMap entry is 1 and the chunk is not already loaded
+            elseif game.chunkMap[x][y] == 1 then
+                if not (game.chunks[fx] and game.chunks[fx][fy]) then
+                    game.loadChunk(game.map, fx, fy)
                 end
             end
         end
     end
 end
+
 
 function game.loadChunk(map, posX, posY)
     for x = 1, game.chunkScale do
