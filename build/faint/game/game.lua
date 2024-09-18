@@ -65,6 +65,8 @@ function game.updateChunks(pos)
         for k1, v1 in pairs(v0) do
             local chunkX = chunkpos[1]
             local chunkY = chunkpos[2]
+
+            print(chunkX, chunkY)
             if v1 == 0 then
                 if game.chunks[chunkX][chunkY] then
                     game.unloadChunk(game.map, chunkX, chunkY)
