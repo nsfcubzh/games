@@ -59,16 +59,14 @@ function game.updateChunks(pos)
             local fx = x-(#game.chunkMap//2)+chunkX
             local fy = y-(#game.chunkMap[x]//2)+chunkY
 
-            print(fx, fy)
-
             if game.chunkMap[fx] ~= nil then
                 if game.chunkMap[fx][fy] == 0 then
-                    if game.chunks[fx][fy] then
-                        game.unloadChunk(game.map, fx, fy)
+                    if game.chunks[fx+chunkX][fy+chunkY] then
+                        game.unloadChunk(game.map, fx+chunkX, fy+chunkY)
                     end
                 elseif game.chunkMap[fx][fy] == 1 then
-                    if not game.chunks[fx][fy] then
-                        game.loadChunk(game.map, fx, fy)
+                    if not game.chunks[fx+chunkX][fy+chunkY] then
+                        game.loadChunk(game.map, fx+chunkX, fy+chunkY)
                     end
                 end
             end
