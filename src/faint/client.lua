@@ -189,6 +189,7 @@ loadShapes = {
 	grass = "nanskip.faint_grass",
 	rock = "nanskip.faint_rock",
 	wall_wood = "nanskip.faint_wall_wood",
+	test = "voxels.chestnut",
 }
 
 loadLua = {

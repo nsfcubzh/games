@@ -200,6 +200,7 @@ loadShapes = {
 	grass = "nanskip.faint_grass",
 	rock = "nanskip.faint_rock",
 	wall_wood = "nanskip.faint_wall_wood",
+	test = "voxels.chestnut",
 }
 
 loadLua = {
@@ -236,7 +237,7 @@ need_to_load_jsons = 0
 isLoaded = false
 
 function doneLoading()
-	NSFLua['faint\\client.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 228 Debug.log("faint\\client.lua > New section: '".."STARTED".."' [Line: 228]")
+	NSFLua['faint\\client.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 229 Debug.log("faint\\client.lua > New section: '".."STARTED".."' [Line: 229]")
 	isLoaded = true
 
 	Camera:SetParent(World)
@@ -541,4 +542,4 @@ Debug.log("client() - Loading " .. need_to_load_jsons .. " jsons..")
 
 
 Debug.log("client() - Total: " .. need_to_load .. " assets")
-NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 533 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 533]")
+NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 534 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 534]")

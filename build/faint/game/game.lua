@@ -138,6 +138,8 @@ function game.loadChunk(map, posX, posY)
                 game.data[originalX + 1][originalY + 1].setScale = function(self)
                     self.shape.Scale = 1/7
                 end
+            elseif cell.object == "test" then
+                game.data[originalX + 1][originalY + 1] = Game.Object.Test()
             end
 
             if game.data[originalX + 1][originalY + 1] ~= nil then

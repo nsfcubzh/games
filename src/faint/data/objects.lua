@@ -16,3 +16,7 @@ Game.Object:New({id = "Wall", model = "wall_wood", type = "Shape", Init = functi
     self.shape.Pivot.Y = 0
     self.shape.Shadow = true
 end})
+Game.Object:New({id = "Test", model = "test", type = "Shape", Init = function(self)
+    self.shape.Pivot.Y = 0
+    self.shape.Shadow = true
+end})

@@ -59,20 +59,14 @@ function worldgen.Generate(config)
                 min_scale = {5, 5},
                 max_scale = {9, 9},
                 floor = true,
-                removed_walls = 0.2,
-                removed_floors = 0.2,
+                removed_walls = 0.1,
+                removed_floors = 0.05,
                 wall_type = "wood",
                 floor_type = "wood",
                 items = {
-                    blue = {
-                        chance = 0.01,
+                    test = {
+                        chance = 0.02
                     },
-                    red = {
-                        chance = 0.02,
-                    },
-                    black = {
-                        chance = 0.01,
-                    }
                 },
                 allowed_materials = {
                     sand = true,
@@ -173,7 +167,7 @@ function worldgen.Generate(config)
                             end
 
                             local block = nil
-                            if math.random(0, 10)/10 > structure.removed_floors then
+                            if math.random(0, 100)/100 > structure.removed_floors then
                                 block = "floor"
                             end
                             
@@ -205,7 +199,7 @@ function worldgen.Generate(config)
                         end
 
                         local object = nil
-                        if math.random(0, 10)/10 > structure.removed_walls then
+                        if math.random(0, 100)/100 > structure.removed_walls then
                             object = "wall"
                         end
 
@@ -227,7 +221,7 @@ function worldgen.Generate(config)
                         end
 
                         local object = nil
-                        if math.random(0, 10)/10 > structure.removed_walls then
+                        if math.random(0, 100)/100 > structure.removed_walls then
                             object = "wall"
                         end
 
@@ -249,7 +243,7 @@ function worldgen.Generate(config)
                         end
 
                         local object = nil
-                        if math.random(0, 10)/10 > structure.removed_walls then
+                        if math.random(0, 100)/100 > structure.removed_walls then
                             object = "wall"
                         end
 
@@ -271,7 +265,7 @@ function worldgen.Generate(config)
                         end
 
                         local object = nil
-                        if math.random(0, 10)/10 > structure.removed_walls then
+                        if math.random(0, 100)/100 > structure.removed_walls then
                             object = "wall"
                         end
 
