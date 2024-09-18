@@ -345,9 +345,15 @@ function worldgen.Generate(config)
     return world
 end
 
-function worldgen.Build(world, object, chunkScale)
+function worldgen.Build(world, object, chunkScale, callback)
     if world == nil then
-        error("worldgen.Build(world) - 1st argument should be a world data.", 2)
+        error("worldgen.Build(world, object, chunkScale, callback) - 1st argument should be a world data.", 3)
+    elseif object == nil then
+        error("worldgen.Build(world, object, chunkScale, callback) - 2nd argument should be an mutableshape object.", 3)
+    elseif chunkScale == nil then
+        chunkScale = 8
+    elseif callback == nil then
+        callback = function() end
     end
 
     Debug.log("world_generator - building world with "..chunkScale.." chunk scale...")
@@ -355,8 +361,8 @@ function worldgen.Build(world, object, chunkScale)
 
     local object_scale = (object.Scale.X + object.Scale.Y + object.Scale.Z)/3
 
-    for chunkX = 1, #world/chunkScale-1 do
-        for chunkY = 1, #world[1]/chunkScale-1 do
+    for chunkX = 0, #world/chunkScale-1 do
+        for chunkY = 0, #world[1]/chunkScale-1 do
             Timer(chunkX/20*((#world[1]/chunkScale)/32), false, function()
                 total_chunks = total_chunks + 1
                 for x = 1, chunkScale do
@@ -400,6 +406,7 @@ function worldgen.Build(world, object, chunkScale)
 
                         if chunkX == #world/chunkScale-1 and chunkY == #world/chunkScale-1 and x == chunkScale and y == chunkScale then
                             Debug.log("world_generator - building world completed. Total chunks: ["..total_chunks.."].")
+                            callback()
                         end
                     end
                 end
