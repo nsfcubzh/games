@@ -16,6 +16,7 @@ function game.play()
     Debug.log("game() - joined world.")
 
     Player:SetParent(World)
+    Player.Position = Number3(0, 0, 0)
     Camera.Tick = function(self, dt)
         Camera.Position = Player.Position + Number3(0, 50, -50)
         Camera.Forward = Player.Position - Camera.Position
