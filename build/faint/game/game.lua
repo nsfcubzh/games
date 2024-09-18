@@ -48,7 +48,7 @@ function game.loadChunk(map, posX, posY)
 
             if cell.object ~= nil then
                 local b = map:GetBlock(Number3(originalX, 0, originalY))
-                b:remove()
+                b:Remove()
 
                 map:AddBlock(Color(255, 255, 255), originalX, 0, originalY)
             end
@@ -66,7 +66,7 @@ function game.unloadChunk(map, posX, posY)
 
             if cell.object ~= nil then
                 local b = map:GetBlock(Number3(originalX, 0, originalY))
-                b:remove()
+                b:Remove()
                 
                 local color = Color(255, 255, 255)
 
