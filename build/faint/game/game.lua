@@ -50,16 +50,17 @@ function game.loadChunk(map, posX, posY)
             local originalY = y+(posY*game.chunkScale)-1
 
             local cell = world[originalX+1][originalY+1]
+            local datacell = game.data[originalX+1][originalY+1]
 
             if cell.object == "tree" then
-                game.data[originalX][originalY] = Game.Object.Tree()
-                game.data[originalX][originalY].shape.Position = Number3(originalX, 1, originalY)*map.Scale.X
+                datacell = Game.Object.Tree()
+                datacell.shape.Position = Number3(originalX, 1, originalY)*map.Scale.X
             elseif cell.object == "rock" then
-                game.data[originalX][originalY] = Game.Object.Rock()
-                game.data[originalX][originalY].shape.Position = Number3(originalX, 1, originalY)*map.Scale.X
+                datacell = Game.Object.Rock()
+                datacell.shape.Position = Number3(originalX, 1, originalY)*map.Scale.X
             elseif cell.object == "grass" then
-                game.data[originalX][originalY] = Game.Object.Grass()
-                game.data[originalX][originalY].shape.Position = Number3(originalX, 1, originalY)*map.Scale.X
+                datacell = Game.Object.Grass()
+                datacell.shape.Position = Number3(originalX, 1, originalY)*map.Scale.X
             end
         end
     end
