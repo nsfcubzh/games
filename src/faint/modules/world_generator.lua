@@ -375,18 +375,33 @@ function worldgen.Build(world, object, chunkScale, callback)
                         elseif cell.block == "granite" then
                             color = Color(56, 55, 54)
                             
-                            object:AddBlock(Color(56, 55, 54), originalX-1, 1, originalY-1)
+                            object:AddBlock(color, originalX-1, 1, originalY-1)
                         elseif cell.block == "mountain" then
                             color = Color(44, 45, 46)
+                            local col = 1
 
-                            object:AddBlock(Color(44, 45, 46), originalX-1, 1, originalY-1)
-                            object:AddBlock(Color(44, 45, 46), originalX-1, 2, originalY-1)
+                            if math.random(0, 1) == 0 then
+                                col = Color(color.R+10, color.G+10, color.B+10)
+                            end
+                            if math.random(0, 1) == 0 then
+                                col = Color(color.R-10, color.G-10, color.B-10)
+                            end
+
+                            object:AddBlock(col, originalX-1, 1, originalY-1)
+                            object:AddBlock(col, originalX-1, 2, originalY-1)
                         elseif cell.block == "floor" then
                             color = Color(101, 68, 40)
                         end
 
                         if cell.object == "wall" then
                             object:AddBlock(Color(101, 68, 40), originalX-1, 1, originalY-1)
+                        end
+
+                        if math.random(0, 1) == 0 then
+                            color = Color(color.R+10, color.G+10, color.B+10)
+                        end
+                        if math.random(0, 1) == 0 then
+                            color = Color(color.R-10, color.G-10, color.B-10)
                         end
 
                         object:AddBlock(color, originalX-1, 0, originalY-1)
