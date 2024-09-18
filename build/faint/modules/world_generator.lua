@@ -385,21 +385,8 @@ function worldgen.Build(world, object, chunkScale, callback)
                             color = Color(87, 83, 81)
                         elseif cell.block == "granite" then
                             color = Color(56, 55, 54)
-                            
-                            object:AddBlock(color, originalX-1, 1, originalY-1)
                         elseif cell.block == "mountain" then
                             color = Color(44, 45, 46)
-                            local col = 1
-
-                            if math.random(0, 1) == 0 then
-                                col = Color(color.R+10, color.G+10, color.B+10)
-                            end
-                            if math.random(0, 1) == 0 then
-                                col = Color(color.R-10, color.G-10, color.B-10)
-                            end
-
-                            object:AddBlock(col, originalX-1, 1, originalY-1)
-                            object:AddBlock(col, originalX-1, 2, originalY-1)
                         elseif cell.block == "floor" then
                             color = Color(101, 68, 40)
                         end
@@ -409,13 +396,20 @@ function worldgen.Build(world, object, chunkScale, callback)
                         end
 
                         if math.random(0, 1) == 0 then
-                            color = Color(color.R+10, color.G+10, color.B+10)
+                            color = Color(color.R+2, color.G+2, color.B+2)
                         end
                         if math.random(0, 1) == 0 then
-                            color = Color(color.R-10, color.G-10, color.B-10)
+                            color = Color(color.R-2, color.G-2, color.B-2)
                         end
 
                         object:AddBlock(color, originalX-1, 0, originalY-1)
+
+                        if cell.block == "granite" then
+                            object:AddBlock(color, originalX-1, 1, originalY-1)
+                        elseif cell.block == "mountain" then
+                            object:AddBlock(color, originalX-1, 1, originalY-1)
+                            object:AddBlock(color, originalX-1, 2, originalY-1)
+                        end
 
                         if chunkX == #world/chunkScale-1 and chunkY == #world/chunkScale-1 and x == chunkScale and y == chunkScale then
                             Debug.log("world_generator - building world completed. Total chunks: ["..total_chunks.."].")
