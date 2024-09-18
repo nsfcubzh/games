@@ -73,6 +73,7 @@ function game.play()
         return
     end
     Player.CollisionBox = Box({-7.5, 0, -7.5}, {7.5, 29, 7.5})
+    Player.Position = Number3(game.map.Width/2, 3, game.map.Depth/2) * game.map.Scale.X
 end
 
 function game.updateChunks(pos)
