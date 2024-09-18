@@ -223,8 +223,6 @@ function menu.remove(self, callback)
         self.resolution_error_text = nil
     end
 
-    menu.pointer:Remove()
-
     Debug.log("menu() - Menu removed.")
     Debug.log("menu() - Executing remove callback...")
 end
