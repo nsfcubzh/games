@@ -43,6 +43,7 @@ function game.play()
     Camera.Tick = function(self, dt)
         Camera.Position = Player.Position + Number3(0, 250, -250)
         Camera.Forward = (Player.Position + Number3(0, 5, 0)) - Camera.Position
+        game.updateChunks(Player.Position)
     end
 end
 
@@ -52,6 +53,8 @@ function game.updateChunks(pos)
 
     local chunkX = chunkpos[1]
     local chunkY = chunkpos[2]
+
+    print(chunkX, chunkY)
 
     for x = 1, #game.chunkMap do
         for y = 1, #game.chunkMap[x] do
