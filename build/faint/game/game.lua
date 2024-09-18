@@ -43,6 +43,18 @@ function game.load()
     game.map.Physics = PhysicsMode.StaticPerBlock
     game.map.Scale = 10
 
+    HTTP:Get("https://raw.githubusercontent.com/nsfcubzh/games/main/build/faint/data/music.mp3", function(data)
+        if data.StatusCode ~= 200 then
+            print("Error downloading music: "..data.StatusCode.."")
+        end
+        game.music = AudioSource()
+        game.music:SetParent(Player)
+        game.music.Sound = data.Body
+        game.music.Loop = true
+        game.music.Volume = 0.2
+        game.music:Play()
+    end)
+
     worldgen.Build(world, game.map, game.chunkScale, function()
         game.play()
     end)
@@ -72,7 +84,7 @@ function game.play()
     end
     Client.AnalogPad = nil
     Pointer.Drag = nil
-    
+
     Player.CollisionBox = Box({-7.5, 0, -7.5}, {7.5, 29, 7.5})
     Player.Position = Number3(game.map.Width/2, 3, game.map.Depth/2) * game.map.Scale.X
 end
