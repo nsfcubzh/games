@@ -169,6 +169,7 @@ loadModules = {
 	menu = "build/faint/menu/menu.lua",
 	settings = "build/faint/settings.lua",
 	worldgen = "build/faint/modules/world_generator.lua",
+	game = "build/faint/game/game.lua",
 }
 
 loadClasses = {
