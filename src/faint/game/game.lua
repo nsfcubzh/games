@@ -61,6 +61,7 @@ function game.play()
     Client.AnalogPad = function(dx, dy)
         return
     end
+    Player.CollisionBox = Box({-7.5, 0, -7.5}, {7.5, 29, 7.5})
 end
 
 function game.updateChunks(pos)
