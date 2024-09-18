@@ -120,7 +120,7 @@ function game.loadChunk(map, posX, posY)
         game.chunks[posX] = {}
     end
 
-    Timer(0.016*math.random(0, 3), false function()
+    Timer(0.016*math.random(0, 3), false, function()
         for x = 1, game.chunkScale do
             for y = 1, game.chunkScale do
                 local originalX = x + (posX * game.chunkScale) - 1
