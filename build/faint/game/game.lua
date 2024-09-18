@@ -60,13 +60,14 @@ end
 function game.updateChunks(pos)
     local fixedpos = pos/game.map.Scale.X
     local chunkpos = {fixedpos.X//game.chunkScale, fixedpos.Z//game.chunkScale}
+    
+    local chunkX = chunkpos[1]
+    local chunkY = chunkpos[2]
+
+    print(chunkX, chunkY)
 
     for k0, v0 in pairs(game.chunkMap) do
         for k1, v1 in pairs(v0) do
-            local chunkX = chunkpos[1]
-            local chunkY = chunkpos[2]
-
-            print(chunkX, chunkY)
             if v1 == 0 then
                 if game.chunks[chunkX][chunkY] then
                     game.unloadChunk(game.map, chunkX, chunkY)
