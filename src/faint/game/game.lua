@@ -19,10 +19,10 @@ function game.play()
 
     Player:SetParent(World)
     Player.Position = Number3(0, 0, 0)
-    Camera.FOV = 50
+    Camera.FOV = 15
     Camera.Tick = function(self, dt)
         Camera.Position = Player.Position + Number3(0, 250, -250)
-        Camera.Forward = Player.Position - Camera.Position
+        Camera.Forward = (Player.Position + Number3(0, 5, 0)) - Camera.Position
     end
 end
 

@@ -367,8 +367,8 @@ function worldgen.Build(world, object, chunkScale, callback)
                 total_chunks = total_chunks + 1
                 for x = 1, chunkScale do
                     for y = 1, chunkScale do
-                        local originalX = x+(chunkX*chunkScale)
-                        local originalY = y+(chunkY*chunkScale)
+                        local originalX = x+(chunkX*chunkScale)-1
+                        local originalY = y+(chunkY*chunkScale)-1
 
                         local color = Color(255, 255, 255)
                         local cell = world[originalX][originalY]
