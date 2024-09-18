@@ -12,7 +12,7 @@ NSFLua['faint\\modules\\world_generator.lua'].LAST_SECTION_LINE = 0
 local worldgen = {}
 
 function worldgen.Generate(config)
-    --NSFLua['faint\\modules\\world_generator.lua'].LAST_SECTION = "WORLD GENERATION" NSFLua['faint\\modules\\world_generator.lua'].LAST_SECTION_LINE = 4 Debug.log("faint\\modules\\world_generator.lua > New section: '".."WORLD GENERATION".."' [Line: 4]")
+    NSFLua['faint\\modules\\world_generator.lua'].LAST_SECTION = "WORLD GENERATION" NSFLua['faint\\modules\\world_generator.lua'].LAST_SECTION_LINE = 4 Debug.log("faint\\modules\\world_generator.lua > New section: '".."WORLD GENERATION".."' [Line: 4]")
 
     if config == nil then
         error("worldgen.Generate(config) - 1st argument must be a table.")
@@ -102,12 +102,12 @@ function worldgen.Generate(config)
         cfg[key] = value
     end
 
-    --Debug.log("world_generator - config saved in ["..cfg.."].")
+    Debug.log("world_generator - config saved in ["..cfg.."].")
 
     local world = {}
     perlin.seed(cfg.seed)
 
-    --Debug.log("world_generator - generating landscape...")
+    Debug.log("world_generator - generating landscape...")
     for x = 1, cfg.width do
         world[x] = {}
         for y = 1, cfg.height do
@@ -154,7 +154,7 @@ function worldgen.Generate(config)
             end
         end
     end
-    --Debug.log("world_generator - placing structures...")
+    Debug.log("world_generator - placing structures...")
     local num_objects = 0
     local num_structures = 0
     for name, structure in pairs(cfg.structures) do
@@ -297,9 +297,9 @@ function worldgen.Generate(config)
             end
         end
     end
-    --Debug.log("world_generator - Placed "..num_structures.." with "..num_objects.." objects inside.")
+    Debug.log("world_generator - Placed "..num_structures.." with "..num_objects.." objects inside.")
     
-    --Debug.log("world_generator - placing objects...")
+    Debug.log("world_generator - placing objects...")
     local num_objects = 0
     for name, item in pairs(cfg.items) do
         perlin.seed(item.seed)
@@ -338,8 +338,8 @@ function worldgen.Generate(config)
             end
         end
     end
-    --Debug.log("world_generator - Placed "..num_objects.." objects.")
-    --Debug.log("world_generator - World generation completed.")
+    Debug.log("world_generator - Placed "..num_objects.." objects.")
+    Debug.log("world_generator - World generation completed.")
 
     return world
 end
@@ -348,6 +348,9 @@ function worldgen.Build(world, object, chunkScale)
     if world == nil then
         error("worldgen.Build(world) - 1st argument should be a world data.", 2)
     end
+
+    Debug.log("world_generator - Building world with "..chunkScale.." chunk scale...")
+    local total_chunks = 0
 
     local object_scale = (object.Scale.X + object.Scale.Y + object.Scale.Z)/3
 
@@ -392,6 +395,12 @@ function worldgen.Build(world, object, chunkScale)
                         end
 
                         object:AddBlock(color, originalX, 0, originalY)
+
+                        total_chunks = total_chunks + 1
+
+                        if chunkX == #world/chunkScale-1 and chunkY == #world/chunkScale-1 then
+                            Debug.log("world_generator - Building world completed. Total chunks: ["..total_chunks.."].")
+                        end
                     end
                 end
             end)
