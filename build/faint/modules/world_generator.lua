@@ -101,8 +101,9 @@ function worldgen.Generate(config)
     for key, value in pairs(config) do
         cfg[key] = value
     end
+    local cfgtext = tostring(cfg)
 
-    Debug.log("world_generator - config saved in ["..cfg.."].")
+    Debug.log("world_generator - config saved in ["..cfgtext.."].")
 
     local world = {}
     perlin.seed(cfg.seed)
