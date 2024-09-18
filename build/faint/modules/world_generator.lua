@@ -70,8 +70,8 @@ function worldgen.Generate(config)
                 min_scale = {5, 5},
                 max_scale = {9, 9},
                 floor = true,
-                removed_walls = 0.8,
-                removed_floors = 0.8,
+                removed_walls = 0.2,
+                removed_floors = 0.2,
                 wall_type = "wood",
                 floor_type = "wood",
                 items = {
@@ -184,7 +184,7 @@ function worldgen.Generate(config)
                             end
 
                             local block = nil
-                            if math.random(0, worldgen.round(1/(structure.removed_floors))) == 0 then
+                            if math.random(0, 10)/10 > structure.removed_floors then
                                 block = "floor"
                             end
                             
@@ -216,7 +216,7 @@ function worldgen.Generate(config)
                         end
 
                         local object = nil
-                        if math.random(0, worldgen.round(1/(structure.removed_walls))) == 0 then
+                        if math.random(0, 10)/10 > structure.removed_walls then
                             object = "wall"
                         end
 
@@ -238,7 +238,7 @@ function worldgen.Generate(config)
                         end
 
                         local object = nil
-                        if math.random(0, worldgen.round(1/(structure.removed_walls))) == 0 then
+                        if math.random(0, 10)/10 > structure.removed_walls then
                             object = "wall"
                         end
 
@@ -260,7 +260,7 @@ function worldgen.Generate(config)
                         end
 
                         local object = nil
-                        if math.random(0, worldgen.round(1/(structure.removed_walls))) == 0 then
+                        if math.random(0, 10)/10 > structure.removed_walls then
                             object = "wall"
                         end
 
@@ -282,7 +282,7 @@ function worldgen.Generate(config)
                         end
 
                         local object = nil
-                        if math.random(0, worldgen.round(1/(structure.removed_walls))) == 0 then
+                        if math.random(0, 10)/10 > structure.removed_walls then
                             object = "wall"
                         end
 
