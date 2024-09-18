@@ -50,20 +50,19 @@ function game.loadChunk(map, posX, posY)
             local originalY = y+(posY*game.chunkScale)-1
 
             local cell = world[originalX+1][originalY+1]
-            local datacell = game.data[originalX+1][originalY+1]
 
             if cell.object == "tree" then
-                datacell = Game.Object.Tree()
+                game.data[originalX+1][originalY+1] = Game.Object.Tree()
             elseif cell.object == "rock" then
-                datacell = Game.Object.Rock()
+                game.data[originalX+1][originalY+1] = Game.Object.Rock()
             elseif cell.object == "grass" then
-                datacell = Game.Object.Grass()
+                game.data[originalX+1][originalY+1] = Game.Object.Grass()
             end
 
-            if datacell ~= nil then
-                datacell.shape:SetParent(map)
-                datacell.shape.Scale = 0.07
-                datacell.shape.Position = Number3(originalX+0.5, 1, originalY+0.5)*map.Scale.X
+            if game.data[originalX+1][originalY+1] ~= nil then
+                game.data[originalX+1][originalY+1].shape:SetParent(map)
+                game.data[originalX+1][originalY+1].shape.Scale = 0.07
+                game.data[originalX+1][originalY+1].shape.Position = Number3(originalX+0.5, 1, originalY+0.5)*map.Scale.X
             end
         end
     end
@@ -76,11 +75,11 @@ function game.unloadChunk(map, posX, posY)
             local originalY = y+(posY*game.chunkScale)-1
 
             local cell = world[originalX+1][originalY+1]
-            local datacell = game.data[originalX+1][originalY+1]
+            local game.data[originalX+1][originalY+1] = game.data[originalX+1][originalY+1]
 
-            if datacell ~= nil then
-                datacell:Destroy()
-                datacell = nil
+            if game.data[originalX+1][originalY+1] ~= nil then
+                game.data[originalX+1][originalY+1]:Destroy()
+                game.data[originalX+1][originalY+1] = nil
             end
         end
     end
