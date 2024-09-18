@@ -67,7 +67,7 @@ function game.unloadChunk(map, posX, posY)
             local cell = world[originalX+1][originalY+1]
             local datacell = game.data[originalX+1][originalY+1]
 
-            if cell.object ~= nil then
+            if datacell ~= nil then
                 datacell:Destroy()
                 datacell = nil
             end
