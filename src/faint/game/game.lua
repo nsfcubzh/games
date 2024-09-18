@@ -48,24 +48,19 @@ function game.play()
 end
 
 function game.updateChunks(pos)
-    -- Convert player's world position to chunk coordinates
     local fixedpos = pos / game.map.Scale.X
     local chunkX = math.floor(fixedpos.X / game.chunkScale)
     local chunkY = math.floor(fixedpos.Z / game.chunkScale)
 
-    -- Iterate through the chunkMap to determine which chunks should be loaded/unloaded
     for x = 1, #game.chunkMap do
         for y = 1, #game.chunkMap[x] do
-            -- Calculate the chunk's world position
             local fx = chunkX + (x - math.ceil(#game.chunkMap / 2))
             local fy = chunkY + (y - math.ceil(#game.chunkMap[x] / 2))
 
-            -- Unload chunk if chunkMap entry is 0 and the chunk is loaded
             if game.chunkMap[x][y] == 0 then
                 if game.chunks[fx] and game.chunks[fx][fy] then
                     game.unloadChunk(game.map, fx, fy)
                 end
-            -- Load chunk if chunkMap entry is 1 and the chunk is not already loaded
             elseif game.chunkMap[x][y] == 1 then
                 if not (game.chunks[fx] and game.chunks[fx][fy]) then
                     game.loadChunk(game.map, fx, fy)
@@ -76,12 +71,10 @@ function game.updateChunks(pos)
 end
 
 function game.loadChunk(map, posX, posY)
-    -- Initialize the chunk row if it's nil
     if not game.chunks[posX] then
         game.chunks[posX] = {}
     end
 
-    -- Proceed with loading the chunk
     for x = 1, game.chunkScale do
         for y = 1, game.chunkScale do
             local originalX = x + (posX * game.chunkScale) - 1
@@ -105,17 +98,14 @@ function game.loadChunk(map, posX, posY)
         end
     end
 
-    -- Mark the chunk as loaded
     game.chunks[posX][posY] = true
 end
 
 function game.unloadChunk(map, posX, posY)
-    -- Check if the chunk exists before attempting to unload
     if not game.chunks[posX] or not game.chunks[posX][posY] then
-        return -- No need to unload if the chunk is not loaded
+        return
     end
 
-    -- Proceed with unloading the chunk
     for x = 1, game.chunkScale do
         for y = 1, game.chunkScale do
             local originalX = x + (posX * game.chunkScale) - 1
@@ -128,7 +118,6 @@ function game.unloadChunk(map, posX, posY)
         end
     end
 
-    -- Mark the chunk as unloaded
     game.chunks[posX][posY] = false
 end
 
