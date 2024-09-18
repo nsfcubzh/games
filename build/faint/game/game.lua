@@ -17,16 +17,30 @@ function game.load()
 
     world = worldgen.Generate({width=128, height = 128})
     game.data = {}
-    for x = 1, 128 do
-        game.data[x] = {}
+    game.chunks = {}
+
+    game.chunkMap = {
+        {0, 0, 0, 0, 0},
+        {0, 1, 1, 1, 0},
+        {0, 1, 1, 1, 0},
+        {0, 1, 1, 1, 0},
+        {0, 0, 0, 0, 0},
+    }
+
+    for i = 1, 128 do
+        game.data[i] = {}
     end
 
-    map = MutableShape()
-    map:SetParent(World)
-    map.Physics = PhysicsMode.StaticPerBlock
-    map.Scale = 10
+    for i = 0, (128/game.chunkScale)-1 do
+        game.chunks[i] = {}
+    end
 
-    worldgen.Build(world, map, game.chunkScale, function()
+    game.map = MutableShape()
+    game.map:SetParent(World)
+    game.map.Physics = PhysicsMode.StaticPerBlock
+    game.map.Scale = 10
+
+    worldgen.Build(world, game.map, game.chunkScale, function()
         game.play()
     end)
 end
@@ -40,6 +54,27 @@ function game.play()
     Camera.Tick = function(self, dt)
         Camera.Position = Player.Position + Number3(0, 250, -250)
         Camera.Forward = (Player.Position + Number3(0, 5, 0)) - Camera.Position
+    end
+end
+
+function game.updateChunks(pos)
+    local fixedpos = pos/game.map.Scale.X
+    local chunkpos = {fixedpos.X//game.chunkScale, fixedpos.Z//game.chunkScale}
+
+    for k0, v0 in pairs(game.chunkMap) do
+        for k1, v1 in pairs(v0) do
+            local chunkX = chunkpos[1]
+            local chunkY = chunkpos[2]
+            if v1 == 0 then
+                if game.chunks[chunkX][chunkY] then
+                    game.unloadChunk(chunkX, chunkY)
+                end
+            elseif v1 == 1 then
+                if not game.chunks[chunkX][chunkY] then
+                    game.loadChunk(chunkX, chunkY)
+                end
+            end
+        end
     end
 end
 
@@ -66,6 +101,8 @@ function game.loadChunk(map, posX, posY)
             end
         end
     end
+
+    game.chunks[posX][posY] = true
 end
 
 function game.unloadChunk(map, posX, posY)
@@ -82,6 +119,8 @@ function game.unloadChunk(map, posX, posY)
             end
         end
     end
+    
+    game.chunks[posX][posY] = false
 end
 
 return game
