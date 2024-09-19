@@ -176,6 +176,7 @@ loadClasses = {
 	"build/faint/classes/Object.lua",
 	"build/faint/classes/Entity.lua",
 	"build/faint/classes/Item.lua",
+	"build/faint/classes/Covering.lua"
 }
 
 animations = {}
