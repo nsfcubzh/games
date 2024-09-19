@@ -215,7 +215,7 @@ loadAudios = {
 
 images = {}
 loadImages = {
-	
+	floor = ""
 }
 
 json = {}

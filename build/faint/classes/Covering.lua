@@ -3,28 +3,29 @@
 
 if NSFLua == nil then rawset(_ENV, "NSFLua", {}) end
 
-NSFLua['faint\\classes\\Object.lua'] = {}
-NSFLua['faint\\classes\\Object.lua'].LAST_SECTION = ""
-NSFLua['faint\\classes\\Object.lua'].LAST_SECTION_LINE = 0
+NSFLua['faint\\classes\\Covering.lua'] = {}
+NSFLua['faint\\classes\\Covering.lua'].LAST_SECTION = ""
+NSFLua['faint\\classes\\Covering.lua'].LAST_SECTION_LINE = 0
 
 -- End of NSFLua code
 
-Game.Object = {
+Game.Covering = {
     New = function(self, config)
-        if self ~= Game.Object then
-            error("Game.Object.New() should be called with ':'!", 2)
+        if self ~= Game.Covering then
+            error("Game.Covering.New() should be called with ':'!", 2)
         end
 
         local defaultConfig = {
             id = nil,
-            model = nil,
-            type = "Shape",
+            image = nil,
+            color = Color.White,
+            type = "Color",
             Init = function(s)
                 return
             end,
             Destroy = function(s)
-                s.shape:SetParent(nil)
-                s.shape = nil
+                s.quad:SetParent(nil)
+                s.quad = nil
                 s = nil
             end,
             Tick = nil,
@@ -39,28 +40,29 @@ Game.Object = {
         end
 
         if cfg.id == nil then 
-            error("Object must have 'id' field.", 2)
+            error("Covering must have 'id' field.", 2)
         end
         if cfg.model == nil then 
-            error("Object must have 'model' field.", 2)
+            error("Covering must have 'model' field.", 2)
         end
-        if shapes[cfg.model] == nil then
-            error("Missing shape for object '"..cfg.id.."'.", 2)
+        if images[cfg.model] == nil then
+            error("Missing image for covering '"..cfg.id.."'.", 2)
         end
 
-        Debug.log("Registering '"..cfg.id.."' object...")
+        Debug.log("Registering '"..cfg.id.."' covering...")
         if self[cfg.id] ~= nil then
-            Debug.log("Error registering '"..cfg.id.."' object [Already registered]...")
-            error("Object "..cfg.id.." already exists.", 2)
+            Debug.log("Error registering '"..cfg.id.."' covering [Already registered]...")
+            error("Covering "..cfg.id.." already exists.", 2)
         end
 
         local constructor = function(...)
             local obj = {}
 
-            if cfg.type == "Shape" then
-                obj.shape = Shape(shapes[cfg.model], {includeChildren = true})
-            elseif cfg.type == "MutableShape" then
-                obj.shape = MutableShape(shapes[cfg.model], {includeChildren = true})
+            obj.quad = Quad()
+            if cfg.type == "Color" then
+                obj.quad.Color = cfg.color
+            elseif cfg.type == "Image" then
+                obj.quad.Image = cfg.image
             end
 
             obj.id = cfg.id

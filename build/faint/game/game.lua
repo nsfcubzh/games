@@ -18,6 +18,7 @@ function game.load()
     game.mapScale = 256
     world = worldgen.Generate({width=game.mapScale, height = game.mapScale})
     game.data = {}
+    game.coverings = {}
     game.chunks = {}
 
     game.chunkMap = {
@@ -32,6 +33,9 @@ function game.load()
 
     for i = 1, game.mapScale do
         game.data[i] = {}
+    end
+    for i = 1, game.mapScale do
+        game.coverings[i] = {}
     end
 
     for i = 0, (game.mapScale/game.chunkScale)-1 do
@@ -148,6 +152,14 @@ function game.loadChunk(map, posX, posY)
                     end
                 elseif cell.object == "test" then
                     game.data[originalX + 1][originalY + 1] = Game.Object.Test()
+                end
+
+                if cell.covering == "floor" then
+                    game.coverings[originalX + 1][originalY + 1] = Game.Covering.Floor()
+                    game.coverings[originalX + 1][originalY + 1].quad.Position = Number3(originalX + 0.5, 1, originalY + 0.5) * map.Scale.X
+                    game.coverings[originalX + 1][originalY + 1].quad:SetParent(World)
+                    game.coverings[originalX + 1][originalY + 1].quad.Scale = game.map.Scale.X
+                    game.coverings[originalX + 1][originalY + 1].quad.LocalPosition.Y = 0.01
                 end
 
                 if game.data[originalX + 1][originalY + 1] ~= nil then

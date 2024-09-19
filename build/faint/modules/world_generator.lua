@@ -178,19 +178,19 @@ function worldgen.Generate(config)
                                 end
                             end
 
-                            local block = nil
+                            local covering = nil
                             if math.random(0, 100)/100 > structure.removed_floors then
-                                block = "floor"
+                                covering = "floor"
                             end
                             
                             if cell ~= nil then
-                                if structure.allowed_materials[cell.block] and block ~= nil then
-                                    cell.block = block
+                                if structure.allowed_materials[cell.covering] and covering ~= nil then
+                                    cell.covering = covering
                                 end
 
                                 for name, item in pairs(structure.items) do
                                     if math.random(0, worldgen.round(1/(structure.items[name].chance))) == 0 then
-                                        if cell.object == nil and cell.block == "floor" then
+                                        if cell.object == nil and cell.covering == "floor" then
                                             cell.object = name
                                         end
                                     end
@@ -382,8 +382,6 @@ function worldgen.Build(world, object, chunkScale, callback)
                             color = Color(56, 55, 54)
                         elseif cell.block == "mountain" then
                             color = Color(44, 45, 46)
-                        elseif cell.block == "floor" then
-                            color = Color(101, 68, 40)
                         end
 
                         if math.random(0, 1) == 0 then

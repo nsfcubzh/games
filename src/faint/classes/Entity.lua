@@ -14,6 +14,7 @@ Game.Entity = {
             Destroy = function(s)
                 s.shape:SetParent(nil)
                 s.shape = nil
+                s = nil
             end,
             Tick = nil,
         }
