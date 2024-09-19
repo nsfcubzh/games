@@ -121,7 +121,7 @@ function game.loadChunk(map, posX, posY)
     end
 
     local function fixedBox(box)
-        return Box({0, 0, 0}, {box[2].X-box[1].X, box[2].Y-box[1].Y, box[2].Z-box[1].Z})
+        return Box({0, 0, 0}, {box[2][1]-box[1][1], box[2][2]-box[1][2], box[2][3]-box[1][3]})
     end
 
     Timer(0.016*math.random(0, 3), false, function()
