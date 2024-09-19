@@ -35,6 +35,13 @@ set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
 set("READY", false)
 
 queue = {}
+function doneLoading()
+	set("READY", true)
+	for i, p in ipairs(queue) do
+		local e = Network.Event("start", {})
+		e:SendTo(p)
+	end
+end
 
 Debug.log(f"server() - version: {VERSION}")
 

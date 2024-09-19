@@ -46,6 +46,13 @@ set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
 set("READY", false)
 
 queue = {}
+function doneLoading()
+	set("READY", true)
+	for i, p in ipairs(queue) do
+		local e = Network.Event("start", {})
+		e:SendTo(p)
+	end
+end
 
 Debug.log("server() - version: "..VERSION.."")
 
@@ -105,4 +112,4 @@ end, function(err) CRASH("Server.tick.Tick - "..err.."") end)
 
 Debug.log("server() - created tick object with Tick function.")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 97 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 97]")
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 104 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 104]")
