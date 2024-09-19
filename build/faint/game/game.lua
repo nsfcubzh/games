@@ -150,8 +150,8 @@ function game.loadChunk(map, posX, posY)
                     game.data[originalX + 1][originalY + 1].shape.Physics = PhysicsMode.Disabled
                     game.data[originalX + 1][originalY + 1].collider = Object()
                     game.data[originalX + 1][originalY + 1].collider.CollisionBox = game.data[originalX + 1][originalY + 1].shape.CollisionBox
-                    game.data[originalX + 1][originalY + 1].collider.Pivot = game.data[originalX + 1][originalY + 1].shape.Pivot
-                    game.data[originalX + 1][originalY + 1].collider.Position = game.data[originalX + 1][originalY + 1].shape.Position
+                    game.data[originalX + 1][originalY + 1].collider.Position = Number3(originalX, 1, originalY) * map.Scale.X
+                    game.data[originalX + 1][originalY + 1].collider:SetParent(World)
 
                     if game.data[originalX + 1][originalY + 1].setScale ~= nil then
                         game.data[originalX + 1][originalY + 1]:setScale()
