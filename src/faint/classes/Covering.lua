@@ -31,10 +31,10 @@ Game.Covering = {
         if cfg.id == nil then 
             error("Covering must have 'id' field.", 2)
         end
-        if cfg.model == nil then 
-            error("Covering must have 'model' field.", 2)
+        if cfg.image == nil then 
+            error("Covering must have 'image' field.", 2)
         end
-        if images[cfg.model] == nil then
+        if images[cfg.image] == nil then
             error(f"Missing image for covering '{cfg.id}'.", 2)
         end
 
