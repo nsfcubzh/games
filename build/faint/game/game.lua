@@ -138,9 +138,12 @@ function game.loadChunk(map, posX, posY)
                     game.data[originalX + 1][originalY + 1] = Game.Object.Rock()
                 elseif cell.object == "grass" then
                     game.data[originalX + 1][originalY + 1] = Game.Object.Grass()
+                    game.data[originalX + 1][originalY + 1].update = function(self)
+                        self.collider.Physics = PhysicsMode.Disabled
+                    end
                 elseif cell.object == "wall" then
                     game.data[originalX + 1][originalY + 1] = Game.Object.Wall()
-                    game.data[originalX + 1][originalY + 1].setScale = function(self)
+                    game.data[originalX + 1][originalY + 1].update = function(self)
                         self.shape.Scale = 1/7
                     end
                 elseif cell.object == "test" then
@@ -160,8 +163,8 @@ function game.loadChunk(map, posX, posY)
                     game.data[originalX + 1][originalY + 1].collider.Position = Number3(originalX, 1, originalY) * map.Scale.X + Number3(offsetx, 0, offsetz)
                     game.data[originalX + 1][originalY + 1].collider:SetParent(World)
 
-                    if game.data[originalX + 1][originalY + 1].setScale ~= nil then
-                        game.data[originalX + 1][originalY + 1]:setScale()
+                    if game.data[originalX + 1][originalY + 1].update ~= nil then
+                        game.data[originalX + 1][originalY + 1]:update()
                     end
                 end
             end
