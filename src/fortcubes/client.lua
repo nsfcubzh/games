@@ -203,8 +203,8 @@ loadShapes = {
 
 audio = {}
 loadAudios = {
-	--game_theme = "build/fortcubes/assets/gameTheme.mp3",
-	--menu_theme = "build/fortcubes/assets/menuTheme.mp3",
+	game_theme = "build/fortcubes/assets/gameTheme.ogg",
+	menu_theme = "build/fortcubes/assets/menuTheme.ogg",
 	bush = "build/fortcubes/assets/bush.mp3"
 }
 
