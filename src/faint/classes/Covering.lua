@@ -51,7 +51,7 @@ Game.Covering = {
             if cfg.type == "Color" then
                 obj.quad.Color = cfg.color
             elseif cfg.type == "Image" then
-                obj.quad.Image = cfg.image
+                obj.quad.Image = images[cfg.image]
             end
 
             obj.id = cfg.id
