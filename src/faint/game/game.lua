@@ -145,10 +145,9 @@ function game.loadChunk(map, posX, posY)
 
                 if cell.covering == "floor" then
                     game.coverings[originalX + 1][originalY + 1] = Game.Covering.Floor()
-                    game.coverings[originalX + 1][originalY + 1].quad.Position = Number3(originalX + 0.5, 2, originalY + 0.5) * map.Scale.X
+                    game.coverings[originalX + 1][originalY + 1].quad.Position = Number3(originalX, 1.01, originalY) * map.Scale.X
                     game.coverings[originalX + 1][originalY + 1].quad:SetParent(World)
                     game.coverings[originalX + 1][originalY + 1].quad.Scale = game.map.Scale.X
-                    --game.coverings[originalX + 1][originalY + 1].quad.LocalPosition.Y = 0.01
                 end
 
                 if game.data[originalX + 1][originalY + 1] ~= nil then
