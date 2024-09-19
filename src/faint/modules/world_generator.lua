@@ -173,7 +173,7 @@ function worldgen.Generate(config)
                             end
                             
                             if cell ~= nil then
-                                if structure.allowed_materials[cell.covering] and covering ~= nil then
+                                if structure.allowed_materials[cell.block] and covering ~= nil then
                                     cell.covering = covering
                                 end
 
