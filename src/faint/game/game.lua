@@ -109,6 +109,10 @@ function game.loadChunk(map, posX, posY)
         game.chunks[posX] = {}
     end
 
+    local function fixedBox(box)
+        return Box({0, 0, 0}, {box[2].X-box[1].X, box[2].Y-box[1].Y box[2].Z-box[1].Z})
+    end
+
     Timer(0.016*math.random(0, 3), false, function()
         for x = 1, game.chunkScale do
             for y = 1, game.chunkScale do
@@ -138,7 +142,7 @@ function game.loadChunk(map, posX, posY)
                     game.data[originalX + 1][originalY + 1].shape.Position = Number3(originalX + 0.5, 1, originalY + 0.5) * map.Scale.X
                     game.data[originalX + 1][originalY + 1].shape.Physics = PhysicsMode.Disabled
                     game.data[originalX + 1][originalY + 1].collider = Object()
-                    game.data[originalX + 1][originalY + 1].collider.CollisionBox = game.data[originalX + 1][originalY + 1].shape.CollisionBox
+                    game.data[originalX + 1][originalY + 1].collider.CollisionBox = fixedBox(game.data[originalX + 1][originalY + 1].shape.CollisionBox)
                     game.data[originalX + 1][originalY + 1].collider.Position = Number3(originalX, 1, originalY) * map.Scale.X
                     game.data[originalX + 1][originalY + 1].collider:SetParent(World)
 
