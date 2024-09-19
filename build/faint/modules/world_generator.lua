@@ -12,7 +12,7 @@ NSFLua['faint\\modules\\world_generator.lua'].LAST_SECTION_LINE = 0
 local worldgen = {}
 
 function worldgen.Generate(config)
-    --NSFLua['faint\\modules\\world_generator.lua'].LAST_SECTION = "WORLD GENERATION" NSFLua['faint\\modules\\world_generator.lua'].LAST_SECTION_LINE = 4 Debug.log("faint\\modules\\world_generator.lua > New section: '".."WORLD GENERATION".."' [Line: 4]")
+    NSFLua['faint\\modules\\world_generator.lua'].LAST_SECTION = "WORLD GENERATION" NSFLua['faint\\modules\\world_generator.lua'].LAST_SECTION_LINE = 4 Debug.log("faint\\modules\\world_generator.lua > New section: '".."WORLD GENERATION".."' [Line: 4]")
 
     if config == nil then
         error("worldgen.Generate(config) - 1st argument must be a table.")
@@ -40,8 +40,8 @@ function worldgen.Generate(config)
                 seed = 2,
                 octaves = 1,
                 chances = {
-                    grass = 1,
-                    podzole = 2
+                    grass = 0.3,
+                    podzole = 1.2
                 }
             },
             grass = {
@@ -58,8 +58,8 @@ function worldgen.Generate(config)
                 seed = 4,
                 octaves = 2,
                 chances = {
-                    grass = 0.8,
-                    podzole = 1,
+                    grass = 0.3,
+                    podzole = 0.5,
                     gravel = 2,
                 }
             },
@@ -70,26 +70,21 @@ function worldgen.Generate(config)
                 min_scale = {5, 5},
                 max_scale = {9, 9},
                 floor = true,
-                removed_walls = 0.8,
-                removed_floors = 0.8,
+                removed_walls = 0.1,
+                removed_floors = 0.05,
                 wall_type = "wood",
                 floor_type = "wood",
                 items = {
-                    blue = {
-                        chance = 0.01,
+                    test = {
+                        chance = 0.02
                     },
-                    red = {
-                        chance = 0.02,
-                    },
-                    black = {
-                        chance = 0.01,
-                    }
                 },
                 allowed_materials = {
                     sand = true,
                     grass = true,
                     podzole = true,
                     gravel = true,
+                    floor = true,
                 }
             }
         }
@@ -101,13 +96,14 @@ function worldgen.Generate(config)
     for key, value in pairs(config) do
         cfg[key] = value
     end
+    local cfgtext = tostring(cfg)
 
-    --Debug.log("world_generator - config saved in ["..cfg.."].")
+    Debug.log("world_generator - config saved in ["..cfgtext.."].")
 
     local world = {}
     perlin.seed(cfg.seed)
 
-    --Debug.log("world_generator - generating landscape...")
+    Debug.log("world_generator - generating landscape...")
     for x = 1, cfg.width do
         world[x] = {}
         for y = 1, cfg.height do
@@ -154,7 +150,7 @@ function worldgen.Generate(config)
             end
         end
     end
-    --Debug.log("world_generator - placing structures...")
+    Debug.log("world_generator - placing structures...")
     local num_objects = 0
     local num_structures = 0
     for name, structure in pairs(cfg.structures) do
@@ -183,7 +179,7 @@ function worldgen.Generate(config)
                             end
 
                             local block = nil
-                            if math.random(0, worldgen.round(1/(structure.removed_floors))) == 0 then
+                            if math.random(0, 100)/100 > structure.removed_floors then
                                 block = "floor"
                             end
                             
@@ -215,7 +211,7 @@ function worldgen.Generate(config)
                         end
 
                         local object = nil
-                        if math.random(0, worldgen.round(1/(structure.removed_walls))) == 0 then
+                        if math.random(0, 100)/100 > structure.removed_walls then
                             object = "wall"
                         end
 
@@ -237,7 +233,7 @@ function worldgen.Generate(config)
                         end
 
                         local object = nil
-                        if math.random(0, worldgen.round(1/(structure.removed_walls))) == 0 then
+                        if math.random(0, 100)/100 > structure.removed_walls then
                             object = "wall"
                         end
 
@@ -259,7 +255,7 @@ function worldgen.Generate(config)
                         end
 
                         local object = nil
-                        if math.random(0, worldgen.round(1/(structure.removed_walls))) == 0 then
+                        if math.random(0, 100)/100 > structure.removed_walls then
                             object = "wall"
                         end
 
@@ -281,7 +277,7 @@ function worldgen.Generate(config)
                         end
 
                         local object = nil
-                        if math.random(0, worldgen.round(1/(structure.removed_walls))) == 0 then
+                        if math.random(0, 100)/100 > structure.removed_walls then
                             object = "wall"
                         end
 
@@ -297,9 +293,9 @@ function worldgen.Generate(config)
             end
         end
     end
-    --Debug.log("world_generator - Placed "..num_structures.." with "..num_objects.." objects inside.")
+    Debug.log("world_generator - placed "..num_structures.." structures with "..num_objects.." objects inside.")
     
-    --Debug.log("world_generator - placing objects...")
+    Debug.log("world_generator - placing objects...")
     local num_objects = 0
     for name, item in pairs(cfg.items) do
         perlin.seed(item.seed)
@@ -338,22 +334,32 @@ function worldgen.Generate(config)
             end
         end
     end
-    --Debug.log("world_generator - Placed "..num_objects.." objects.")
-    --Debug.log("world_generator - World generation completed.")
+    Debug.log("world_generator - placed "..num_objects.." objects.")
+    Debug.log("world_generator - World generation completed.")
 
     return world
 end
 
-function worldgen.Build(world, object, chunkScale)
+function worldgen.Build(world, object, chunkScale, callback)
     if world == nil then
-        error("worldgen.Build(world) - 1st argument should be a world data.", 2)
+        error("worldgen.Build(world, object, chunkScale, callback) - 1st argument should be a world data.", 3)
+    elseif object == nil then
+        error("worldgen.Build(world, object, chunkScale, callback) - 2nd argument should be an mutableshape object.", 3)
+    elseif chunkScale == nil then
+        chunkScale = 8
+    elseif callback == nil then
+        callback = function() end
     end
+
+    Debug.log("world_generator - building world with "..chunkScale.." chunk scale...")
+    local total_chunks = 0
 
     local object_scale = (object.Scale.X + object.Scale.Y + object.Scale.Z)/3
 
-    for chunkX = 1, #world/chunkScale-1 do
-        for chunkY = 1, #world[1]/chunkScale-1 do
+    for chunkX = 0, #world/chunkScale-1 do
+        for chunkY = 0, #world[1]/chunkScale-1 do
             Timer(chunkX/20*((#world[1]/chunkScale)/32), false, function()
+                total_chunks = total_chunks + 1
                 for x = 1, chunkScale do
                     for y = 1, chunkScale do
                         local originalX = x+(chunkX*chunkScale)
@@ -374,24 +380,35 @@ function worldgen.Build(world, object, chunkScale)
                             color = Color(87, 83, 81)
                         elseif cell.block == "granite" then
                             color = Color(56, 55, 54)
-                            
-                            object:AddBlock(Color(56, 55, 54), originalX, 1, originalY)
                         elseif cell.block == "mountain" then
                             color = Color(44, 45, 46)
-
-                            object:AddBlock(Color(44, 45, 46), originalX, 1, originalY)
-                            object:AddBlock(Color(44, 45, 46), originalX, 2, originalY)
                         elseif cell.block == "floor" then
                             color = Color(101, 68, 40)
                         end
 
-                        if cell.object == "wall" then
-                            local block2 = Block(Color(101, 68, 40), Number3(originalX, 1, originalY))
-
-                            object:AddBlock(block2)
+                        if math.random(0, 1) == 0 then
+                            color = Color(color.R+2, color.G+2, color.B+2)
+                        end
+                        if math.random(0, 1) == 0 then
+                            color = Color(color.R-2, color.G-2, color.B-2)
                         end
 
-                        object:AddBlock(color, originalX, 0, originalY)
+                        object:AddBlock(color, originalX-1, 0, originalY-1)
+
+                        if cell.block == "granite" then
+                            object:AddBlock(color, originalX-1, 1, originalY-1)
+                        elseif cell.block == "mountain" then
+                            object:AddBlock(color, originalX-1, 1, originalY-1)
+                            object:AddBlock(color, originalX-1, 2, originalY-1)
+                        end
+
+                        if chunkX == #world/chunkScale-1 and chunkY == #world/chunkScale-1 and x == chunkScale and y == chunkScale then
+                            local total_blocks = total_chunks*total_chunks*chunkScale*chunkScale
+                            Debug.log("world_generator - building world completed.")
+                            Debug.log("world_generator - Total chunks: ["..total_chunks.."].")
+                            Debug.log("world_generator - Total blocks: ["..total_blocks.."].")
+                            callback()
+                        end
                     end
                 end
             end)

@@ -44,7 +44,7 @@ function menu.create(self)
         end
     end
 
-    -- MENU INITIALION
+    -- MENU INITIALIZATION
     
     self.screenWidth = math.max(640, Screen.Width)/1920
     self.screenHeight = math.max(360, Screen.Height)/1080
@@ -62,8 +62,8 @@ function menu.create(self)
     end, function(err) CRASH(f"menu.object.Tick - {err}") end)
 
     Camera:SetModeFree()
-    Camera.Rotation = Rotation(0, -0.2, 0)
-    Camera.Position = Number3(-10, 5, 5)
+    Camera.Rotation = Rotation(0, 0, 0)
+    Camera.Position = Number3(0, 0, 0)
     Camera.FOV = 30
     self.avatar = require("avatar")
     self.ha = require("hierarchyactions")
@@ -74,6 +74,14 @@ function menu.create(self)
     self.currentMenu = "menu"
 
     -- -- ------  --  UI ELEMENTS CREATION  --  ------ -- --
+
+    menu.buttons = {}
+    menu.buttons.play = ui:createButton("Play", theme.button)
+    menu.buttons.play.pos = Number2(10, 10)
+    menu.buttons.play.onPress = function(self)
+        menu:remove()
+        game:load()
+    end
 
     -- MAIN MENU
 
@@ -186,26 +194,26 @@ function menu.remove(self, callback)
     Debug.log("menu() - Removing menu...")
     self.closing = true
 
-    Timer(0.5, false, function()
-        self.created = false
-        self.firstTick = nil
-        self.listener:Remove()
+    for k, v in pairs(self.buttons) do
+        v:remove()
+        v = nil
+    end
 
-        if self.resolution_error ~= nil then
-            self.resolution_error:remove()
-            self.resolution_error = nil
-            self.resolution_error_text:remove()
-            self.resolution_error_text = nil
-        end
+    self.buttons = nil
 
-        menu.pointer:Remove()
+    self.created = false
+    self.firstTick = nil
+    self.listener:Remove()
 
-        Debug.log("menu() - Menu removed.")
-        Debug.log("menu() - Executing remove callback...")
-        if callback ~= nil then
-            callback()
-        end
-    end)
+    if self.resolution_error ~= nil then
+        self.resolution_error:remove()
+        self.resolution_error = nil
+        self.resolution_error_text:remove()
+        self.resolution_error_text = nil
+    end
+
+    Debug.log("menu() - Menu removed.")
+    Debug.log("menu() - Executing remove callback...")
 end
 
 function menu.loadModels(self)

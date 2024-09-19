@@ -1,6 +1,6 @@
 -SECTION("START")
 
-Debug.enabled = false
+Debug.enabled = true
 Debug.log(f"server() - Loaded from: '{repo}' repo. Commit: '{githash}'. Modules commit: '{nsfwhash}'")
 Debug.log(f"server() - Starting '{game}' server...")
 
@@ -145,15 +145,15 @@ set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
 
 Debug.log(f"client() - version: {VERSION}")
 
---Client.DirectionalPad = nil
---Client.AnalogPad = nil
+Client.DirectionalPad = nil
+Client.AnalogPad = nil
 Client.OnPlayerJoin = function(p)
 	if p == Player and not playerJoined then
 		playerJoined = true
 		checkLoading()
 	end
 end
---Pointer.Drag = nil
+Pointer.Drag = nil
 
 
 loadingBG = ui:createFrame(Color(0, 0, 0, 255))
@@ -169,6 +169,7 @@ loadModules = {
 	menu = "build/faint/menu/menu.lua",
 	settings = "build/faint/settings.lua",
 	worldgen = "build/faint/modules/world_generator.lua",
+	game = "build/faint/game/game.lua",
 }
 
 loadClasses = {
@@ -186,7 +187,9 @@ shapes = {}
 loadShapes = {
 	tree = "nanskip.faint_tree1",
 	grass = "nanskip.faint_grass",
-	rock = "nanskip.faint_rock"
+	rock = "nanskip.faint_rock",
+	wall_wood = "nanskip.faint_wall_wood",
+	test = "voxels.chestnut",
 }
 
 loadLua = {

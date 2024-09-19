@@ -11,7 +11,7 @@ NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 0
 
 NSFLua['faint\\client.lua'].LAST_SECTION = "START" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 1 Debug.log("faint\\client.lua > New section: '".."START".."' [Line: 1]")
 
-Debug.enabled = false
+Debug.enabled = true
 Debug.log("server() - Loaded from: '"..repo.."' repo. Commit: '"..githash.."'. Modules commit: '"..nsfwhash.."'")
 Debug.log("server() - Starting '"..game.."' server...")
 
@@ -156,15 +156,15 @@ set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
 
 Debug.log("client() - version: "..VERSION.."")
 
---Client.DirectionalPad = nil
---Client.AnalogPad = nil
+Client.DirectionalPad = nil
+Client.AnalogPad = nil
 Client.OnPlayerJoin = function(p)
 	if p == Player and not playerJoined then
 		playerJoined = true
 		checkLoading()
 	end
 end
---Pointer.Drag = nil
+Pointer.Drag = nil
 
 
 loadingBG = ui:createFrame(Color(0, 0, 0, 255))
@@ -180,6 +180,7 @@ loadModules = {
 	menu = "build/faint/menu/menu.lua",
 	settings = "build/faint/settings.lua",
 	worldgen = "build/faint/modules/world_generator.lua",
+	game = "build/faint/game/game.lua",
 }
 
 loadClasses = {
@@ -197,7 +198,9 @@ shapes = {}
 loadShapes = {
 	tree = "nanskip.faint_tree1",
 	grass = "nanskip.faint_grass",
-	rock = "nanskip.faint_rock"
+	rock = "nanskip.faint_rock",
+	wall_wood = "nanskip.faint_wall_wood",
+	test = "voxels.chestnut",
 }
 
 loadLua = {
@@ -234,7 +237,7 @@ need_to_load_jsons = 0
 isLoaded = false
 
 function doneLoading()
-	NSFLua['faint\\client.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 226 Debug.log("faint\\client.lua > New section: '".."STARTED".."' [Line: 226]")
+	NSFLua['faint\\client.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 229 Debug.log("faint\\client.lua > New section: '".."STARTED".."' [Line: 229]")
 	isLoaded = true
 
 	Camera:SetParent(World)
@@ -539,4 +542,4 @@ Debug.log("client() - Loading " .. need_to_load_jsons .. " jsons..")
 
 
 Debug.log("client() - Total: " .. need_to_load .. " assets")
-NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 531 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 531]")
+NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 534 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 534]")
