@@ -164,6 +164,8 @@ function game.unloadChunk(map, posX, posY)
             local originalY = y + (posY * game.chunkScale) - 1
 
             if game.data[originalX + 1][originalY + 1] ~= nil then
+                game.data[originalX + 1][originalY + 1].collider:SetParent(nil)
+                game.data[originalX + 1][originalY + 1].collider = nil
                 game.data[originalX + 1][originalY + 1]:Destroy()
                 game.data[originalX + 1][originalY + 1] = nil
             end
