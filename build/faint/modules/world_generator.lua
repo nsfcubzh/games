@@ -76,7 +76,7 @@ function worldgen.Generate(config)
                 floor_type = "wood",
                 items = {
                     test = {
-                        chance = 0.02
+                        chance = 0.03
                     },
                 },
                 allowed_materials = {
@@ -192,6 +192,7 @@ function worldgen.Generate(config)
                                     if math.random(0, worldgen.round(1/(structure.items[name].chance))) == 0 then
                                         if cell.object == nil and cell.covering == "floor" then
                                             cell.object = name
+                                            num_objects = num_objects + 1
                                         end
                                     end
                                 end
@@ -284,7 +285,6 @@ function worldgen.Generate(config)
                         if cell ~= nil then
                             if structure.allowed_materials[cell.block] and object ~= nil then
                                 cell.object = object
-                                num_objects = num_objects + 1
                             end
                         end
                     end
@@ -327,7 +327,7 @@ function worldgen.Generate(config)
     
                 local result = math.random(0, worldgen.round(1/chance))
 
-                if result == 0 and cell.object == nil and item.chances[cell.block] ~= nil then
+                if result == 0 and cell.object == nil and item.chances[cell.block] ~= nil and cell.covering == nil then
                     cell.object = name
                     num_objects = num_objects + 1
                 end
