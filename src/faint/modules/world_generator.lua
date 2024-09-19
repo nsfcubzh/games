@@ -55,7 +55,7 @@ function worldgen.Generate(config)
         },
         structures = {
             abandoned_room = {
-                chance = 0.00015,
+                chance = 0.0003,
                 min_scale = {5, 5},
                 max_scale = {9, 9},
                 floor = true,
