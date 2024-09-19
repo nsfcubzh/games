@@ -205,7 +205,7 @@ audio = {}
 loadAudios = {
 	game_theme = "build/fortcubes/assets/gameTheme.ogg",
 	menu_theme = "build/fortcubes/assets/menuTheme.ogg",
-	bush = "build/fortcubes/assets/bush.mp3"
+	bush = "build/fortcubes/assets/bush.ogg"
 }
 
 images = {}
