@@ -172,8 +172,8 @@ function game.loadChunk(map, posX, posY)
                     game.data[originalX + 1][originalY + 1].collider.CollisionBox = fixedBox(game.data[originalX + 1][originalY + 1].shape.CollisionBox)
                     local offsetx = (10 - game.data[originalX + 1][originalY + 1].collider.CollisionBox.Max.X)/2
                     local offsetz = (10 - game.data[originalX + 1][originalY + 1].collider.CollisionBox.Max.Z)/2
+                    game.data[originalX + 1][originalY + 1].collider:SetParent(game.data[originalX + 1][originalY + 1].shape)
                     game.data[originalX + 1][originalY + 1].collider.Position = Number3(originalX, 1, originalY) * map.Scale.X + Number3(offsetx, 0, offsetz)
-                    game.data[originalX + 1][originalY + 1].collider:SetParent(World)
 
                     if game.data[originalX + 1][originalY + 1].update ~= nil then
                         game.data[originalX + 1][originalY + 1]:update()
