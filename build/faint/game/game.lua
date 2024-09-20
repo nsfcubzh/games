@@ -94,6 +94,7 @@ function game.play()
     Player.Position = Number3(game.map.Width/2, 3, game.map.Depth/2) * game.map.Scale.X
 
     game.loadAmbience()
+    game.initUI()
 end
 
 function game.updateChunks(pos)
@@ -209,6 +210,30 @@ function game.unloadChunk(map, posX, posY)
     end
 
     game.chunks[posX][posY] = false
+end
+
+function game.initUI()
+    game.initInventory()
+end
+
+function game.initInventory()
+    game.inventory = {
+        data = {false, false, false, false, false},
+    }
+
+    local imageScale = Screen.Width/1920
+
+    game.inventory.background = ui:createFrame(Color(85, 81, 54))
+    game.inventory.background.Width = 10 + #game.inventory.data * 50 * imageScale
+    game.inventory.background.Height = 10 + 50 * imageScale
+    game.inventory.background.pos = Number2(Screen.Width/2 - game.inventory.background.Width/2, 10)
+
+    for i = 1, #game.inventory.data do
+        game.inventory.data[i] = ui:createFrame(Color(92, 88, 61))
+        game.inventory.data[i].Width = 50 * imageScale
+        game.inventory.data[i].Height = 50 * imageScale
+        game.inventory.data[i].pos = Number2(game.inventory.background.pos.X + 10 + i * 50 * imageScale, 15)
+    end
 end
 
 function game.loadAmbience()
