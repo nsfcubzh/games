@@ -17,6 +17,7 @@ end})
 Game.Object:New({id = "Grass", model = "grass", type = "Shape", Init = function(self)
     self.shape.Rotation.Y = math.random(-314, 314)*0.01
     self.shape.Shadow = true
+    self.disabledCollider == true
 end})
 Game.Object:New({id = "Rock", model = "rock", type = "Shape", Init = function(self)
     self.shape.Rotation.Y = math.random(-314, 314)*0.01

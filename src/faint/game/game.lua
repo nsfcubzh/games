@@ -131,9 +131,6 @@ function game.loadChunk(map, posX, posY)
                     game.data[originalX + 1][originalY + 1] = Game.Object.Rock()
                 elseif cell.object == "grass" then
                     game.data[originalX + 1][originalY + 1] = Game.Object.Grass()
-                    game.data[originalX + 1][originalY + 1].update = function(self)
-                        self.collider.Physics = PhysicsMode.Disabled
-                    end
                 elseif cell.object == "wall" then
                     game.data[originalX + 1][originalY + 1] = Game.Object.Wall()
                     game.data[originalX + 1][originalY + 1].update = function(self)
@@ -157,15 +154,18 @@ function game.loadChunk(map, posX, posY)
                     game.data[originalX + 1][originalY + 1].shape.Position = Number3(originalX + 0.5, 1, originalY + 0.5) * map.Scale.X
                     game.data[originalX + 1][originalY + 1].shape.Physics = PhysicsMode.Disabled
 
-                    game.data[originalX + 1][originalY + 1].collider = Object()
+                    if not game.data[originalX + 1][originalY + 1].disabledCollider then
+                        game.data[originalX + 1][originalY + 1].collider = Object()
+                        game.data[originalX + 1][originalY + 1].collider.CollisionBox = fixedBox(game.data[originalX + 1][originalY + 1].shape.CollisionBox)
+                        local offsetx = (10 - game.data[originalX + 1][originalY + 1].collider.CollisionBox.Max.X)/2
+                        local offsetz = (10 - game.data[originalX + 1][originalY + 1].collider.CollisionBox.Max.Z)/2
+                        game.data[originalX + 1][originalY + 1].collider.Position = Number3(originalX, 1, originalY) * map.Scale.X + Number3(offsetx, 0, offsetz)
+                        game.data[originalX + 1][originalY + 1].collider:SetParent(World)
+                    end
+
                     if game.data[originalX + 1][originalY + 1].update ~= nil then
                         game.data[originalX + 1][originalY + 1]:update()
                     end
-                    game.data[originalX + 1][originalY + 1].collider.CollisionBox = fixedBox(game.data[originalX + 1][originalY + 1].shape.CollisionBox)
-                    local offsetx = (10 - game.data[originalX + 1][originalY + 1].collider.CollisionBox.Max.X)/2
-                    local offsetz = (10 - game.data[originalX + 1][originalY + 1].collider.CollisionBox.Max.Z)/2
-                    game.data[originalX + 1][originalY + 1].collider.Position = Number3(originalX, 1, originalY) * map.Scale.X + Number3(offsetx, 0, offsetz)
-                    game.data[originalX + 1][originalY + 1].collider:SetParent(World)
                 end
             end
         end
@@ -185,8 +185,10 @@ function game.unloadChunk(map, posX, posY)
             local originalY = y + (posY * game.chunkScale) - 1
 
             if game.data[originalX + 1][originalY + 1] ~= nil then
-                game.data[originalX + 1][originalY + 1].collider:SetParent(nil)
-                game.data[originalX + 1][originalY + 1].collider = nil
+                if not game.data[originalX + 1][originalY + 1].disabledCollider then
+                    game.data[originalX + 1][originalY + 1].collider:SetParent(nil)
+                    game.data[originalX + 1][originalY + 1].collider = nil
+                end
                 game.data[originalX + 1][originalY + 1]:Destroy()
                 game.data[originalX + 1][originalY + 1] = nil
             end
