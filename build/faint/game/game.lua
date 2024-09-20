@@ -147,6 +147,7 @@ function game.loadChunk(map, posX, posY)
                     game.data[originalX + 1][originalY + 1].update = function(self)
                         self.shape.Scale = 1/7
                         self.collider.Scale = 10/7
+                        self.collider.Position = self.collider.Position - Number3(1, 0, 1)
                     end
                 elseif cell.object == "test" then
                     game.data[originalX + 1][originalY + 1] = Game.Object.Test()
