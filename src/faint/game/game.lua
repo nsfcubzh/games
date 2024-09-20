@@ -213,7 +213,7 @@ function game.initInventory()
     local imageScale = Screen.Width/1920
 
     game.inventory.background = ui:createFrame(Color(85, 81, 54))
-    game.inventory.background.Width = 10 + (#game.inventory.data * 100 + #game.inventory.data-1 * 5) * imageScale
+    game.inventory.background.Width = 10 + (#game.inventory.data * 105) * imageScale
     game.inventory.background.Height = 10 + 100 * imageScale
     game.inventory.background.pos = Number2(Screen.Width/2 - game.inventory.background.Width/2, 10)
 
@@ -221,7 +221,7 @@ function game.initInventory()
         game.inventory.data[i] = ui:createFrame(Color(92, 88, 61))
         game.inventory.data[i].Width = 100 * imageScale
         game.inventory.data[i].Height = 100 * imageScale
-        game.inventory.data[i].pos = Number2(game.inventory.background.pos.X + 10 + i * 105 * imageScale, 15)
+        game.inventory.data[i].pos = Number2(game.inventory.background.pos.X + 5 + i * 105 * imageScale, 15)
     end
 end
 
