@@ -262,10 +262,11 @@ function game.initInventory()
             if pe.X >= buttonpos.X and pe.X <= buttonpos.X + buttonscale.X and pe.Y >= buttonpos.Y and pe.Y <= buttonpos.Y + buttonscale.Y then
                 print("Removed cursor: "..i)
                 game.inventory.clicked = false
-            else
-                print("Removed cursor out of bounds.")
-                game.inventory.clicked = false
             end
+        end
+        if game.inventory.clicked then
+            print("Removed cursor out of bounds.")
+            game.inventory.clicked = false
         end
     end, {topPriority = true})
 
