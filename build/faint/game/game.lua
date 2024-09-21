@@ -240,14 +240,23 @@ function game.initInventory()
         game.inventory.buttons[i].pos = Number2(game.inventory.background.pos.X + 5 + i * 105 * imageScale, 15)
     end
     -- listeners
-    game.drag = LocalEvent:Listen(LocalEvent.Name.PointerDrag, function(pe)
-        print("dragging: ", pe.X, pe.Y)
+    game.inventory.drag = LocalEvent:Listen(LocalEvent.Name.PointerDrag, function(pe)
+        --
     end, {topPriority = true})
-    game.dragbegin = LocalEvent:Listen(LocalEvent.Name.PointerDown, function(pe)
-        print("drag begin: ", pe.X, pe.Y)
+    game.inventory.down = LocalEvent:Listen(LocalEvent.Name.PointerDown, function(pe)
+        -- calls when pointer is down, clicking or touching screen
+
+        for i=0, #game.inventory.buttons-1 do
+            local buttonpos = game.inventory.buttons[i].pos
+            local buttonscale = Number2(game.inventory.buttons[i].Width, game.inventory.buttons[i].Height)
+            if pe.X >= buttonpos.X and pe.X <= buttonpos.X + buttonscale.X and pe.Y >= buttonpos.Y and pe.Y <= buttonpos.Y + buttonscale.Y then
+                print("Clicked: "..i)
+            end
+        end
+
     end, {topPriority = true})
-    game.dragend = LocalEvent:Listen(LocalEvent.Name.PointerUp, function(pe)
-        print("drag end: ", pe.X, pe.Y)
+    game.inventory.up = LocalEvent:Listen(LocalEvent.Name.PointerUp, function(pe)
+        --
     end, {topPriority = true})
 end
 
