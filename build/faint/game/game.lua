@@ -244,7 +244,7 @@ function game.initInventory()
     game.inventory.drag = LocalEvent:Listen(LocalEvent.Name.PointerDrag, function(pe)
         -- calls when pointer is down and moving
         local pe = Number2(pe.X*Screen.Width, pe.Y*Screen.Height)
-        if game.inventory.clicked and game.inventory.dragTimer > 30 then
+        if game.inventory.clicked and game.inventory.dragTimer > 3 then
             print("Dragging: "..game.inventory.selected)
         end
     end, {topPriority = true})
@@ -286,7 +286,25 @@ function game.initInventory()
             game.inventory.dragTimer = game.inventory.dragTimer + dt*60
         end
     end, {topPriority = true})
+
+    -- functions
+        
+    function game.inventory.insertItem(item, slot)
+        if not game.inventory.data[slot] then
+            game.inventory.data[slot] = item
+            game.inventory.buttons[slot].content = ui:createShape(item.shape)
+        end
+    end
+
+    function game.inventory.removeItem(slot)
+        if game.inventory.data[slot] then
+            game.inventory.buttons[slot].content:remove()
+            game.inventory.buttons[slot].content = nil
+            game.inventory.data[slot] = false
+        end
+    end
 end
+
 
 function game.loadAmbience()
     require("ambience"):set({

@@ -196,6 +196,7 @@ loadShapes = {
 loadLua = {
 	"build/faint/data/objects.lua",
 	"build/faint/data/coverings.lua",
+	"build/faint/data/items.lua",
 }
 loadedLua = {}
 

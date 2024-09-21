@@ -18,6 +18,8 @@ Game.Item = {
         local defaultConfig = {
             id = nil,
             model = nil,
+            name = "item.name"
+            stackSize = 1,
         }
 
         local cfg = {}
@@ -49,6 +51,8 @@ Game.Item = {
 
             item.id = cfg.id
             item.shape = Shape(shapes[cfg.model], {includeChildren = true})
+            item.name = cfg.name
+            item.stackSize = cfg.stackSize
 
             return item
         end
