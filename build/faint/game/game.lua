@@ -278,20 +278,19 @@ function game.initInventory()
             local buttonpos = game.inventory.buttons[i].pos
             local buttonscale = Number2(game.inventory.buttons[i].Width, game.inventory.buttons[i].Height)
             if pe.X >= buttonpos.X and pe.X <= buttonpos.X + buttonscale.X and pe.Y >= buttonpos.Y and pe.Y <= buttonpos.Y + buttonscale.Y then
+                if game.inventory.buttons[i].content.text ~= nil then
+                    game.inventory.buttons[i].content.text:remove()
+                    game.inventory.buttons[i].content.text = nil
+                end
+                if game.inventory.buttons[game.inventory.selected].content.text ~= nil then
+                    game.inventory.buttons[game.inventory.selected].content.text:remove()
+                    game.inventory.buttons[game.inventory.selected].content.text = nil
+                end
                 if game.inventory.clicked and game.inventory.dragging and game.inventory.buttons[game.inventory.selected].content ~= nil then
                     if game.inventory.selected ~= i then
                         game.inventory.data[i], game.inventory.data[game.inventory.selected] = game.inventory.data[game.inventory.selected], game.inventory.data[i]
                         game.inventory.buttons[i].content, game.inventory.buttons[game.inventory.selected].content = game.inventory.buttons[game.inventory.selected].content, game.inventory.buttons[i].content
                         game.inventory.buttons[i].content.pos = Number2(game.inventory.buttons[i].pos.X + 5, game.inventory.buttons[i].pos.Y + 5)
-
-                        if game.inventory.buttons[i].content.text ~= nil then
-                            game.inventory.buttons[i].content.text:remove()
-                            game.inventory.buttons[i].content.text = nil
-                        end
-                        if game.inventory.buttons[game.inventory.selected].content.text ~= nil then
-                            game.inventory.buttons[game.inventory.selected].content.text:remove()
-                            game.inventory.buttons[game.inventory.selected].content.text = nil
-                        end
 
                         if game.inventory.buttons[game.inventory.selected].content ~= nil then
                             game.inventory.buttons[game.inventory.selected].content.pos = Number2(game.inventory.buttons[game.inventory.selected].pos.X + 5, game.inventory.buttons[game.inventory.selected].pos.Y + 5)
