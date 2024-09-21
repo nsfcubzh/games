@@ -235,7 +235,7 @@ function game.initInventory()
     game.inventory.down = LocalEvent:Listen(LocalEvent.Name.PointerDown, function(pe)
         -- calls when pointer is down, clicking or touching screen
         local pe = Number2(pe.X*Screen.Width, pe.Y*Screen.Height)
-        for i=1, #game.inventory.buttons do
+        for i=0, #game.inventory.buttons do
             local buttonpos = game.inventory.buttons[i].pos
             local buttonscale = Number2(game.inventory.buttons[i].Width, game.inventory.buttons[i].Height)
             if pe.X >= buttonpos.X and pe.X <= buttonpos.X + buttonscale.X and pe.Y >= buttonpos.Y and pe.Y <= buttonpos.Y + buttonscale.Y then
