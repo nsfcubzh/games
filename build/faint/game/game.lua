@@ -307,7 +307,7 @@ function game.initInventory()
             print("Removed cursor out of bounds.")
 
             if game.inventory.buttons[game.inventory.selected].content ~= nil then
-                game.iventory.buttons[game.inventory.selected].content.pos = Number2(game.inventory.buttons[game.inventory.selected].pos.X + 5, game.inventory.buttons[game.inventory.selected].pos.Y + 5)
+                game.inventory.buttons[game.inventory.selected].content.pos = Number2(game.inventory.buttons[game.inventory.selected].pos.X + 5, game.inventory.buttons[game.inventory.selected].pos.Y + 5)
             end
             game.inventory.clicked = false
             game.inventory.dragging = false
