@@ -234,8 +234,6 @@ function game.initInventory()
         -- calls when pointer is down and moving
         local pe = Number2(pe.X*Screen.Width, pe.Y*Screen.Height)
         if game.inventory.clicked and game.inventory.dragTimer > 3 then
-            print("Dragging: " .. game.inventory.selected)
-            
             if game.inventory.buttons[game.inventory.selected].content ~= nil then
                 game.inventory.buttons[game.inventory.selected].content.pos = Number2(
                     pe.X - game.inventory.buttons[game.inventory.selected].content.Width/2,
@@ -257,10 +255,6 @@ function game.initInventory()
                 game.inventory.clicked = true
                 game.inventory.dragTimer = 0
                 game.inventory.selected = i
-
-                if game.inventory.data[i] then
-                    print("Clicked on [" .. game.inventory.data[i].name .. "]")
-                end
             end
         end
 
@@ -273,8 +267,6 @@ function game.initInventory()
             local buttonpos = game.inventory.buttons[i].pos
             local buttonscale = Number2(game.inventory.buttons[i].Width, game.inventory.buttons[i].Height)
             if pe.X >= buttonpos.X and pe.X <= buttonpos.X + buttonscale.X and pe.Y >= buttonpos.Y and pe.Y <= buttonpos.Y + buttonscale.Y then
-                print("Removed cursor: "..i)
-
                 if game.inventory.clicked and game.inventory.dragging and game.inventory.buttons[game.inventory.selected].content ~= nil then
                     if game.inventory.selected ~= i then
                         game.inventory.data[i], game.inventory.data[game.inventory.selected] = game.inventory.data[game.inventory.selected], game.inventory.data[i]
@@ -283,6 +275,7 @@ function game.initInventory()
                         if game.inventory.buttons[game.inventory.selected].content ~= nil then
                             game.inventory.buttons[game.inventory.selected].content.pos = Number2(game.inventory.buttons[game.inventory.selected].pos.X + 5, game.inventory.buttons[game.inventory.selected].pos.Y + 5)
                         end
+                        game.inventory.updateSlot(i)
                     else
                         game.inventory.buttons[game.inventory.selected].content.pos = Number2(game.inventory.buttons[game.inventory.selected].pos.X + 5, game.inventory.buttons[game.inventory.selected].pos.Y + 5)
                     end
@@ -290,6 +283,7 @@ function game.initInventory()
 
                 game.inventory.clicked = false
                 game.inventory.dragging = false
+                game.inventory.updateSlot(game.inventory.selected)
             end
         end
         if game.inventory.clicked then
