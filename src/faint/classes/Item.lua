@@ -7,7 +7,7 @@ Game.Item = {
         local defaultConfig = {
             id = nil,
             model = nil,
-            name = "item.name"
+            name = "item.name",
             stackSize = 1,
         }
 
