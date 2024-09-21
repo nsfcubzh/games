@@ -76,8 +76,8 @@ function game.play()
         Player.Motion = Number3(x, 0, y) * 50
         Player.cam.Forward = Number3(x+(math.random(-10, 10)*0.002), 0, y+(math.random(-10, 10)*0.002))
     end
-    Client.AnalogPad = nil
-    Pointer.Drag = nil
+    Client.AnalogPad = function() end
+    Pointer.Drag = function() end
 
     Player.CollisionBox = Box({-7.5, 0, -7.5}, {7.5, 29, 7.5})
     Player.Position = Number3(game.map.Width/2, 3, game.map.Depth/2) * game.map.Scale.X
