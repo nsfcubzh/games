@@ -328,7 +328,10 @@ function game.initInventory()
         if game.inventory.data[slot] then
             if game.inventory.data[slot].count > 1 then
                 game.inventory.buttons[slot].content.text = ui:createText(game.inventory.data[slot].count, Color(255, 255, 255))
-                game.inventory.buttons[slot].content.text.pos = Number2(game.inventory.buttons[slot].content.Width/2-game.inventory.buttons[slot].content.text.Width/2, game.inventory.buttons[slot].content.Height/2-game.inventory.buttons[slot].content.text.Height/2)
+                game.inventory.buttons[slot].content.text.pos = Number2(
+                    game.inventory.buttons[slot].pos.X + 100*imageScale - game.inventory.buttons[slot].content.text.Width,
+                    game.inventory.buttons[slot].pos.Y + 5
+                )
             else
                 if game.inventory.buttons[slot].content.text ~= nil then
                     game.inventory.buttons[slot].content.text:remove()
