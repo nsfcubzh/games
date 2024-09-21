@@ -277,7 +277,9 @@ function game.initInventory()
 
                 if game.inventory.clicked and game.inventory.dragging and game.inventory.buttons[game.inventory.selected].content ~= nil then
                     if game.inventory.selected ~= i then
+                        print(game.inventory.data[i], game.inventory.data[game.inventory.selected] .. "\n")
                         game.inventory.data[i], game.inventory.data[game.inventory.selected] = game.inventory.data[game.inventory.selected], game.inventory.data[i]
+                        print(game.inventory.data[i], game.inventory.data[game.inventory.selected])
                         game.inventory.buttons[i].content, game.inventory.buttons[game.inventory.selected].content = game.inventory.buttons[game.inventory.selected].content, game.inventory.buttons[i].content
                         game.inventory.buttons[i].content.pos = Number2(game.inventory.buttons[i].pos.X + 5, game.inventory.buttons[i].pos.Y + 5)
                         if game.inventory.buttons[game.inventory.selected].content ~= nil then
