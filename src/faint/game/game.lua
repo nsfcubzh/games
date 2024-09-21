@@ -275,7 +275,7 @@ function game.initInventory()
             if pe.X >= buttonpos.X and pe.X <= buttonpos.X + buttonscale.X and pe.Y >= buttonpos.Y and pe.Y <= buttonpos.Y + buttonscale.Y then
                 print("Removed cursor: "..i)
 
-                if game.inventory.clicked and game.inventory.dragging then
+                if game.inventory.clicked and game.inventory.dragging and game.inventory.buttons[i].content ~= nil then
                     if game.inventory.selected ~= i then
                         game.inventory.data[i], game.inventory.data[game.inventory.selected] = game.inventory.data[game.inventory.selected], game.inventory.data[i]
                         game.inventory.buttons[i].content, game.inventory.buttons[game.inventory.selected].content = game.inventory.buttons[game.inventory.selected].content, game.inventory.buttons[i].content
