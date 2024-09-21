@@ -212,13 +212,14 @@ function game.initInventory()
 
     local imageScale = Screen.Width/1920
 
+    game.backUi = ui:createFrame(Color(0, 0, 0, 0))
+    game.backUi.Width = Screen.Width
+    game.backUi.Height = Screen.Height
+
     game.inventory.background = ui:createFrame(Color(85, 81, 54))
     game.inventory.background.Width = 5 + (#game.inventory.data * 105) * imageScale
     game.inventory.background.Height = 10 + 100 * imageScale
     game.inventory.background.pos = Number2(Screen.Width/2 - game.inventory.background.Width/2, 10)
-    game.inventory.background.onPress = function(self)
-        return
-    end
 
     game.inventory.buttons = {}
     for i = 0, #game.inventory.data-1 do
@@ -226,17 +227,17 @@ function game.initInventory()
         game.inventory.buttons[i].Width = 100 * imageScale
         game.inventory.buttons[i].Height = 100 * imageScale
         game.inventory.buttons[i].pos = Number2(game.inventory.background.pos.X + 5 + i * 105 * imageScale, 15)
-
-        game.inventory.buttons[i].onPress = function(self)
-            print("Pressed" .. i)
-        end
-        game.inventory.buttons[i].onRelease = function(self)
-            print("Released" .. i)
-        end
-        game.inventory.buttons[i].onDrag = function(self)
-            print("Dragged" .. i)
-        end
     end
+    -- listeners
+    game.drag = LocalEvent:Listen("PointerDrag", function(pe)
+        print("dragging: ", pe.X, pe.Y)
+    end)
+    game.dragbegin = LocalEvent:Listen("PointerDragBegin", function(pe)
+        print("drag begin: ", pe.X, pe.Y)
+    end)
+    game.dragend = LocalEvent:Listen("PointerDragEnd", function(pe)
+        print("drag end: ", pe.X, pe.Y)
+    end)
 end
 
 function game.loadAmbience()
