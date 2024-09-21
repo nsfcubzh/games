@@ -222,11 +222,11 @@ function game.initInventory()
     game.inventory.background.pos = Number2(Screen.Width/2 - game.inventory.background.Width/2, 10)
 
     game.inventory.buttons = {}
-    for i = 0, #game.inventory.data-1 do
+    for i = 1, #game.inventory.data do
         game.inventory.buttons[i] = ui:createFrame(Color(92, 88, 61))
         game.inventory.buttons[i].Width = 100 * imageScale
         game.inventory.buttons[i].Height = 100 * imageScale
-        game.inventory.buttons[i].pos = Number2(game.inventory.background.pos.X + 5 + i * 105 * imageScale, 15)
+        game.inventory.buttons[i].pos = Number2(game.inventory.background.pos.X + 5 + i * 105 * imageScale-(100 * imageScale), 15)
     end
     -- listeners
     game.inventory.dragTimer = 0
@@ -234,12 +234,14 @@ function game.initInventory()
         -- calls when pointer is down and moving
         local pe = Number2(pe.X*Screen.Width, pe.Y*Screen.Height)
         if game.inventory.clicked and game.inventory.dragTimer > 3 then
-            print("Dragging: "..game.inventory.selected)
+            print("Dragging: " .. game.inventory.selected)
             
-            game.inventory.buttons[game.inventory.selected].content.pos = Number2(
-                pe.X - game.inventory.buttons[game.inventory.selected].content.Width/2,
-                pe.Y - game.inventory.buttons[game.inventory.selected].content.Height/2
-            )
+            if game.inventory.buttons[game.inventory.selected].content ~= nil then
+                game.inventory.buttons[game.inventory.selected].content.pos = Number2(
+                    pe.X - game.inventory.buttons[game.inventory.selected].content.Width/2,
+                    pe.Y - game.inventory.buttons[game.inventory.selected].content.Height/2
+                )
+            end
 
             game.inventory.dragging = true
 
@@ -273,10 +275,14 @@ function game.initInventory()
             if pe.X >= buttonpos.X and pe.X <= buttonpos.X + buttonscale.X and pe.Y >= buttonpos.Y and pe.Y <= buttonpos.Y + buttonscale.Y then
                 print("Removed cursor: "..i)
 
-                if game.inventory.clicked and game.inventory.dragging and game.inventory.selected ~= i then
-                    game.inventory.data[i], game.inventory.data[game.inventory.selected] = game.inventory.data[game.inventory.selected], game.inventory.data[i]
-                    game.inventory.buttons[i].content, game.inventory.buttons[game.inventory.selected].content = game.inventory.buttons[game.inventory.selected].content, game.inventory.buttons[i].content
-                    game.inventory.buttons[i].content.pos = Number2(game.inventory.buttons[i].pos.X + 5, game.inventory.buttons[i].pos.Y + 5)
+                if game.inventory.clicked and game.inventory.dragging then
+                    if game.inventory.selected ~= i then
+                        game.inventory.data[i], game.inventory.data[game.inventory.selected] = game.inventory.data[game.inventory.selected], game.inventory.data[i]
+                        game.inventory.buttons[i].content, game.inventory.buttons[game.inventory.selected].content = game.inventory.buttons[game.inventory.selected].content, game.inventory.buttons[i].content
+                        game.inventory.buttons[i].content.pos = Number2(game.inventory.buttons[i].pos.X + 5, game.inventory.buttons[i].pos.Y + 5)
+                    else
+                        game.inventory.buttons[game.inventory.selected].content.pos = Number2(game.inventory.buttons[game.inventory.selected].pos.X + 5, game.inventory.buttons[game.inventory.selected].pos.Y + 5)
+                    end
                 end
 
                 game.inventory.clicked = false
@@ -285,7 +291,10 @@ function game.initInventory()
         end
         if game.inventory.clicked then
             print("Removed cursor out of bounds.")
+
+            game.inventory.buttons[game.inventory.selected].content.pos = Number2(game.inventory.buttons[game.inventory.selected].pos.X + 5, game.inventory.buttons[game.inventory.selected].pos.Y + 5)
             game.inventory.clicked = false
+            game.inventory.dragging = false
         end
     end, {topPriority = true})
 
