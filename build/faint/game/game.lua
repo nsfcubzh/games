@@ -293,6 +293,9 @@ function game.initInventory()
         if not game.inventory.data[slot] then
             game.inventory.data[slot] = item
             game.inventory.buttons[slot].content = ui:createShape(item.shape)
+            game.inventory.buttons[slot].content.pos = Number2(game.inventory.buttons[slot].pos.X + 5, game.inventory.buttons[slot].pos.Y + 5)
+            game.inventory.buttons[slot].content.Width = game.inventory.buttons[slot].Width - 10
+            game.inventory.buttons[slot].content.Height = game.inventory.buttons[slot].Height - 10
         end
     end
 
