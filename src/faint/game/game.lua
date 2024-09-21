@@ -231,13 +231,13 @@ function game.initInventory()
     -- listeners
     game.drag = LocalEvent:Listen("PointerDrag", function(pe)
         print("dragging: ", pe.X, pe.Y)
-    end)
+    end, {topPriority = true})
     game.dragbegin = LocalEvent:Listen("PointerDragBegin", function(pe)
         print("drag begin: ", pe.X, pe.Y)
-    end)
+    end, {topPriority = true})
     game.dragend = LocalEvent:Listen("PointerDragEnd", function(pe)
         print("drag end: ", pe.X, pe.Y)
-    end)
+    end, {topPriority = true})
 end
 
 function game.loadAmbience()
