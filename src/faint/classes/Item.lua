@@ -9,6 +9,7 @@ Game.Item = {
             model = nil,
             name = "item.name",
             stackSize = 1,
+            count = 1,
         }
 
         local cfg = {}
@@ -41,6 +42,7 @@ Game.Item = {
             item.id = cfg.id
             item.shape = Shape(shapes[cfg.model], {includeChildren = true})
             item.name = cfg.name
+            item.count = cfg.count
             item.stackSize = cfg.stackSize
 
             return item

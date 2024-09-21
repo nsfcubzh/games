@@ -318,6 +318,7 @@ function game.initInventory()
             game.inventory.buttons[slot].content.pos = Number2(game.inventory.buttons[slot].pos.X + 5, game.inventory.buttons[slot].pos.Y + 5)
             game.inventory.buttons[slot].content.Width = game.inventory.buttons[slot].Width - 10
             game.inventory.buttons[slot].content.Height = game.inventory.buttons[slot].Height - 10
+            game.inventory.updateSlot(slot)
         end
     end
 
@@ -326,6 +327,20 @@ function game.initInventory()
             game.inventory.buttons[slot].content:remove()
             game.inventory.buttons[slot].content = nil
             game.inventory.data[slot] = false
+        end
+    end
+
+    function game.inventory.updateSlot(slot)
+        if game.inventory.data[slot] then
+            if game.inventory.data[slot].count > 1 then
+                game.inventory.buttons[slot].content.text = ui:createText(game.inventory.data[slot].count, Color(255, 255, 255))
+                game.inventory.buttons[slot].content.text.pos = Number2(game.inventory.buttons[slot].content.Width/2-game.inventory.buttons[slot].content.text.Width/2, game.inventory.buttons[slot].content.Height/2-game.inventory.buttons[slot].content.text.Height/2)
+            else
+                if game.inventory.buttons[slot].content.text ~= nil then
+                    game.inventory.buttons[slot].content.text:remove()
+                    game.inventory.buttons[slot].content.text = nil
+                end
+            end
         end
     end
 end
