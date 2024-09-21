@@ -237,7 +237,7 @@ function game.initInventory()
         game.inventory.buttons[i] = ui:createFrame(Color(92, 88, 61))
         game.inventory.buttons[i].Width = 100 * imageScale
         game.inventory.buttons[i].Height = 100 * imageScale
-        game.inventory.buttons[i].pos = Number2(game.inventory.background.pos.X + 5 + i * 105 * imageScale-(100 * imageScale), 15)
+        game.inventory.buttons[i].pos = Number2(game.inventory.background.pos.X + 5 + i * 105 * imageScale-5-(100 * imageScale), 15)
     end
     -- listeners
     game.inventory.dragTimer = 0
@@ -261,7 +261,7 @@ function game.initInventory()
     game.inventory.down = LocalEvent:Listen(LocalEvent.Name.PointerDown, function(pe)
         -- calls when pointer is down, clicking or touching screen
         local pe = Number2(pe.X*Screen.Width, pe.Y*Screen.Height)
-        for i=0, #game.inventory.buttons do
+        for i=1, #game.inventory.buttons do
             local buttonpos = game.inventory.buttons[i].pos
             local buttonscale = Number2(game.inventory.buttons[i].Width, game.inventory.buttons[i].Height)
             if pe.X >= buttonpos.X and pe.X <= buttonpos.X + buttonscale.X and pe.Y >= buttonpos.Y and pe.Y <= buttonpos.Y + buttonscale.Y then
@@ -280,7 +280,7 @@ function game.initInventory()
         -- calls when pointer is up, clicking end or untouching screen
 
         local pe = Number2(pe.X*Screen.Width, pe.Y*Screen.Height)
-        for i=0, #game.inventory.buttons do
+        for i=1, #game.inventory.buttons do
             local buttonpos = game.inventory.buttons[i].pos
             local buttonscale = Number2(game.inventory.buttons[i].Width, game.inventory.buttons[i].Height)
             if pe.X >= buttonpos.X and pe.X <= buttonpos.X + buttonscale.X and pe.Y >= buttonpos.Y and pe.Y <= buttonpos.Y + buttonscale.Y then
