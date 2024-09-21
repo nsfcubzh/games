@@ -229,8 +229,13 @@ function game.initInventory()
         game.inventory.buttons[i].pos = Number2(game.inventory.background.pos.X + 5 + i * 105 * imageScale, 15)
     end
     -- listeners
+    game.inventory.dragTimer = 0
     game.inventory.drag = LocalEvent:Listen(LocalEvent.Name.PointerDrag, function(pe)
-        --
+        -- calls when pointer is down and moving
+        local pe = Number2(pe.X*Screen.Width, pe.Y*Screen.Height)
+        if game.inventory.clicked and game.inventory.dragTimer > 30 then
+            print("Dragging: "..game.inventory.selected)
+        end
     end, {topPriority = true})
     game.inventory.down = LocalEvent:Listen(LocalEvent.Name.PointerDown, function(pe)
         -- calls when pointer is down, clicking or touching screen
@@ -240,12 +245,34 @@ function game.initInventory()
             local buttonscale = Number2(game.inventory.buttons[i].Width, game.inventory.buttons[i].Height)
             if pe.X >= buttonpos.X and pe.X <= buttonpos.X + buttonscale.X and pe.Y >= buttonpos.Y and pe.Y <= buttonpos.Y + buttonscale.Y then
                 print("Clicked: "..i)
+                game.inventory.clicked = true
+                game.inventory.dragTimer = 0
+                game.inventory.selected = i
             end
         end
 
     end, {topPriority = true})
     game.inventory.up = LocalEvent:Listen(LocalEvent.Name.PointerUp, function(pe)
-        --
+        -- calls when pointer is up, clicking end or untouching screen
+
+        local pe = Number2(pe.X*Screen.Width, pe.Y*Screen.Height)
+        for i=0, #game.inventory.buttons do
+            local buttonpos = game.inventory.buttons[i].pos
+            local buttonscale = Number2(game.inventory.buttons[i].Width, game.inventory.buttons[i].Height)
+            if pe.X >= buttonpos.X and pe.X <= buttonpos.X + buttonscale.X and pe.Y >= buttonpos.Y and pe.Y <= buttonpos.Y + buttonscale.Y then
+                print("Removed cursor: "..i)
+                game.inventory.clicked = false
+            else
+                print("Removed cursor out of bounds.")
+                game.inventory.clicked = false
+            end
+        end
+    end, {topPriority = true})
+
+    game.inventory.tick = LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
+        if game.inventory.clicked then
+            game.inventory.dragTimer += dt*60
+        end
     end, {topPriority = true})
 end
 
