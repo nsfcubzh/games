@@ -275,6 +275,7 @@ function game.initInventory()
 
                 if game.inventory.clicked and game.inventory.dragging and game.inventory.selected ~= i then
                     game.inventory.data[i], game.inventory.data[game.inventory.selected] = game.inventory.data[game.inventory.selected], game.inventory.data[i]
+                    game.inventory.buttons[i].content, game.inventory.buttons[game.inventory.selected].content = game.inventory.buttons[game.inventory.selected].content, game.inventory.buttons[i].content
                     game.inventory.buttons[i].content.pos = Number2(game.inventory.buttons[i].pos.X + 5, game.inventory.buttons[i].pos.Y + 5)
                 end
 
