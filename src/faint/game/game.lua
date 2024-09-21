@@ -271,7 +271,7 @@ function game.initInventory()
 
     game.inventory.tick = LocalEvent:Listen(LocalEvent.Name.Tick, function(dt)
         if game.inventory.clicked then
-            game.inventory.dragTimer += dt*60
+            game.inventory.dragTimer = game.inventory.dragTime + dt*60
         end
     end, {topPriority = true})
 end
