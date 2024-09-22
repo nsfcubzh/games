@@ -10,6 +10,11 @@ world_types.block_codes = {
     mountain = 7,
 }
 
+world_types.block_codes_reverse = {}
+for key, value in pairs(world_types.block_codes) do
+    world_types.block_codes_reverse[value] = key
+end
+
 world_types.object_codes = {
     none = 0,
     tree = 1,
@@ -19,9 +24,19 @@ world_types.object_codes = {
     test = 5,
 }
 
+world_types.object_codes_reverse = {}
+for key, value in pairs(world_types.object_codes) do
+    world_types.object_codes_reverse[value] = key
+end
+
 world_types.covering_codes = {
     none = 0,
     floor = 1,
 }
+
+world_types.covering_codes_reverse = {}
+for key, value in pairs(world_types.covering_codes) do
+    world_types.covering_codes_reverse[value] = key
+end
 
 return world_types

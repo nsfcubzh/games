@@ -263,8 +263,8 @@ function worldgen.Generate(config)
 
                 chance = ((chance + 1) / 2)^4
 
-                if item.chances[block] ~= nil then
-                    chance = chance * item.chances[block]
+                if item.chances[world_types.block_codes_reverse[block]] ~= nil then
+                    chance = chance * item.chances[world_types.block_codes_reverse[block]]
                 else
                     chance = 0
                 end
