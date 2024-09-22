@@ -88,7 +88,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 
 	getWorld = function(event)
 		Debug.log(f"server() - sending world to {event.Sender.Username}")
-		local r = Network.Event("loadWorld", {world = JSON:Encode(world)})
+		local r = Network.Event("loadWorld", {map = JSON:Encode(world)})
 		r:SendTo(event.Sender)
 	end,
 
@@ -109,7 +109,7 @@ Debug.log("server() - created tick object with Tick function.")
 
 function doneLoading()
 	Debug.log("server() - done loading.")
-	world = worldgen.Generate({width = 256, height = 256})
+	world = worldgen.Generate({width = 32, height = 32})
 end
 
 need_to_load = 0
