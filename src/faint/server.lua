@@ -115,7 +115,7 @@ Debug.log("server() - created tick object with Tick function.")
 
 function doneLoading()
 	Debug.log("server() - done loading.")
-	world = worldgen.Generate({width = 64, height = 64})
+	world = worldgen.Generate({width = 32, height = 32})
 end
 
 need_to_load = 0
