@@ -62,7 +62,7 @@ function game.load()
                 end)
             end,
             ["_"] = function(event)
-                Debug.log(f"game() - got unknown event: {tostring(event.action)} from {event.Sender}")
+                Debug.log(f"game() - got unknown event: {tostring(event.action)} from {type(event.Sender)}")
             end,
         })
     end)

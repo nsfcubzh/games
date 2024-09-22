@@ -93,7 +93,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 	end,
 
 	["_"] = function(event)
-		Debug.log(f"server() - got unknown event: {tostring(event.action)} from {event.Sender}")
+		Debug.log(f"server() - got unknown event: {tostring(event.action)} from {type(event.Sender)}")
 	end,
 
 	})
