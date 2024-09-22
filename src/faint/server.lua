@@ -111,6 +111,7 @@ function doneLoading()
 	world = worldgen.Generate({width = 256, height = 256})
 end
 
+need_to_load = 0
 loadModules = {
 	worldgen = "build/faint/modules/world_generator.lua",
 }
