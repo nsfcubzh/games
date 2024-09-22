@@ -104,7 +104,6 @@ function worldgen.Generate(config)
         blocks = {},
         objects = {},
         coverings = {},
-        -- Add more types here if needed
     }
     perlin.seed(cfg.seed)
 
@@ -154,8 +153,9 @@ function worldgen.Generate(config)
                 blockType = "error"
             end
 
-            world.blocks[x][y] = blockType
-            -- Initialize other types as nil
+            world.blocks[x][y] = world_types.block_codes[blockType] or 0
+            world.objects[x][y] = world_types.object_codes["none"] or 0
+            world.coverings[x][y] = world_types.covering_codes["none"] or 0
         end
     end
 
@@ -190,13 +190,13 @@ function worldgen.Generate(config)
                                 end
 
                                 if structure.allowed_materials[block] and coveringType ~= nil then
-                                    world.coverings[cordX][cordY] = coveringType
+                                    world.coverings[cordX][cordY] = world_types.covering_codes[coveringType] or 0
                                 end
 
                                 for itemName, item in pairs(structure.items) do
                                     if math.random(0, worldgen.round(1/(item.chance))) == 0 then
                                         if world.objects[cordX][cordY] == nil and world.coverings[cordX][cordY] == "floor" then
-                                            world.objects[cordX][cordY] = itemName
+                                            world.objects[cordX][cordY] = world_types.object_codes[itemName] or 0
                                             num_objects = num_objects + 1
                                         end
                                     end
@@ -210,7 +210,7 @@ function worldgen.Generate(config)
                         if world.blocks[cordX] ~= nil and world.blocks[cordX][cordY] ~= nil then
                             local block = world.blocks[cordX][cordY]
                             if structure.allowed_materials[block] and math.random() > structure.removed_walls then
-                                world.objects[cordX][cordY] = "wall"
+                                world.objects[cordX][cordY] = world_types.object_codes["wall"] or 0
                             end
                         end
                     end
@@ -281,7 +281,7 @@ function worldgen.Generate(config)
                 end
 
                 if chance > 0 and math.random() < chance and object == nil and covering == nil then
-                    world.objects[x][y] = name
+                    world.objects[x][y] = world_types.object_codes[name] or 0
                     num_objects = num_objects + 1
                 end
             end
@@ -322,9 +322,9 @@ function worldgen.Build(world, object, chunkScale, callback)
                         local originalY = y+(chunkY*chunkScale)
 
                         local color = Color(255, 255, 255)
-                        local blockType = world.blocks[originalX][originalY]
-                        local objectType = world.objects[originalX][originalY]
-                        local coveringType = world.coverings[originalX][originalY]
+                        local blockType = world_types.block_codes[world.blocks[originalX][originalY]] or "unknown"
+                        local objectType = world_types.object_codes[world.objects[originalX][originalY]] or "none"
+                        local coveringType = world_types.covering_codes[world.coverings[originalX][originalY]] or "none"
 
                         if blockType == "water" then
                             color = Color(114, 140, 176)
