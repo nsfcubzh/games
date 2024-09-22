@@ -104,7 +104,13 @@ Server.DidReceiveEvent = errorHandler(function(e)
 	end,
 
 	["_"] = function(event)
-		Debug.log("server() - got unknown event: "..tostring(event.action).." from "..type(event.Sender).."")
+		local name = ""
+		if event.Sender.Username ~= nil then
+			name = event.Sender.Username
+		else
+			name = "Server"
+		end
+		Debug.log("server() - got unknown event: "..tostring(event.action).." from "..name.."")
 	end,
 
 	})
@@ -158,4 +164,4 @@ Debug.log("server() - Loading " .. need_to_load_modules.. " modules..")
 
 Debug.log("server() - Total: " .. need_to_load .. " assets")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 150 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 150]")
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 156 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 156]")

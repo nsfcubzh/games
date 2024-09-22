@@ -73,7 +73,13 @@ function game.load()
                 end)
             end,
             ["_"] = function(event)
-                Debug.log("game() - got unknown event: "..tostring(event.action).." from "..type(event.Sender).."")
+                local name = ""
+                if event.Sender.Username ~= nil then
+                    name = event.Sender.Username
+                else
+                    name = "Server"
+                end
+                Debug.log("game() - got unknown event: "..tostring(event.action).." from "..name.."")
             end,
         })
     end)

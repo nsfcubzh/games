@@ -93,7 +93,13 @@ Server.DidReceiveEvent = errorHandler(function(e)
 	end,
 
 	["_"] = function(event)
-		Debug.log(f"server() - got unknown event: {tostring(event.action)} from {type(event.Sender)}")
+		local name = ""
+		if event.Sender.Username ~= nil then
+			name = event.Sender.Username
+		else
+			name = "Server"
+		end
+		Debug.log(f"server() - got unknown event: {tostring(event.action)} from {name}")
 	end,
 
 	})
