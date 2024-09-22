@@ -323,9 +323,9 @@ function worldgen.Build(world, object, chunkScale, callback)
                         local originalY = y+(chunkY*chunkScale)
 
                         local color = Color(255, 255, 255)
-                        local blockType = world_types.block_codes[world.blocks[originalX][originalY]] or "unknown"
-                        local objectType = world_types.object_codes[world.objects[originalX][originalY]] or "none"
-                        local coveringType = world_types.covering_codes[world.coverings[originalX][originalY]] or "none"
+                        local blockType = world_types.block_codes_reverse[world.blocks[originalX][originalY]] or "unknown"
+                        local objectType = world_types.object_codes_reverse[world.objects[originalX][originalY]] or "none"
+                        local coveringType = world_types.covering_codes_reverse[world.coverings[originalX][originalY]] or "none"
 
                         if blockType == "water" then
                             color = Color(114, 140, 176)
