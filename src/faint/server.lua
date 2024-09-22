@@ -83,7 +83,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 		Debug.log(f"server() - sending world to {event.Sender.Username}")
 		local map = worldser.serialize(world)
 		print(type(map.blocks), type(map.objects), type(map.coverings))
-		print(Data(map.blocks).Length, Data(map.objects).Length, Data(map.coverings).Length)
+		print(map.blocks.Length, map.objects.Length, map.coverings.Length)
 		local r = Network.Event("loadWorld", {blocks = Data(map.blocks), objects = Data(map.objects), coverings = Data(map.coverings), scale = world_scale})
 		r:SendTo(event.Sender)
 	end,
@@ -116,7 +116,7 @@ function doneLoading()
 		local e = Network.Event("start", {})
 		e:SendTo(p)
 	end
-	world_scale = 32
+	world_scale = 8
 	world = worldgen.Generate({width = world_scale, height = world_scale})
 end
 
