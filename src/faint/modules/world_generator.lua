@@ -142,9 +142,9 @@ function worldgen.Generate(config)
                 blockType = "error"
             end
 
-            world.blocks[x][y] = world_types.block_codes[blockType] or 0
-            world.objects[x][y] = world_types.object_codes["none"] or 0
-            world.coverings[x][y] = world_types.covering_codes["none"] or 0
+            world.blocks[x][y] = world_types.block_codes[blockType]
+            world.objects[x][y] = world_types.object_codes["none"]
+            world.coverings[x][y] = world_types.covering_codes["none"]
         end
     end
 
@@ -179,13 +179,13 @@ function worldgen.Generate(config)
                                 end
 
                                 if structure.allowed_materials[block] and coveringType ~= nil then
-                                    world.coverings[cordX][cordY] = world_types.covering_codes[coveringType] or 0
+                                    world.coverings[cordX][cordY] = world_types.covering_codes[coveringType]
                                 end
 
                                 for itemName, item in pairs(structure.items) do
                                     if math.random(0, worldgen.round(1/(item.chance))) == 0 then
                                         if world.objects[cordX][cordY] == nil and world.coverings[cordX][cordY] == "floor" then
-                                            world.objects[cordX][cordY] = world_types.object_codes[itemName] or 0
+                                            world.objects[cordX][cordY] = world_types.object_codes[itemName]
                                             num_objects = num_objects + 1
                                         end
                                     end
@@ -199,7 +199,7 @@ function worldgen.Generate(config)
                         if world.blocks[cordX] ~= nil and world.blocks[cordX][cordY] ~= nil then
                             local block = world.blocks[cordX][cordY]
                             if structure.allowed_materials[block] and math.random() > structure.removed_walls then
-                                world.objects[cordX][cordY] = world_types.object_codes["wall"] or 0
+                                world.objects[cordX][cordY] = world_types.object_codes["wall"]
                             end
                         end
                     end
@@ -270,7 +270,7 @@ function worldgen.Generate(config)
                 end
 
                 if chance > 0 and math.random() < chance and object == nil and covering == nil then
-                    world.objects[x][y] = world_types.object_codes[name] or 0
+                    world.objects[x][y] = world_types.object_codes[name]
                     num_objects = num_objects + 1
                 end
             end
