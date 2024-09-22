@@ -59,8 +59,8 @@ function game.load()
         game.music:Play()
     end)
 
-    local e = Network.Event("getWorld", {})
-    e:SendTo(Server)
+    local get = Network.Event("getWorld", {})
+    get:SendTo(Server)
 
     game.event = LocalEvent:Listen(LocalEvent.Name.DidReceiveEvent, function(e)
         Network:ParseEvent(e, {
@@ -72,6 +72,7 @@ function game.load()
                     game.play()
                 end)
             end,
+            
             ["_"] = function(event)
                 local name = ""
                 if event.Sender.Username ~= nil then
