@@ -65,7 +65,7 @@ function game.load()
     game.event = LocalEvent:Listen(LocalEvent.Name.DidReceiveEvent, function(e)
         Network:ParseEvent(e, {
             loadWorld = function(event)
-                Debug.log("game() - received world with "..event.data.map.blocks.Lenght.." blocks, "..event.data.map.objects.Lenght.." objects and "..event.data.map.coverings.Lenght.." coverings.")
+                Debug.log("game() - received world with "..event.data.map.blocks.Length.." blocks, "..event.data.map.objects.Length.." objects and "..event.data.map.coverings.Length.." coverings.")
                 world = worldser.deserialize(event.data.map, event.data.scale, event.data.scale)
                 worldgen.Build(world, game.map, game.chunkScale, function()
                     game.play()
