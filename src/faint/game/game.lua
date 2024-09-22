@@ -61,7 +61,7 @@ function game.load()
                     game.play()
                 end)
             end,
-            
+
             ["_"] = function(event)
                 local name = ""
                 if event.Sender.Username ~= nil then
@@ -69,7 +69,11 @@ function game.load()
                 else
                     name = "Server"
                 end
-                Debug.log(f"game() - got unknown event: {tostring(event.action)} from {name}")
+                local data = ""
+                if event.data ~= nil then
+                    data = JSON:Encode(event.data)
+                end
+                Debug.log(f"game() - got unknown event: {tostring(event.action)} from {name} with data: {data}")
             end,
         })
     end)
