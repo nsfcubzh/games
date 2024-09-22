@@ -119,6 +119,7 @@ end, function(err) CRASH("Server.tick.Tick - "..err.."") end)
 Debug.log("server() - created tick object with Tick function.")
 
 function doneLoading()
+	Debug.log("server() - done loading.")
 	world = worldgen.Generate({width = 256, height = 256})
 end
 
@@ -154,4 +155,4 @@ for key, value in pairs(loadModules) do
 end
 Debug.log("server() - Loading " .. need_to_load_modules.. " modules..")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 146 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 146]")
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 147 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 147]")

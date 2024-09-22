@@ -108,6 +108,7 @@ end, function(err) CRASH(f"Server.tick.Tick - {err}") end)
 Debug.log("server() - created tick object with Tick function.")
 
 function doneLoading()
+	Debug.log("server() - done loading.")
 	world = worldgen.Generate({width = 256, height = 256})
 end
 
