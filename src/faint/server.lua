@@ -82,7 +82,8 @@ Server.DidReceiveEvent = errorHandler(function(e)
 	getWorld = function(event)
 		Debug.log(f"server() - sending world to {event.Sender.Username}")
 		local map = worldser.serialize(world, world_scale, world_scale)
-		print(map.blocks.Length, map.objects.Length, map.coverings.Length)
+		local dmap = worldser.deserialize(map, world_scale, world_scale)
+		print(JSON:Encode(dmap))
 
 		for i=1, map.blocks.Length do
 			print(map.blocks[i])
