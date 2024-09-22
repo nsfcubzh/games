@@ -93,8 +93,9 @@ Server.DidReceiveEvent = errorHandler(function(e)
 	getWorld = function(event)
 		Debug.log("server() - sending world to "..event.Sender.Username.."")
 		local map = worldser.serialize(world, world_scale, world_scale)
-
-		local r = Network.Event("loadWorld", {blocks = map.blocks, objects = map.objects, coverings = map.coverings, scale = world_scale, j = JSON:Encode(map)})
+		print(map.blocks.Length, map.objects.Length, map.coverings.Length)
+		
+		local r = Network.Event("loadWorld", {blocks = map.blocks, objects = map.objects, coverings = map.coverings, scale = world_scale})
 		r:SendTo(event.Sender)
 	end,
 
@@ -166,4 +167,4 @@ Debug.log("server() - Loading " .. need_to_load_modules.. " modules..")
 
 Debug.log("server() - Total: " .. need_to_load .. " assets")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 158 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 158]")
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 159 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 159]")
