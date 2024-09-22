@@ -81,7 +81,8 @@ Server.DidReceiveEvent = errorHandler(function(e)
 
 	getWorld = function(event)
 		Debug.log(f"server() - sending world to {event.Sender.Username}")
-		local r = Network.Event("loadWorld", {map = worldser.serialize(world), scale = world_scale})
+		local map = worldser.serialize(world)
+		local r = Network.Event("loadWorld", {blocks = map.blocks, objects = map.objects, coverings = map.coverings, scale = world_scale})
 		r:SendTo(event.Sender)
 	end,
 
