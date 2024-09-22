@@ -124,6 +124,7 @@ function doneLoading()
 end
 
 need_to_load = 0
+loaded = 0
 loadModules = {
 	worldgen = "build/faint/modules/world_generator.lua",
 }
@@ -155,4 +156,4 @@ for key, value in pairs(loadModules) do
 end
 Debug.log("server() - Loading " .. need_to_load_modules.. " modules..")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 147 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 147]")
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 148 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 148]")

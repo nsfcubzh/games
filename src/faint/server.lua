@@ -113,6 +113,7 @@ function doneLoading()
 end
 
 need_to_load = 0
+loaded = 0
 loadModules = {
 	worldgen = "build/faint/modules/world_generator.lua",
 }
