@@ -51,7 +51,7 @@ function game.load()
     local e = Network.Event("getWorld", {})
     e:SendTo(Server)
 
-    Network.ParseEvent(e, {
+    Network:ParseEvent(e, {
         loadWorld = function(event)
             world = JSON:Decode(event.data.world)
             worldgen.Build(world, game.map, game.chunkScale, function()
