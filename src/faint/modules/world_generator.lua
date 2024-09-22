@@ -178,7 +178,7 @@ function worldgen.Generate(config)
                                     coveringType = "floor"
                                 end
 
-                                if structure.allowed_materials[block] and coveringType ~= nil then
+                                if structure.allowed_materials[world_types.block_codes_reverse[block]] and coveringType ~= nil then
                                     world.coverings[cordX][cordY] = world_types.covering_codes[coveringType]
                                 end
 
@@ -198,7 +198,7 @@ function worldgen.Generate(config)
                     local function placeWall(cordX, cordY)
                         if world.blocks[cordX] ~= nil and world.blocks[cordX][cordY] ~= nil then
                             local block = world.blocks[cordX][cordY]
-                            if structure.allowed_materials[block] and math.random() > structure.removed_walls then
+                            if structure.allowed_materials[world_types.block_codes_reverse[block]] and math.random() > structure.removed_walls then
                                 world.objects[cordX][cordY] = world_types.object_codes["wall"]
                             end
                         end

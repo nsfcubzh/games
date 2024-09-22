@@ -159,26 +159,27 @@ function game.loadChunk(map, posX, posY)
                 local originalX = x + (posX * game.chunkScale) - 1
                 local originalY = y + (posY * game.chunkScale) - 1
 
-                local cell = world[originalX + 1][originalY + 1]
+                local objectType = world_types.object_codes_reverse[world.objects[originalX][originalY]] or "none"
+                local coveringType = world_types.covering_codes_reverse[world.coverings[originalX][originalY]] or "none"
 
-                if cell.object == "tree" then
+                if objectType == "tree" then
                     game.data[originalX + 1][originalY + 1] = Game.Object.Tree()
-                elseif cell.object == "rock" then
+                elseif objectType == "rock" then
                     game.data[originalX + 1][originalY + 1] = Game.Object.Rock()
-                elseif cell.object == "grass" then
+                elseif objectType == "grass" then
                     game.data[originalX + 1][originalY + 1] = Game.Object.Grass()
-                elseif cell.object == "wall" then
+                elseif objectType == "wall" then
                     game.data[originalX + 1][originalY + 1] = Game.Object.Wall()
                     game.data[originalX + 1][originalY + 1].update = function(self)
                         self.shape.Scale = 1/7
                         self.collider.Scale = 10/7
                         self.collider.Position = self.collider.Position - Number3(1.4, 0, 1.4)
                     end
-                elseif cell.object == "test" then
+                elseif objectType == "test" then
                     game.data[originalX + 1][originalY + 1] = Game.Object.Test()
                 end
 
-                if cell.covering == "floor" then
+                if coveringType == "floor" then
                     game.coverings[originalX + 1][originalY + 1] = Game.Covering.Floor()
                     game.coverings[originalX + 1][originalY + 1].quad.Position = Number3(originalX, 1.01, originalY) * map.Scale.X
                     game.coverings[originalX + 1][originalY + 1].quad:SetParent(World)
