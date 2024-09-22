@@ -101,9 +101,9 @@ function worldgen.Generate(config)
     Debug.log("world_generator - config saved in ["..cfgtext.."].")
 
     local world = {
-        blocks = {},
-        objects = {},
-        coverings = {},
+        blocks = Data(),
+        objects = Data(),
+        coverings = Data(),
     }
     perlin.seed(cfg.seed)
 
