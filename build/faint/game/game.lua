@@ -16,7 +16,6 @@ function game.load()
     game.chunkScale = 8
 
     game.mapScale = 256
-    world = worldgen.Generate({width=game.mapScale, height = game.mapScale})
     game.data = {}
     game.coverings = {}
     game.chunks = {}
@@ -60,9 +59,20 @@ function game.load()
         game.music:Play()
     end)
 
-    worldgen.Build(world, game.map, game.chunkScale, function()
-        game.play()
-    end)
+    local e = Network.Event("getWorld", {})
+    e:SendTo(Server)
+
+    Network.ParseEvent(e, {
+        loadWorld = function(event)
+            world = JSON:Decode(event.data.world)
+            worldgen.Build(world, game.map, game.chunkScale, function()
+                game.play()
+            end)
+        end,
+        ["_"] = function(event)
+            Debug.log("game() - got unknown event: "..tostring(event.action).."")
+        end,
+    })
 end
 
 function game.play()

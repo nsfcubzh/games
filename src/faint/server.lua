@@ -86,9 +86,15 @@ Server.DidReceiveEvent = errorHandler(function(e)
 		end
 	end,
 
+	getWorld = function(event)
+		Debug.log(f"server() - sending world to {event.Sender.Username}")
+		local e = Network.Event("loadWorld", {world = JSON:Encode(world)})
+		e:SendTo(event.Sender)
+	end,
+
 	["_"] = function(event)
 		Debug.log(f"server() - got unknown event: {tostring(event.action)}")
-	end
+	end,
 
 	})
 end, function(err) CRASH(f"Server.DidReceiveEvent - {err}") end)
@@ -100,5 +106,40 @@ tick.Tick = errorHandler(function(self, dt)
 end, function(err) CRASH(f"Server.tick.Tick - {err}") end)
 
 Debug.log("server() - created tick object with Tick function.")
+
+function doneLoading()
+	world = worldgen.Generate({width = 256, height = 256})
+end
+
+loadModules = {
+	worldgen = "build/faint/modules/world_generator.lua",
+}
+
+for key, value in pairs(loadModules) do
+	if need_to_load_modules == nil then need_to_load_modules = 0 end
+	need_to_load_modules = need_to_load_modules + 1
+	need_to_load = need_to_load + 1
+
+	Loader:LoadFunction(value, function(module)
+		Debug.log("server() - Loaded '".. value .."'")
+
+		errorHandler(
+			function() _ENV[key] = module() end, 
+			function(err) CRASH("Failed to load module '"..key.."' - "..err) end
+		)()
+
+		if loaded_modules == nil then loaded_modules = 0 end
+		loaded_modules = loaded_modules + 1
+		loaded = loaded + 1
+
+		if loaded_modules >= need_to_load_modules then
+			Debug.log("server() - Loaded all modules.")
+		end
+		if loaded >= need_to_load then
+			doneLoading()
+		end
+	end)
+end
+Debug.log("server() - Loading " .. need_to_load_modules.. " modules..")
 
 -SECTION("STARTED")
