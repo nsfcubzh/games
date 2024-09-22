@@ -27,6 +27,7 @@ serializer.object_codes = {
     grass = 2,
     rock = 3,
     wall = 4,
+    test = 5,
 }
 
 serializer.covering_codes = {

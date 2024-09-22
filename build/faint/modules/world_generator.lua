@@ -194,7 +194,7 @@ function worldgen.Generate(config)
                                 if structure.allowed_materials[block] and coveringType ~= nil then
                                     world.coverings[cordX][cordY] = coveringType
                                 else
-                                    world.coverings[cordX][cordY] = 0
+                                    world.coverings[cordX][cordY] = "none"
                                 end
 
                                 for itemName, item in pairs(structure.items) do
@@ -288,7 +288,7 @@ function worldgen.Generate(config)
                     world.objects[x][y] = name
                     num_objects = num_objects + 1
                 else
-                    world.objects[x][y] = 0
+                    world.objects[x][y] = "none"
                 end
             end
         end
