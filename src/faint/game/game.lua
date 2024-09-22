@@ -51,17 +51,19 @@ function game.load()
     local e = Network.Event("getWorld", {})
     e:SendTo(Server)
 
-    Network:ParseEvent(e, {
-        loadWorld = function(event)
-            world = JSON:Decode(event.data.world)
-            worldgen.Build(world, game.map, game.chunkScale, function()
-                game.play()
-            end)
-        end,
-        ["_"] = function(event)
-            Debug.log(f"game() - got unknown event: {tostring(event.action)}")
-        end,
-    })
+    game.event = LocalEvent:Listen(LocalEvent.Name.DidReceiveEvent, function(e)
+        Network:ParseEvent(e, {
+            loadWorld = function(event)
+                world = JSON:Decode(event.data.world)
+                worldgen.Build(world, game.map, game.chunkScale, function()
+                    game.play()
+                end)
+            end,
+            ["_"] = function(event)
+                Debug.log(f"game() - got unknown event: {tostring(event.action)}")
+            end,
+        })
+    end)
 end
 
 function game.play()
