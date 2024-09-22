@@ -69,7 +69,9 @@ function game.load()
                 print(event.data.blocks.Length, event.data.objects.Length, event.data.coverings.Length)
 
                 world = worldser.deserialize({blocks = event.data.blocks, objects = event.data.objects, coverings = event.data.coverings}, event.data.scale, event.data.scale)
-                Dev:CopyToClipboard(JSON:Encode(world))
+                for i=1, event.data.blocks.Length do
+                    print(event.data.blocks[i])
+                end
                 worldgen.Build(world, game.map, game.chunkScale, function()
                     game.play()
                 end)
