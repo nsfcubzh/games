@@ -61,8 +61,8 @@ function serializer.deserialize(binary_data, width, height)
         world.objects[x] = {}
         world.coverings[x] = {}
         for y = 1, height do
-            local covering_code = binary_data:ReadUInt8()
             local object_code = binary_data:ReadUInt8()
+            local covering_code = binary_data:ReadUInt8()
             local block_code = binary_data:ReadUInt8()
 
             -- Map codes back to names
