@@ -84,10 +84,6 @@ Server.DidReceiveEvent = errorHandler(function(e)
 		local map = worldser.serialize(world, world_scale, world_scale)
 		local dmap = worldser.deserialize(map, world_scale, world_scale)
 		print(JSON:Encode(dmap))
-
-		for i=1, map.blocks.Length do
-			print(map.blocks[i])
-		end
 		
 		local r = Network.Event("loadWorld", {blocks = map.blocks, objects = map.objects, coverings = map.coverings, scale = world_scale})
 		r:SendTo(event.Sender)
