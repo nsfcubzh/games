@@ -184,7 +184,7 @@ function worldgen.Generate(config)
 
                                 for itemName, item in pairs(structure.items) do
                                     if math.random(0, worldgen.round(1/(item.chance))) == 0 then
-                                        if world.objects[cordX][cordY] == nil and world.coverings[cordX][cordY] == "floor" then
+                                        if world.objects[cordX][cordY] == "none" and world.coverings[cordX][cordY] == "floor" then
                                             world.objects[cordX][cordY] = world_types.object_codes[itemName]
                                             num_objects = num_objects + 1
                                         end
@@ -269,7 +269,7 @@ function worldgen.Generate(config)
                     chance = 0
                 end
 
-                if chance > 0 and math.random() < chance and object == nil and covering == nil then
+                if chance > 0 and math.random() < chance and object == "none" and covering == "none" then
                     world.objects[x][y] = world_types.object_codes[name]
                     num_objects = num_objects + 1
                 end
