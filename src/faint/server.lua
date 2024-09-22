@@ -135,8 +135,6 @@ for key, value in pairs(loadModules) do
 		loaded_modules = loaded_modules + 1
 		loaded = loaded + 1
 
-		Debut.log(f"server() - loaded {loaded} files out of {need_to_load}.")
-
 		if loaded_modules >= need_to_load_modules then
 			Debug.log("server() - Loaded all modules.")
 		end
