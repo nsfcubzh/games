@@ -30,29 +30,40 @@ serializer.object_codes = {
 }
 
 -- Assuming we can create a new Data instance
-function serializer.serialize(data)
+function serializer.serialize(world)
     -- Create a new Data object
     local binary_data = Data()
-    for _, row in ipairs(data) do
-        for _, cell in ipairs(row) do
-            local block_code = serializer.block_codes[cell.block] or 0
-            local object_code = serializer.object_codes[cell.object] or 0
+    local width = #world.blocks
+    local height = #world.blocks[1]
+    for x = 1, width do
+        for y = 1, height do
+            local block = world.blocks[x][y]
+            local object = world.objects[x][y] or "none"
+            local block_code = serializer.block_codes[block] or 0
+            local object_code = serializer.object_codes[object] or 0
             binary_data:WriteUInt8(block_code)
             binary_data:WriteUInt8(object_code)
         end
     end
-    binary_data:WriteUInt8(0)
+    binary_data:WriteUInt8(0) -- Optional end marker
     return binary_data
 end
 
 function serializer.deserialize(binary_data, width, height)
-    local data = {}
+    local world = {
+        blocks = {},
+        objects = {},
+        -- Initialize other types if needed
+    }
     binary_data.Cursor = 1 -- Reset cursor to the beginning
-    for i = 1, height do
-        local row = {}
-        for j = 1, width do
-            local object_code = binary_data:ReadUInt8()
+    for x = 1, width do
+        world.blocks[x] = {}
+        world.objects[x] = {}
+        for y = 1, height do
             local block_code = binary_data:ReadUInt8()
+            local object_code = binary_data:ReadUInt8()
+
+            -- Map codes back to names
             local block = "unknown"
             for name, code in pairs(serializer.block_codes) do
                 if code == block_code then
@@ -60,18 +71,20 @@ function serializer.deserialize(binary_data, width, height)
                     break
                 end
             end
-            local object = "unknown"
+
+            local object = "none"
             for name, code in pairs(serializer.object_codes) do
                 if code == object_code then
                     object = name
                     break
                 end
             end
-            table.insert(row, {block = block, object = object})
+
+            world.blocks[x][y] = block
+            world.objects[x][y] = object
         end
-        table.insert(data, row)
     end
-    return data
+    return world
 end
 
 return serializer
