@@ -146,6 +146,8 @@ for key, value in pairs(loadModules) do
 		loaded_modules = loaded_modules + 1
 		loaded = loaded + 1
 
+		Debut.log("server() - loaded "..loaded.." files out of "..need_to_load..".")
+
 		if loaded_modules >= need_to_load_modules then
 			Debug.log("server() - Loaded all modules.")
 		end
@@ -156,4 +158,6 @@ for key, value in pairs(loadModules) do
 end
 Debug.log("server() - Loading " .. need_to_load_modules.. " modules..")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 148 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 148]")
+Debug.log("server() - Total: " .. need_to_load .. " assets")
+
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 152 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 152]")
