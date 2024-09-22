@@ -46,13 +46,6 @@ set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
 set("READY", false)
 
 queue = {}
-function doneLoading()
-	set("READY", true)
-	for i, p in ipairs(queue) do
-		local e = Network.Event("start", {})
-		e:SendTo(p)
-	end
-end
 
 Debug.log("server() - version: "..VERSION.."")
 
@@ -99,7 +92,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 
 	getWorld = function(event)
 		Debug.log("server() - sending world to "..event.Sender.Username.."")
-		local r = Network.Event("loadWorld", {map = worldser.serialize(world)})
+		local r = Network.Event("loadWorld", {map = worldser.serialize(world), scale = world_scale})
 		r:SendTo(event.Sender)
 	end,
 
@@ -126,7 +119,13 @@ Debug.log("server() - created tick object with Tick function.")
 
 function doneLoading()
 	Debug.log("server() - done loading.")
-	world = worldgen.Generate({width = 32, height = 32})
+	set("READY", true)
+	for i, p in ipairs(queue) do
+		local e = Network.Event("start", {})
+		e:SendTo(p)
+	end
+	world_scale = 128
+	world = worldgen.Generate({width = world_scale, height = world_scale})
 end
 
 need_to_load = 0
@@ -165,4 +164,4 @@ Debug.log("server() - Loading " .. need_to_load_modules.. " modules..")
 
 Debug.log("server() - Total: " .. need_to_load .. " assets")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 157 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 157]")
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 156 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 156]")

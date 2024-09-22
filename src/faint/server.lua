@@ -35,13 +35,6 @@ set("ADMINS", {"nsfworks", "fab3kleuuu", "nanskip"})
 set("READY", false)
 
 queue = {}
-function doneLoading()
-	set("READY", true)
-	for i, p in ipairs(queue) do
-		local e = Network.Event("start", {})
-		e:SendTo(p)
-	end
-end
 
 Debug.log(f"server() - version: {VERSION}")
 
@@ -88,7 +81,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 
 	getWorld = function(event)
 		Debug.log(f"server() - sending world to {event.Sender.Username}")
-		local r = Network.Event("loadWorld", {map = worldser.serialize(world)})
+		local r = Network.Event("loadWorld", {map = worldser.serialize(world), scale = world_scale})
 		r:SendTo(event.Sender)
 	end,
 
@@ -115,7 +108,13 @@ Debug.log("server() - created tick object with Tick function.")
 
 function doneLoading()
 	Debug.log("server() - done loading.")
-	world = worldgen.Generate({width = 32, height = 32})
+	set("READY", true)
+	for i, p in ipairs(queue) do
+		local e = Network.Event("start", {})
+		e:SendTo(p)
+	end
+	world_scale = 128
+	world = worldgen.Generate({width = world_scale, height = world_scale})
 end
 
 need_to_load = 0

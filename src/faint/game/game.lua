@@ -55,7 +55,7 @@ function game.load()
         Network:ParseEvent(e, {
             loadWorld = function(event)
                 Debug.log(f"game() - received world with lenght: {event.data.map.Length}")
-                world = worldser.deserialize(event.data.map, 32, 32)
+                world = worldser.deserialize(event.data.map, event.data.scale, event.data.scale)
                 worldgen.Build(world, game.map, game.chunkScale, function()
                     game.play()
                 end)
