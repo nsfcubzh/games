@@ -99,8 +99,8 @@ Server.DidReceiveEvent = errorHandler(function(e)
 
 	getWorld = function(event)
 		Debug.log("server() - sending world to "..event.Sender.Username.."")
-		local e = Network.Event("loadWorld", {world = JSON:Encode(world)})
-		e:SendTo(event.Sender)
+		local r = Network.Event("loadWorld", {world = JSON:Encode(world)})
+		r:SendTo(event.Sender)
 	end,
 
 	["_"] = function(event)
