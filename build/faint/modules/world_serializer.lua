@@ -11,11 +11,9 @@ NSFLua['faint\\modules\\world_serializer.lua'].LAST_SECTION_LINE = 0
 
 local serializer = {}
 
-function serializer.serialize(world)
+function serializer.serialize(world, width, height)
     local world_data = {blocks = Data(), objects = Data(), coverings = Data()}
 
-    local width = #world.blocks
-    local height = #world.blocks[1]
     for x = 1, width do
         for y = 1, height do
             local block = world.blocks[x][y]
