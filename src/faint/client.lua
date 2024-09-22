@@ -170,7 +170,7 @@ loadModules = {
 	worldgen = "build/faint/modules/world_generator.lua",
 	game = "build/faint/game/game.lua",
 	worldser = "build/faint/modules/world_serializer.lua",
-	worldtypes = "build/faint/modules/world_types.lua",
+	world_types = "build/faint/modules/world_types.lua",
 }
 
 loadClasses = {
