@@ -217,7 +217,7 @@ function worldgen.Generate(config)
                         end
 
                         if cell ~= nil then
-                            if structure.allowed_materials[cell.block] and object ~= nil then
+                            if structure.allowed_materials[cell.block] and (object ~= "none" or (object ~= "none" or object ~= nil)) then
                                 cell.object = object
                             end
                         end
@@ -239,7 +239,7 @@ function worldgen.Generate(config)
                         end
 
                         if cell ~= nil then
-                            if structure.allowed_materials[cell.block] and object ~= nil then
+                            if structure.allowed_materials[cell.block] and (object ~= "none" or object ~= nil) then
                                 cell.object = object
                             end
                         end
@@ -261,7 +261,7 @@ function worldgen.Generate(config)
                         end
 
                         if cell ~= nil then
-                            if structure.allowed_materials[cell.block] and object ~= nil then
+                            if structure.allowed_materials[cell.block] and (object ~= "none" or object ~= nil) then
                                 cell.object = object
                             end
                         end
@@ -283,7 +283,7 @@ function worldgen.Generate(config)
                         end
 
                         if cell ~= nil then
-                            if structure.allowed_materials[cell.block] and object ~= nil then
+                            if structure.allowed_materials[cell.block] and (object ~= "none" or object ~= nil) then
                                 cell.object = object
                             end
                         end

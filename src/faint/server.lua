@@ -88,7 +88,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 
 	getWorld = function(event)
 		Debug.log(f"server() - sending world to {event.Sender.Username}")
-		local r = Network.Event("loadWorld", {map = JSON:Encode(world)})
+		local r = Network.Event("loadWorld", {map = worldser.serialize(world)})
 		r:SendTo(event.Sender)
 	end,
 
@@ -122,6 +122,7 @@ need_to_load = 0
 loaded = 0
 loadModules = {
 	worldgen = "build/faint/modules/world_generator.lua",
+	worldser = "build/faint/modules/world_serializer.lua",
 }
 
 for key, value in pairs(loadModules) do

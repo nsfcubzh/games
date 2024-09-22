@@ -99,7 +99,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 
 	getWorld = function(event)
 		Debug.log("server() - sending world to "..event.Sender.Username.."")
-		local r = Network.Event("loadWorld", {map = JSON:Encode(world)})
+		local r = Network.Event("loadWorld", {map = worldser.serialize(world)})
 		r:SendTo(event.Sender)
 	end,
 
@@ -133,6 +133,7 @@ need_to_load = 0
 loaded = 0
 loadModules = {
 	worldgen = "build/faint/modules/world_generator.lua",
+	worldser = "build/faint/modules/world_serializer.lua",
 }
 
 for key, value in pairs(loadModules) do
@@ -164,4 +165,4 @@ Debug.log("server() - Loading " .. need_to_load_modules.. " modules..")
 
 Debug.log("server() - Total: " .. need_to_load .. " assets")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 156 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 156]")
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 157 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 157]")

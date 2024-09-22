@@ -36,7 +36,6 @@ ui = require("uikit")
 toast = require("ui_toast")
 Debug.log("client() - loaded cubzh modules")
 
-
 function copyClientLogs()
 	Debug.log("client() - copying client logs")
 
@@ -170,6 +169,7 @@ loadModules = {
 	settings = "build/faint/settings.lua",
 	worldgen = "build/faint/modules/world_generator.lua",
 	game = "build/faint/game/game.lua",
+	worldser = "build/faint/modules/world_serializer.lua",
 }
 
 loadClasses = {
