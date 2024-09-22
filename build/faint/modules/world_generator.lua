@@ -193,6 +193,8 @@ function worldgen.Generate(config)
 
                                 if structure.allowed_materials[block] and coveringType ~= nil then
                                     world.coverings[cordX][cordY] = coveringType
+                                else
+                                    world.coverings[cordX][cordY] = 0
                                 end
 
                                 for itemName, item in pairs(structure.items) do
@@ -285,6 +287,8 @@ function worldgen.Generate(config)
                 if chance > 0 and math.random() < chance and object == nil and covering == nil then
                     world.objects[x][y] = name
                     num_objects = num_objects + 1
+                else
+                    world.objects[x][y] = 0
                 end
             end
         end
