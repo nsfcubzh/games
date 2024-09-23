@@ -103,7 +103,21 @@ Server.DidReceiveEvent = errorHandler(function(e)
 			print("Map is nil.")
 		else
 			print(map.blocks, map.objects, map.coverings)
-			print(#map.blocks, #map.objects, #map.coverings)
+			text = ""
+			for i=1, #map.blocks do
+				text = text .. map.blocks[i]
+			end 
+			print(text)
+			text = ""
+			for i=1, #map.object do
+				text = text .. map.objects[i]
+			end 
+			print(text)
+			text = ""
+			for i=1, #map.coverings do
+				text = text .. map.coverings[i]
+			end 
+			print(text)
 		end
 
 		local r = Network.Event("loadWorld", {blocks = map.blocks, objects = map.objects, coverings = map.coverings, scale = world_scale})
@@ -178,4 +192,4 @@ Debug.log("server() - Loading " .. need_to_load_modules.. " modules..")
 
 Debug.log("server() - Total: " .. need_to_load .. " assets")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 170 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 170]")
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 184 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 184]")
