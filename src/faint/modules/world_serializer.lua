@@ -3,6 +3,10 @@ local serializer = {}
 function serializer.serialize(world, width, height)
     local world_data = {blocks = Data(), objects = Data(), coverings = Data()}
 
+    world_data.blocks.Cursor = 0
+    world_data.objects.Cursor = 0
+    world_data.coverings.Cursor = 0
+    
     for x = 1, width do
         for y = 1, height do
             local block = world.blocks[x][y]
@@ -26,8 +30,8 @@ function serializer.deserialize(world_data, width, height)
     }
 
     world_data.blocks.Cursor = 0
-    world_data.objects.Cursor = 1
-    world_data.coverings.Cursor = 1
+    world_data.objects.Cursor = 0
+    world_data.coverings.Cursor = 0
 
     for x = 1, width do
         world.blocks[x] = {}
