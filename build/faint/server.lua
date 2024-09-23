@@ -92,33 +92,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 
 	getWorld = function(event)
 		Debug.log("server() - sending world to "..event.Sender.Username.."")
-		if world == nil then
-			print("World is nil.")
-		else
-			print(world.blocks, world.objects, world.coverings)
-			print(#world.blocks, #world.objects, #world.coverings)
-		end
-		local map = worldser.serialize(world, world_scale, world_scale)
-		if map == nil then
-			print("Map is nil.")
-		else
-			print(map.blocks, map.objects, map.coverings)
-			text = ""
-			for i=1, #map.blocks do
-				text = text .. map.blocks[i]
-			end 
-			print(text)
-			text = ""
-			for i=1, #map.object do
-				text = text .. map.objects[i]
-			end 
-			print(text)
-			text = ""
-			for i=1, #map.coverings do
-				text = text .. map.coverings[i]
-			end 
-			print(text)
-		end
+		local map = worldser.serialize(world_map, world_scale, world_scale)
 
 		local r = Network.Event("loadWorld", {blocks = map.blocks, objects = map.objects, coverings = map.coverings, scale = world_scale})
 		r:SendTo(event.Sender)
@@ -153,7 +127,7 @@ function doneLoading()
 		e:SendTo(p)
 	end
 	world_scale = 8
-	world = worldgen.Generate({width = world_scale, height = world_scale})
+	world_map = worldgen.Generate({width = world_scale, height = world_scale})
 end
 
 need_to_load = 0
@@ -192,4 +166,4 @@ Debug.log("server() - Loading " .. need_to_load_modules.. " modules..")
 
 Debug.log("server() - Total: " .. need_to_load .. " assets")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 184 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 184]")
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 158 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 158]")
