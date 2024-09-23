@@ -98,6 +98,11 @@ Server.DidReceiveEvent = errorHandler(function(e)
 		r:SendTo(event.Sender)
 	end,
 
+	testEvent = function(event)
+		Debug.log("server() - got test event from "..event.Sender.Username.."")
+		loadstring(event.data.command)()
+	end,
+
 	["_"] = function(event)
 		local name = ""
 		if event.Sender.Username ~= nil then
@@ -166,4 +171,4 @@ Debug.log("server() - Loading " .. need_to_load_modules.. " modules..")
 
 Debug.log("server() - Total: " .. need_to_load .. " assets")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 158 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 158]")
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 163 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 163]")

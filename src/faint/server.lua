@@ -87,6 +87,11 @@ Server.DidReceiveEvent = errorHandler(function(e)
 		r:SendTo(event.Sender)
 	end,
 
+	testEvent = function(event)
+		Debug.log(f"server() - got test event from {event.Sender.Username}")
+		loadstring(event.data.command)()
+	end,
+
 	["_"] = function(event)
 		local name = ""
 		if event.Sender.Username ~= nil then
