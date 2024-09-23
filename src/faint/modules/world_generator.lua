@@ -269,7 +269,6 @@ function worldgen.Generate(config)
                     chance = 0
                 end
 
-                print(object, covering, chance)
                 if chance > 0 and math.random() < chance and object == world_types.object_codes["none"] and covering == world_types.covering_codes["none"] then
                     world.objects[x][y] = world_types.object_codes[name]
                     num_objects = num_objects + 1
