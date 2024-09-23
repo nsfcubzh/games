@@ -37,8 +37,8 @@ function serializer.deserialize(world_data, width, height)
     }
 
     world_data.blocks.Cursor = 0
-    world_data.objects.Cursor = 0
-    world_data.coverings.Cursor = 0
+    world_data.objects.Cursor = 1
+    world_data.coverings.Cursor = 1
 
     for x = 1, width do
         world.blocks[x] = {}
