@@ -120,7 +120,7 @@ function doneLoading()
 		local e = Network.Event("start", {})
 		e:SendTo(p)
 	end
-	world_scale = 256
+	world_scale = 128
 	world_map = worldgen.Generate({width = world_scale, height = world_scale})
 end
 
