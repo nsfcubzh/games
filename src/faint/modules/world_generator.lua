@@ -338,13 +338,13 @@ function worldgen.Build(world, object, chunkScale, callback)
                             color = Color(color.R-2, color.G-2, color.B-2)
                         end
 
-                        object:AddBlock(color, originalX-1, 0, originalY-1)
+                        object:AddBlock(color, originalX, 0, originalY)
 
                         if blockType == "granite" then
-                            object:AddBlock(color, originalX-1, 1, originalY-1)
+                            object:AddBlock(color, originalX, 1, originalY)
                         elseif blockType == "mountain" then
-                            object:AddBlock(color, originalX-1, 1, originalY-1)
-                            object:AddBlock(color, originalX-1, 2, originalY-1)
+                            object:AddBlock(color, originalX, 1, originalY)
+                            object:AddBlock(color, originalX, 2, originalY)
                         end
 
                         if chunkX == width/chunkScale-1 and chunkY == height/chunkScale-1 and x == chunkScale and y == chunkScale then
