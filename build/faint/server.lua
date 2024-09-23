@@ -92,10 +92,21 @@ Server.DidReceiveEvent = errorHandler(function(e)
 
 	getWorld = function(event)
 		Debug.log("server() - sending world to "..event.Sender.Username.."")
+		if world == nil then
+			print("World is nil.")
+		else
+			print(world.blocks, world.objects, world.coverings)
+			print(#world.blocks, #world.objects, #world.coverings)
+		end
 		local map = worldser.serialize(world, world_scale, world_scale)
-		local dmap = worldser.deserialize(map, world_scale, world_scale)
-		
-		local r = Network.Event("loadWorld", {m = JSON:Encode(dmap)})
+		if map == nil then
+			print("Map is nil.")
+		else
+			print(map.blocks, map.objects, map.coverings)
+			print(#map.blocks, #map.objects, #map.coverings)
+		end
+
+		local r = Network.Event("loadWorld", {blocks = map.blocks, objects = map.objects, coverings = map.coverings, scale = world_scale})
 		r:SendTo(event.Sender)
 	end,
 
@@ -167,4 +178,4 @@ Debug.log("server() - Loading " .. need_to_load_modules.. " modules..")
 
 Debug.log("server() - Total: " .. need_to_load .. " assets")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 159 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 159]")
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 170 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 170]")

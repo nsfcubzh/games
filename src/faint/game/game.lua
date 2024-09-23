@@ -54,8 +54,6 @@ function game.load()
     game.event = LocalEvent:Listen(LocalEvent.Name.DidReceiveEvent, function(e)
         Network:ParseEvent(e, {
             loadWorld = function(event)
-                print(event.data.m)
-                data = event.data.m
                 Debug.log(f"game() - received world with {event.data.blocks.Length} blocks, {event.data.objects.Length} objects and {event.data.coverings.Length} coverings.")
                 print(event.data.blocks.Length, event.data.objects.Length, event.data.coverings.Length)
 

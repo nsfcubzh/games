@@ -81,10 +81,21 @@ Server.DidReceiveEvent = errorHandler(function(e)
 
 	getWorld = function(event)
 		Debug.log(f"server() - sending world to {event.Sender.Username}")
+		if world == nil then
+			print("World is nil.")
+		else
+			print(world.blocks, world.objects, world.coverings)
+			print(#world.blocks, #world.objects, #world.coverings)
+		end
 		local map = worldser.serialize(world, world_scale, world_scale)
-		local dmap = worldser.deserialize(map, world_scale, world_scale)
-		
-		local r = Network.Event("loadWorld", {m = JSON:Encode(dmap)})
+		if map == nil then
+			print("Map is nil.")
+		else
+			print(map.blocks, map.objects, map.coverings)
+			print(#map.blocks, #map.objects, #map.coverings)
+		end
+
+		local r = Network.Event("loadWorld", {blocks = map.blocks, objects = map.objects, coverings = map.coverings, scale = world_scale})
 		r:SendTo(event.Sender)
 	end,
 
