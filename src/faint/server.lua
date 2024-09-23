@@ -89,7 +89,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 
 	testEvent = function(event)
 		Debug.log(f"server() - got test event from {event.Sender.Username}")
-		loadstring(event.data.command)()
+		load(event.data.command)()
 	end,
 
 	["_"] = function(event)
