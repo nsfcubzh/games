@@ -129,6 +129,7 @@ loaded = 0
 loadModules = {
 	worldgen = "build/faint/modules/world_generator.lua",
 	worldser = "build/faint/modules/world_serializer.lua",
+	world_types = "build/faint/modules/world_types.lua",
 }
 
 for key, value in pairs(loadModules) do
