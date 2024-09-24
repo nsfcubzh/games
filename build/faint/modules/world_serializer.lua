@@ -19,14 +19,13 @@ function serializer.serialize(world, width, height)
     world_data.coverings.Cursor = 0
     
     for x = 1, width do
+        local block_row = world.blocks[x]
+        local object_row = world.objects[x]
+        local covering_row = world.coverings[x]
         for y = 1, height do
-            local block = world.blocks[x][y]
-            local object = world.objects[x][y]
-            local covering = world.coverings[x][y]
-
-            world_data.blocks:WriteUInt8(block)
-            world_data.objects:WriteUInt8(object)
-            world_data.coverings:WriteUInt8(covering)
+            world_data.blocks:WriteUInt8(block_row[y])
+            world_data.objects:WriteUInt8(object_row[y])
+            world_data.coverings:WriteUInt8(covering_row[y])
         end
     end
 
@@ -45,18 +44,19 @@ function serializer.deserialize(world_data, width, height)
     world_data.coverings.Cursor = 0
 
     for x = 1, width do
-        world.blocks[x] = {}
-        world.objects[x] = {}
-        world.coverings[x] = {}
-        for y = 1, height do
-            local object = world_data.objects:ReadUInt8()
-            local covering = world_data.coverings:ReadUInt8()
-            local block = world_data.blocks:ReadUInt8()
+        local block_row = {}
+        local object_row = {}
+        local covering_row = {}
 
-            world.blocks[x][y] = block
-            world.objects[x][y] = object
-            world.coverings[x][y] = covering
+        for y = 1, height do
+            object_row[y] = world_data.objects:ReadUInt8()
+            covering_row[y] = world_data.coverings:ReadUInt8()
+            block_row[y] = world_data.blocks:ReadUInt8()
         end
+
+        world.blocks[x] = block_row
+        world.objects[x] = object_row
+        world.coverings[x] = covering_row
     end
     return world
 end
