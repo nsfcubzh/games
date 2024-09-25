@@ -64,7 +64,7 @@ Server.OnPlayerLeave = function(player)
 	end
 	queue = new_queue
 
-	if world_loaded then
+	if world_loaded and #Players == 0 then
 		save()
 	end
 end
