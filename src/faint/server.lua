@@ -52,6 +52,10 @@ Server.OnPlayerLeave = function(player)
 		end
 	end
 	queue = new_queue
+
+	if world_loaded then
+		save()
+	end
 end
 
 Server.DidReceiveEvent = errorHandler(function(e) 

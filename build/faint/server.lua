@@ -63,6 +63,10 @@ Server.OnPlayerLeave = function(player)
 		end
 	end
 	queue = new_queue
+
+	if world_loaded then
+		save()
+	end
 end
 
 Server.DidReceiveEvent = errorHandler(function(e) 
@@ -246,4 +250,4 @@ Debug.log("server() - Loading " .. need_to_load_modules.. " modules..")
 
 Debug.log("server() - Total: " .. need_to_load .. " assets")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 238 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 238]")
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 242 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 242]")
