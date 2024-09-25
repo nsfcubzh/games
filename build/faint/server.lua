@@ -217,7 +217,7 @@ function doneLoading()
 		local e = Network.Event("start", {})
 		e:SendTo(p)
 	end
-	world_scale = 16
+	world_scale = 128
 	load()
 end
 
