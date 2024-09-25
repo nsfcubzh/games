@@ -139,7 +139,7 @@ load = function()
 	local kvs = KeyValueStore("save")
 	kvs:Get("world", function(success, data)
 		if success then
-			if data.map == nil or data.scale == nil or data.version == nil or data.time == nil then
+			if data.world.map == nil or data.world.scale == nil or data.world.version == nil or data.world.time == nil then
 				Debug.error("server() - world data is corrupted.")
 				world_map = worldgen.Generate({width = world_scale, height = world_scale})
 				world_loaded = true
@@ -147,9 +147,9 @@ load = function()
 				return
 			end
 			Debug.log("server() - world loaded successfully.")
-			world_map = data.map
-			local version = data.version
-			local got_time = data.time
+			world_map = data.world.map
+			local version = data.world.version
+			local got_time = data.world.time
 			if version ~= VERSION then
 				Debug.error("server() - world version mismatch. Expected: "..VERSION..". Got: "..version)
 				world_map = worldgen.Generate({width = world_scale, height = world_scale})
@@ -165,7 +165,7 @@ load = function()
 				return
 			end
 			world_loaded = true
-			world_scale = data.scale
+			world_scale = data.world.scale
 		else
 			Debug.error("server() - failed to load world. (KVS ERROR)")
 
