@@ -139,6 +139,10 @@ load = function()
 	local kvs = KeyValueStore("save")
 	kvs:Get("world", function(success, data)
 		if success then
+			Debug.Log(data)
+			Debug.Log(data.map)
+			Debug.Log(data.world)
+			Debug.Log(data.world.map)
 			if data.map == nil or data.scale == nil or data.version == nil or data.time == nil then
 				Debug.error("server() - world data is corrupted.")
 				world_map = worldgen.Generate({width = world_scale, height = world_scale})

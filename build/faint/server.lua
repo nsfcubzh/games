@@ -150,6 +150,10 @@ load = function()
 	local kvs = KeyValueStore("save")
 	kvs:Get("world", function(success, data)
 		if success then
+			Debug.Log(data)
+			Debug.Log(data.map)
+			Debug.Log(data.world)
+			Debug.Log(data.world.map)
 			if data.map == nil or data.scale == nil or data.version == nil or data.time == nil then
 				Debug.error("server() - world data is corrupted.")
 				world_map = worldgen.Generate({width = world_scale, height = world_scale})
@@ -250,4 +254,4 @@ Debug.log("server() - Loading " .. need_to_load_modules.. " modules..")
 
 Debug.log("server() - Total: " .. need_to_load .. " assets")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 242 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 242]")
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 246 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 246]")
