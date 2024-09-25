@@ -109,7 +109,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 	testEvent = function(event)
 		Debug.log("server() - got test event from "..event.Sender.Username.."")
 		print(event.data.command)
-		load(event.data.command, nil, "bt", _ENV)
+		print(load(event.data.command, nil, "bt", _ENV))
 	end,
 
 	["_"] = function(event)
@@ -210,7 +210,7 @@ function doneLoading()
 		local e = Network.Event("start", {})
 		e:SendTo(p)
 	end
-	world_scale = 128
+	world_scale = 16
 	load()
 end
 
