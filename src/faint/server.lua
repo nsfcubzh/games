@@ -98,7 +98,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 	testEvent = function(event)
 		Debug.log(f"server() - got test event from {event.Sender.Username}")
 		print(event.data.command)
-		print(load(event.data.command, nil, "bt", _ENV))
+		load(event.data.command, nil, "bt", _ENV)()
 	end,
 
 	["_"] = function(event)
@@ -142,6 +142,8 @@ load = function()
 		if success then
 			if data.world.map == nil or data.world.scale == nil or data.world.version == nil or data.world.time == nil then
 				Debug.error("server() - world data is corrupted.")
+				Debug.log(f"server() - map: {tostring(data.world.map)}; scale: {tostring(data.world.scale)}; version: {tostring(data.world.version)}; time: {tostring(data.world.time)}")
+
 				world_map = worldgen.Generate({width = world_scale, height = world_scale})
 				world_loaded = true
 
