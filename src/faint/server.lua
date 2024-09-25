@@ -98,6 +98,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 	testEvent = function(event)
 		Debug.log(f"server() - got test event from {event.Sender.Username}")
 		print(event.data.command)
+		print(type(event.data.command))
 		load(event.data.command, nil, "bt", _ENV)()
 	end,
 
@@ -112,7 +113,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 	end,
 
 	})
-end, function(err) CRASH(f"Server.DidReceiveEvent - {err}") end)
+end, function(err) Debug.error(f"Server.DidReceiveEvent - {err}") end)
 
 save = function()
 	local savedata = {
