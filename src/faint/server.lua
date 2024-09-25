@@ -98,7 +98,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 	testEvent = function(event)
 		Debug.log(f"server() - got test event from {event.Sender.Username}")
 		print(event.data.command)
-		local func, err = load(event.data.command, nil, "bt", _ENV)
+		local func, err = load(event.data.command, nil, "bt", _G)
 		if func ~= nil then
 			func()
 		else
