@@ -81,10 +81,14 @@ Server.DidReceiveEvent = errorHandler(function(e)
 
 	getWorld = function(event)
 		Debug.log(f"server() - sending world to {event.Sender.Username}")
-		local map = worldser.serialize(world_map, world_scale, world_scale)
+		if world_loaded then
+			local map = worldser.serialize(world_map, world_scale, world_scale)
 
-		local r = Network.Event("loadWorld", {blocks = map.blocks, objects = map.objects, coverings = map.coverings, scale = world_scale})
-		r:SendTo(event.Sender)
+			local r = Network.Event("loadWorld", {blocks = map.blocks, objects = map.objects, coverings = map.coverings, scale = world_scale})
+			r:SendTo(event.Sender)
+		else
+			queue[#queue+1] = event.Sender
+		end
 	end,
 
 	testEvent = function(event)
@@ -105,10 +109,73 @@ Server.DidReceiveEvent = errorHandler(function(e)
 	})
 end, function(err) CRASH(f"Server.DidReceiveEvent - {err}") end)
 
+save = function()
+	local savedata = {
+		map = world_map,
+		scale = world_scale,
+		version = VERSION,
+		time = os.time(),
+	}
+	Debug.log("server() - saving world...")
+
+	local kvs = KeyValueStore("save")
+	kvs:Set("world", savedata, function(success)
+		if success then
+			Debug.log("server() - world saved successfully.")
+		else
+			Debug.error("server() - failed to save world. (KVS ERROR)")
+		end
+	end)
+end
+
+load = function()
+	Debug.log("server() - loading world...")
+	world_loaded = false
+
+	local kvs = KeyValueStore("save")
+	kvs:Get("world", function(success, data)
+		if success then
+			Debug.log("server() - world loaded successfully.")
+			world_map = data.map
+			local version = data.version
+			local got_time = data.time
+			if version ~= VERSION then
+				Debug.error("server() - world version mismatch. Expected: "..VERSION..". Got: "..version)
+				world_map = worldgen.Generate({width = world_scale, height = world_scale})
+				world_loaded = true
+
+				return
+			end
+			if os.time() - got_time > 60*60*24 then
+				Debug.error("server() - world is too old. Please delete it and start a new world.")
+				world_map = worldgen.Generate({width = world_scale, height = world_scale})
+				world_loaded = true
+
+				return
+			end
+			world_loaded = true
+			world_scale = data.scale
+		else
+			Debug.error("server() - failed to load world. (KVS ERROR)")
+
+			world_map = worldgen.Generate({width = world_scale, height = world_scale})
+			world_loaded = true
+		end
+	end)
+end
 
 tick = Object()
 tick.Tick = errorHandler(function(self, dt)
+	if world_loaded then
+		local map = worldser.serialize(world_map, world_scale, world_scale)
 
+		for k, v in pairs(queue) do
+			local r = Network.Event("loadWorld", {blocks = map.blocks, objects = map.objects, coverings = map.coverings, scale = world_scale})
+			r:SendTo(v)
+			
+			table.remove(queue, k)
+		end
+	end
 end, function(err) CRASH(f"Server.tick.Tick - {err}") end)
 
 Debug.log("server() - created tick object with Tick function.")
@@ -121,7 +188,7 @@ function doneLoading()
 		e:SendTo(p)
 	end
 	world_scale = 128
-	world_map = worldgen.Generate({width = world_scale, height = world_scale})
+	load()
 end
 
 need_to_load = 0
