@@ -128,7 +128,7 @@ end, function(err) Debug.error("Server.DidReceiveEvent - "..err.."") end)
 
 save = function()
 	local savedata = {
-		map = {world_map.blocks, world_map.objects, world_map.coverings},
+		map = {blocks = world_map.blocks, objects = world_map.objects, coverings = world_map.coverings},
 		scale = world_scale,
 		version = VERSION,
 		time = os.time(),
@@ -152,9 +152,9 @@ load = function()
 	local kvs = KeyValueStore("save")
 	kvs:Get("world", function(success, data)
 		if success then
+			Debug.log("server() - map: "..tostring(data.world.map).."; scale: "..tostring(data.world.scale).."; version: "..tostring(data.world.version).."; time: "..tostring(data.world.time).."")
 			if data.world.map == nil or data.world.scale == nil or data.world.version == nil or data.world.time == nil then
 				Debug.error("server() - world data is corrupted.")
-				Debug.log("server() - map: "..tostring(data.world.map).."; scale: "..tostring(data.world.scale).."; version: "..tostring(data.world.version).."; time: "..tostring(data.world.time).."")
 
 				world_map = worldgen.Generate({width = world_scale, height = world_scale})
 				world_loaded = true
@@ -174,7 +174,7 @@ load = function()
 
 				return
 			end
-			if os.time() - got_time > 60*60*24 then
+			if os.time() - got_time > 60 then
 				Debug.error("server() - world is too old. Please delete it and start a new world.")
 				world_map = worldgen.Generate({width = world_scale, height = world_scale})
 				world_loaded = true
