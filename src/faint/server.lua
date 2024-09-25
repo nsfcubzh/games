@@ -163,7 +163,7 @@ load = function()
 
 				return
 			end
-			if os.time() - got_time > 60 then
+			if os.time() - got_time > 60*5 then
 				Debug.error("server() - world is too old. Please delete it and start a new world.")
 				world_map = worldgen.Generate({width = world_scale, height = world_scale})
 				world_loaded = true
