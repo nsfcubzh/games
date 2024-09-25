@@ -158,6 +158,7 @@ load = function()
 
 				world_map = worldgen.Generate({width = world_scale, height = world_scale})
 				world_loaded = true
+				save()
 
 				return
 			end
@@ -169,6 +170,7 @@ load = function()
 				Debug.error("server() - world version mismatch. Expected: "..VERSION..". Got: "..version)
 				world_map = worldgen.Generate({width = world_scale, height = world_scale})
 				world_loaded = true
+				save()
 
 				return
 			end
@@ -176,6 +178,7 @@ load = function()
 				Debug.error("server() - world is too old. Please delete it and start a new world.")
 				world_map = worldgen.Generate({width = world_scale, height = world_scale})
 				world_loaded = true
+				save()
 
 				return
 			end
@@ -186,6 +189,7 @@ load = function()
 
 			world_map = worldgen.Generate({width = world_scale, height = world_scale})
 			world_loaded = true
+			save()
 		end
 	end)
 end
@@ -254,4 +258,4 @@ Debug.log("server() - Loading " .. need_to_load_modules.. " modules..")
 
 Debug.log("server() - Total: " .. need_to_load .. " assets")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 246 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 246]")
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 250 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 250]")

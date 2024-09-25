@@ -147,6 +147,7 @@ load = function()
 
 				world_map = worldgen.Generate({width = world_scale, height = world_scale})
 				world_loaded = true
+				save()
 
 				return
 			end
@@ -158,6 +159,7 @@ load = function()
 				Debug.error("server() - world version mismatch. Expected: "..VERSION..". Got: "..version)
 				world_map = worldgen.Generate({width = world_scale, height = world_scale})
 				world_loaded = true
+				save()
 
 				return
 			end
@@ -165,6 +167,7 @@ load = function()
 				Debug.error("server() - world is too old. Please delete it and start a new world.")
 				world_map = worldgen.Generate({width = world_scale, height = world_scale})
 				world_loaded = true
+				save()
 
 				return
 			end
@@ -175,6 +178,7 @@ load = function()
 
 			world_map = worldgen.Generate({width = world_scale, height = world_scale})
 			world_loaded = true
+			save()
 		end
 	end)
 end
