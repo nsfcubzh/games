@@ -72,7 +72,7 @@ function game.load()
                     name = "Server"
                 end
                 local data = ""
-                if event.data ~= nil then
+                if event.data ~= nil and type(event.data) == "table" then
                     data = JSON:Encode(event.data)
                 end
                 Debug.log(f"game() - got unknown event: {tostring(event.action)} from {name} with data: {data}")

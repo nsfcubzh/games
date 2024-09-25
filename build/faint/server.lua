@@ -126,7 +126,7 @@ end, function(err) CRASH("Server.DidReceiveEvent - "..err.."") end)
 
 save = function()
 	local savedata = {
-		map = world_map,
+		map = {world_map.blocks, world_map.objects, world_map.coverings},
 		scale = world_scale,
 		version = VERSION,
 		time = os.time(),
@@ -150,11 +150,7 @@ load = function()
 	local kvs = KeyValueStore("save")
 	kvs:Get("world", function(success, data)
 		if success then
-			Debug.log(data)
-			Debug.log(data.map)
-			Debug.log(data.world)
-			Debug.log(data.world.map)
-			if data.map == nil or data.scale == nil or data.version == nil or data.time == nil then
+			if data.world.map == nil or data.world.scale == nil or data.world.version == nil or data.world.time == nil then
 				Debug.error("server() - world data is corrupted.")
 				world_map = worldgen.Generate({width = world_scale, height = world_scale})
 				world_loaded = true
@@ -162,9 +158,9 @@ load = function()
 				return
 			end
 			Debug.log("server() - world loaded successfully.")
-			world_map = data.map
-			local version = data.version
-			local got_time = data.time
+			world_map = data.world.map
+			local version = data.world.version
+			local got_time = data.world.time
 			if version ~= VERSION then
 				Debug.error("server() - world version mismatch. Expected: "..VERSION..". Got: "..version)
 				world_map = worldgen.Generate({width = world_scale, height = world_scale})
@@ -180,7 +176,7 @@ load = function()
 				return
 			end
 			world_loaded = true
-			world_scale = data.scale
+			world_scale = data.world.scale
 		else
 			Debug.error("server() - failed to load world. (KVS ERROR)")
 
@@ -254,4 +250,4 @@ Debug.log("server() - Loading " .. need_to_load_modules.. " modules..")
 
 Debug.log("server() - Total: " .. need_to_load .. " assets")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 246 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 246]")
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 242 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 242]")
