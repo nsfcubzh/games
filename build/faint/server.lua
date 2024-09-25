@@ -109,12 +109,7 @@ Server.DidReceiveEvent = errorHandler(function(e)
 	testEvent = function(event)
 		Debug.log("server() - got test event from "..event.Sender.Username.."")
 		print(event.data.command)
-		local func, err = load(event.data.command, nil, "bt", _G)
-		if func ~= nil then
-			func()
-		else
-			print(err)
-		end
+		load(event.data.command, nil, "bt", _ENV)
 	end,
 
 	["_"] = function(event)
@@ -256,4 +251,4 @@ Debug.log("server() - Loading " .. need_to_load_modules.. " modules..")
 
 Debug.log("server() - Total: " .. need_to_load .. " assets")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 248 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 248]")
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 243 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 243]")
