@@ -146,6 +146,13 @@ load = function()
 	local kvs = KeyValueStore("save")
 	kvs:Get("world", function(success, data)
 		if success then
+			if data.map == nil or data.scale == nil or data.version == nil or data.time == nil then
+				Debug.error("server() - world data is corrupted.")
+				world_map = worldgen.Generate({width = world_scale, height = world_scale})
+				world_loaded = true
+
+				return
+			end
 			Debug.log("server() - world loaded successfully.")
 			world_map = data.map
 			local version = data.version
@@ -183,7 +190,7 @@ tick.Tick = errorHandler(function(self, dt)
 		for k, v in pairs(queue) do
 			local r = Network.Event("loadWorld", {blocks = map.blocks, objects = map.objects, coverings = map.coverings, scale = world_scale})
 			r:SendTo(v)
-			
+
 			table.remove(queue, k)
 		end
 	end
@@ -239,4 +246,4 @@ Debug.log("server() - Loading " .. need_to_load_modules.. " modules..")
 
 Debug.log("server() - Total: " .. need_to_load .. " assets")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 231 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 231]")
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 238 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 238]")

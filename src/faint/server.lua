@@ -135,6 +135,13 @@ load = function()
 	local kvs = KeyValueStore("save")
 	kvs:Get("world", function(success, data)
 		if success then
+			if data.map == nil or data.scale == nil or data.version == nil or data.time == nil then
+				Debug.error("server() - world data is corrupted.")
+				world_map = worldgen.Generate({width = world_scale, height = world_scale})
+				world_loaded = true
+
+				return
+			end
 			Debug.log("server() - world loaded successfully.")
 			world_map = data.map
 			local version = data.version
@@ -172,7 +179,7 @@ tick.Tick = errorHandler(function(self, dt)
 		for k, v in pairs(queue) do
 			local r = Network.Event("loadWorld", {blocks = map.blocks, objects = map.objects, coverings = map.coverings, scale = world_scale})
 			r:SendTo(v)
-			
+
 			table.remove(queue, k)
 		end
 	end
