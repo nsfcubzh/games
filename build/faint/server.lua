@@ -91,6 +91,8 @@ Server.DidReceiveEvent = errorHandler(function(e)
 	start = function(event)
 		if READY == false then
 			table.insert(queue, event.Sender)
+		else
+			send_ready_event(event.Sender)
 		end
 	end,
 
@@ -194,6 +196,11 @@ load = function()
 	end)
 end
 
+send_ready_event = function(player)
+	local e = Network.Event("ready", {})
+	e:SendTo(player)
+end
+
 tick = Object()
 tick.Tick = errorHandler(function(self, dt)
 	if world_loaded then
@@ -213,12 +220,14 @@ Debug.log("server() - created tick object with Tick function.")
 function doneLoading()
 	Debug.log("server() - done loading.")
 	set("READY", true)
-	for i, p in ipairs(queue) do
-		local e = Network.Event("start", {})
-		e:SendTo(p)
-	end
+
 	world_scale = 128
 	load()
+
+	for i, p in ipairs(queue) do
+		send_ready_event(p)
+	end
+	queue = {}
 end
 
 need_to_load = 0
@@ -258,4 +267,4 @@ Debug.log("server() - Loading " .. need_to_load_modules.. " modules..")
 
 Debug.log("server() - Total: " .. need_to_load .. " assets")
 
-NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 250 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 250]")
+NSFLua['faint\\server.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\server.lua'].LAST_SECTION_LINE = 259 Debug.log("faint\\server.lua > New section: '".."STARTED".."' [Line: 259]")
