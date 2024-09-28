@@ -208,7 +208,8 @@ loadAudios = {
 
 images = {}
 loadImages = {
-	floor = "build/faint/data/floor_wood.png"
+	floor = "build/faint/data/floor_wood.png",
+	menu_background = "build/faint/data/menu_background.png",
 }
 
 json = {}

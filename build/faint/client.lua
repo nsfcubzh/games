@@ -219,7 +219,8 @@ loadAudios = {
 
 images = {}
 loadImages = {
-	floor = "build/faint/data/floor_wood.png"
+	floor = "build/faint/data/floor_wood.png",
+	menu_background = "build/faint/data/menu_background.png",
 }
 
 json = {}
@@ -241,7 +242,7 @@ need_to_load_jsons = 0
 isLoaded = false
 
 function doneLoading()
-	NSFLua['faint\\client.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 233 Debug.log("faint\\client.lua > New section: '".."STARTED".."' [Line: 233]")
+	NSFLua['faint\\client.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 234 Debug.log("faint\\client.lua > New section: '".."STARTED".."' [Line: 234]")
 	isLoaded = true
 
 	Camera:SetParent(World)
@@ -546,4 +547,4 @@ Debug.log("client() - Loading " .. need_to_load_jsons .. " jsons..")
 
 
 Debug.log("client() - Total: " .. need_to_load .. " assets")
-NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 538 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 538]")
+NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 539 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 539]")
