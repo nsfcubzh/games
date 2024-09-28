@@ -290,6 +290,9 @@ function checkLoading()
 		if gotStartEvent == true then
 			doneLoading()
 		else
+			local e = Network.Event("start", {})
+			e:SendTo(Server)
+			
 			showServerLoadingScreen()
 		end
 	end

@@ -301,6 +301,9 @@ function checkLoading()
 		if gotStartEvent == true then
 			doneLoading()
 		else
+			local e = Network.Event("start", {})
+			e:SendTo(Server)
+			
 			showServerLoadingScreen()
 		end
 	end
@@ -582,4 +585,4 @@ Debug.log("client() - Loading " .. need_to_load_jsons .. " jsons..")
 
 
 Debug.log("client() - Total: " .. need_to_load .. " assets")
-NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 574 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 574]")
+NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 577 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 577]")
