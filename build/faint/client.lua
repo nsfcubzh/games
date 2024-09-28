@@ -242,7 +242,7 @@ need_to_load_jsons = 0
 isLoaded = false
 
 LocalEvent:Listen(LocalEvent.Name.DidReceiveEvent, function(e)
-	if e.action == "start" and e.Sender == Server then
+	if e.action == "ready" and e.Sender == Server then
 		Debug.log("Got start event from server")
 		gotStartEvent = true
 
@@ -303,7 +303,8 @@ function checkLoading()
 		else
 			local e = Network.Event("start", {})
 			e:SendTo(Server)
-			
+			Debug.log("Sended start event to server")
+
 			showServerLoadingScreen()
 		end
 	end
@@ -585,4 +586,4 @@ Debug.log("client() - Loading " .. need_to_load_jsons .. " jsons..")
 
 
 Debug.log("client() - Total: " .. need_to_load .. " assets")
-NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 577 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 577]")
+NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 578 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 578]")
