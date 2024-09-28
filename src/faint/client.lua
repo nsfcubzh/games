@@ -230,6 +230,17 @@ need_to_load_jsons = 0
 
 isLoaded = false
 
+LocalEvent:Listen(LocalEvent.Name.DidReceiveEvent, function(e)
+	if e.action == "start" and e.Sender == Server then
+		Debug.log("Got start event from server")
+		gotStartEvent = true
+
+		if isLoaded ~= true and loaded >= need_to_load then
+			doneLoading()
+		end
+	end
+end)
+
 function doneLoading()
 	-SECTION("STARTED")
 	isLoaded = true
@@ -250,13 +261,37 @@ function doneLoading()
 	end
 
 	if loading_screen.created then loading_screen:remove() end
+	if server_loading_screen ~= nil then hideServerLoadingScreen() end
 	settings:load()
 	menu:create()
 end
 
+function showServerLoadingScreen()
+	if loading_screen.created then loading_screen:remove() end
+	server_loading_screen = ui:createFrame(Color(255, 255, 255, 255))
+	server_loading_screen:setImage(images.menu_background)
+
+	server_loading_screen.parentDidResize = function()
+		local scale_factor = Screen.Height / 949
+		server_loading_screen.Width = Screen.Width * scale_factor
+		server_loading_screen.Height = Screen.Height
+		server_loading_screen.pos = Number2(Screen.Width - server_loading_screen.Width, 0)
+	end
+	server_loading_screen.parentDidResize()
+end
+
+function hideServerLoadingScreen()
+	server_loading_screen:remove()
+	server_loading_screen = nil
+end
+
 function checkLoading()
-	if isLoaded ~= true and playerJoined and loaded >= need_to_load then
-		doneLoading()
+	if isLoaded ~= true and loaded >= need_to_load then
+		if gotStartEvent == true then
+			doneLoading()
+		else
+			showServerLoadingScreen()
+		end
 	end
 end
 
