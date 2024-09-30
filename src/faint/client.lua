@@ -261,7 +261,7 @@ function doneLoading()
 	end
 
 	if loading_screen.created then loading_screen:remove() end
-	if server_loading_screen ~= nil then hideServerLoadingScreen() end
+	hideServerLoadingScreen()
 	settings:load()
 	menu:create()
 end
@@ -281,8 +281,10 @@ function showServerLoadingScreen()
 end
 
 function hideServerLoadingScreen()
-	server_loading_screen:remove()
-	server_loading_screen = nil
+	if server_loading_screen ~= nil then
+		server_loading_screen:remove()
+		server_loading_screen = nil
+	end
 end
 
 function checkLoading()

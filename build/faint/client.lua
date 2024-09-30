@@ -272,7 +272,7 @@ function doneLoading()
 	end
 
 	if loading_screen.created then loading_screen:remove() end
-	if server_loading_screen ~= nil then hideServerLoadingScreen() end
+	hideServerLoadingScreen()
 	settings:load()
 	menu:create()
 end
@@ -286,14 +286,16 @@ function showServerLoadingScreen()
 		local scale_factor = Screen.Height / 949
 		server_loading_screen.Width = Screen.Width * scale_factor
 		server_loading_screen.Height = Screen.Height
-		server_loading_screen.pos = Number2(Screen.Width - server_loading_screen.Width, 0)
+		server_loading_screen.pos = Number2((Screen.Width - server_loading_screen.Width)/2, 0)
 	end
 	server_loading_screen.parentDidResize()
 end
 
 function hideServerLoadingScreen()
-	server_loading_screen:remove()
-	server_loading_screen = nil
+	if server_loading_screen ~= nil then
+		server_loading_screen:remove()
+		server_loading_screen = nil
+	end
 end
 
 function checkLoading()
@@ -586,4 +588,4 @@ Debug.log("client() - Loading " .. need_to_load_jsons .. " jsons..")
 
 
 Debug.log("client() - Total: " .. need_to_load .. " assets")
-NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 578 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 578]")
+NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 580 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 580]")
