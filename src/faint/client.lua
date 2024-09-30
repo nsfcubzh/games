@@ -275,7 +275,7 @@ function showServerLoadingScreen()
 		local scale_factor = Screen.Height / 949
 		server_loading_screen.Width = Screen.Width * scale_factor
 		server_loading_screen.Height = Screen.Height
-		server_loading_screen.pos = Number2(Screen.Width - server_loading_screen.Width, 0)
+		server_loading_screen.pos = Number2((Screen.Width - server_loading_screen.Width)/2, 0)
 	end
 	server_loading_screen.parentDidResize()
 end
