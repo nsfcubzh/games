@@ -37,6 +37,21 @@ toast = require("ui_toast")
 Debug.log("client() - loaded cubzh modules")
 
 
+Debug.log("client() - Removing all objects...")
+local remove_list = {}
+for obj_i = 1, World.ChildrenCount do
+	local obj = World:GetChild(obj_i)
+    if type(obj) == "Quad" then
+        table.insert(remove_list, obj)
+    end
+end
+
+for i, obj in ipairs(remove_list) do
+    obj:SetParent(nil)
+end
+Debug.log("client() - All objects removed.")
+
+
 function copyClientLogs()
 	Debug.log("client() - copying client logs")
 
