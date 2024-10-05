@@ -283,6 +283,7 @@ function showServerLoadingScreen()
 	server_loading_screen:setImage(images.menu_background)
 
 	server_loading_screen.parentDidResize = function(_)
+		print(_)
 		if _ ~= server_loading_screen then _:remove() end
 
 		local scale_factor = Screen.Height / 949
