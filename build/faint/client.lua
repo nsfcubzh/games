@@ -282,11 +282,13 @@ function showServerLoadingScreen()
 	server_loading_screen = ui:createFrame(Color(255, 255, 255, 255))
 	server_loading_screen:setImage(images.menu_background)
 
-	server_loading_screen.parentDidResize = function()
+	server_loading_screen.parentDidResize = function(_)
+		if _ ~= server_loading_screen then _:remove() end
+
 		local scale_factor = Screen.Height / 949
-		server_loading_screen.Width = Screen.Width * scale_factor
-		server_loading_screen.Height = Screen.Height
-		server_loading_screen.pos = Number2((Screen.Width - server_loading_screen.Width)/2, 0)
+		_.Width = Screen.Width * scale_factor
+		_.Height = Screen.Height
+		_.pos = Number2((Screen.Width - _.Width)/2, 0)
 	end
 	server_loading_screen.parentDidResize()
 end
@@ -588,4 +590,4 @@ Debug.log("client() - Loading " .. need_to_load_jsons .. " jsons..")
 
 
 Debug.log("client() - Total: " .. need_to_load .. " assets")
-NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 580 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 580]")
+NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 582 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 582]")
