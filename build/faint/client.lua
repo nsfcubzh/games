@@ -47,6 +47,20 @@ ui = require("uikit")
 toast = require("ui_toast")
 Debug.log("client() - loaded cubzh modules")
 
+Debug.log("client() - Removing all objects...")
+local remove_list = {}
+for obj_i = 1, World.ChildrenCount do
+	local obj = World:GetChild(obj_i)
+    if type(obj) == "Quad" then
+        table.insert(remove_list, obj)
+    end
+end
+
+for i, obj in ipairs(remove_list) do
+    obj:SetParent(nil)
+end
+Debug.log("client() - All objects removed.")
+
 function copyClientLogs()
 	Debug.log("client() - copying client logs")
 
@@ -253,7 +267,7 @@ LocalEvent:Listen(LocalEvent.Name.DidReceiveEvent, function(e)
 end)
 
 function doneLoading()
-	NSFLua['faint\\client.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 245 Debug.log("faint\\client.lua > New section: '".."STARTED".."' [Line: 245]")
+	NSFLua['faint\\client.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 259 Debug.log("faint\\client.lua > New section: '".."STARTED".."' [Line: 259]")
 	isLoaded = true
 
 	Camera:SetParent(World)
@@ -588,4 +602,4 @@ Debug.log("client() - Loading " .. need_to_load_jsons .. " jsons..")
 
 
 Debug.log("client() - Total: " .. need_to_load .. " assets")
-NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 580 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 580]")
+NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 594 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 594]")
