@@ -41,12 +41,6 @@ Camera:SetParent(nil)
 Fog.On = false
 Clouds.On = false
 
-Debug.log("client() - Applying ui fix...")
-if type(World:GetChild(3)) == "Object" then
-	World:GetChild(3):SetParent(nil)
-end
-
-
 Debug.log("client() - loading cubzh modules...")
 multi = require("multi")
 ui = require("uikit")
@@ -259,7 +253,7 @@ LocalEvent:Listen(LocalEvent.Name.DidReceiveEvent, function(e)
 end)
 
 function doneLoading()
-	NSFLua['faint\\client.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 251 Debug.log("faint\\client.lua > New section: '".."STARTED".."' [Line: 251]")
+	NSFLua['faint\\client.lua'].LAST_SECTION = "STARTED" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 245 Debug.log("faint\\client.lua > New section: '".."STARTED".."' [Line: 245]")
 	isLoaded = true
 
 	Camera:SetParent(World)
@@ -594,4 +588,4 @@ Debug.log("client() - Loading " .. need_to_load_jsons .. " jsons..")
 
 
 Debug.log("client() - Total: " .. need_to_load .. " assets")
-NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 586 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 586]")
+NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 580 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 580]")

@@ -30,12 +30,6 @@ Camera:SetParent(nil)
 Fog.On = false
 Clouds.On = false
 
-Debug.log("client() - Applying ui fix...")
-if type(World:GetChild(3)) == "Object" then
-	World:GetChild(3):SetParent(nil)
-end
-
-
 Debug.log("client() - loading cubzh modules...")
 multi = require("multi")
 ui = require("uikit")
