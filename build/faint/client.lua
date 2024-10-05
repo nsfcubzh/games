@@ -591,4 +591,4 @@ Debug.log("client() - Loading " .. need_to_load_jsons .. " jsons..")
 
 
 Debug.log("client() - Total: " .. need_to_load .. " assets")
-NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 582 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 582]")
+NSFLua['faint\\client.lua'].LAST_SECTION = "LOADING" NSFLua['faint\\client.lua'].LAST_SECTION_LINE = 583 Debug.log("faint\\client.lua > New section: '".."LOADING".."' [Line: 583]")
